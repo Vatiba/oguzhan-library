@@ -10,6 +10,7 @@
 
 .main {
   flex: 1 0 auto;
+  background: url(/src/assets/img/bg-image.png);
 }
 
 .footer {
