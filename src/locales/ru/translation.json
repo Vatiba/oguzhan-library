@@ -1,4 +1,20 @@
 {
 	"search": "Поиск",
-	"books": "Книги"
+	"books": "Книги",
+	"booksOfLeader": "Книги национального лидера",
+	"3dbooks": "3D книги",
+	"schoolBooks": "Школьные книги",
+	"olimpicBooks": "Книги олимпиады",
+	"literature": "Литература",
+	"eNewspapers": "E-газеты",
+	"eMagazines": "E-журналы",
+	"scienceWorld": "Мир науки",
+	"scienceArticles": "Научные статьи",
+	"scienceWorks": "Научные работы",
+	"designWorks": "Проектные работы",
+	"scienceSources": "Научные источники",
+	"conferences": "Конференции",
+	"newsPapersAndMagazines": "Газеты и журналы",
+	"virtualLibrary": "Виртуальное библиотека",
+	"audioBooks": "Аудио книги"
 }

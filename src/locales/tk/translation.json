@@ -1,4 +1,20 @@
 {
 	"search": "Gözleg",
-	"books": "Kitaplar"
+	"books": "Kitaplar",
+	"booksOfLeader": "Milli Liderimiziň kitaplary",
+	"3dbooks": "3D kitaplar",
+	"schoolBooks": "Mekdep kitaplary",
+	"olimpicBooks": "Olimpiýada kitaplary",
+	"literature": "Çeper eserler",
+	"eNewspapers": "E-gazetlar",
+	"eMagazines": "E-žurnallar",
+	"scienceWorld": "Ylym dünýäsi",
+	"scienceArticles": "Ylmy makalalar",
+	"scienceWorks": "Ylmy işler",
+	"designWorks": "Taslama işleri",
+	"scienceSources": "Ylmy çeşmeler",
+	"conferences": "Konferensiýalar",
+	"newsPapersAndMagazines": "Gazetlar we žurnallar",
+	"virtualLibrary": "Virtual kitaphana",
+	"audioBooks": "Audio kitaplar"
 }

@@ -1,4 +1,20 @@
 {
 	"search": "Search",
-	"books": "Books"
+	"books": "Books",
+	"booksOfLeader": "National leader books",
+	"3dbooks": "3D books",
+	"schoolBooks": "School books",
+	"olimpicBooks": "Olimpic books",
+	"literature": "Literature",
+	"eNewspapers": "E-newspapers",
+	"eMagazines": "E-magazines",
+	"scienceWorld": "Science world",
+	"scienceArticles": "Science articles",
+	"scienceWorks": "Science works",
+	"designWorks": "design works",
+	"scienceSources": "Science sources",
+	"conferences": "Conferences",
+	"newsPapersAndMagazines": "Newspapers and magazines",
+	"virtualLibrary": "Virtual library",
+	"audioBooks": "Audio books"
 }

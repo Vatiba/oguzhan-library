@@ -12,7 +12,7 @@ function Footer() {
 					className='flex justify-between py-[14px]'
 				>
 					<div className='flex items-center'>
-						<img className='h-[70px] w-[70px]' src={Logo} alt="TITU logo" />
+						<img className='h-[65px] w-[65px]' src={Logo} alt="TITU logo" />
 						<span className='pl-4 font-bold text-[20px] leading-[24px] text-white'>TITU e-library</span>
 					</div>
 					<div className='flex flex-col justify-center items-end'>
