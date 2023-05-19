@@ -8,6 +8,126 @@ import Logo from '@app/assets/img/logo.png';
 // hooks
 import { useTranslation } from 'react-i18next';
 import { Link } from '@tanstack/react-location';
+// components
+import { Disclosure } from '@headlessui/react'
+// icons
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { OptionType } from '../Accordion';
+import Accordion from '../Accordion/Accordion';
+
+
+const bookOptions: OptionType = [
+	{
+		href: '#',
+		label: 'booksOfLeader' as const
+	},
+	{
+		href: '#',
+		label: '3dbooks' as const
+	},
+	{
+		href: '#',
+		label: 'schoolBooks' as const
+	},
+	{
+		href: '#',
+		label: 'olimpicBooks' as const
+	},
+	{
+		href: '#',
+		label: 'literature' as const
+	}
+]
+const newsPaperOptions: OptionType = [
+	{
+		href: '#',
+		label: 'eNewspapers'
+	},
+	{
+		href: '#',
+		label: 'eMagazines'
+	}
+]
+const scienceWorldOptions: OptionType = [
+	{
+		href: '#',
+		label: 'scienceArticles'
+	},
+	{
+		href: '#',
+		label: 'scienceWorks'
+	},
+	{
+		href: '#',
+		label: 'designWorks'
+	},
+	{
+		href: '#',
+		label: 'scienceSources',
+		children: [
+			{
+				href: '#',
+				label: 'Google scholar',
+			},
+			{
+				href: '#',
+				label: 'CyberLeninka'
+			},
+			{
+				href: '#',
+				label: 'Ncbi.nlm.nih.gov'
+			},
+			{
+				href: '#',
+				label: 'Mendeleyew'
+			},
+			{
+				href: '#',
+				label: 'Taylorfrancis'
+			},
+			{
+				href: '#',
+				label: 'Sciencedirect'
+			},
+			{
+				href: '#',
+				label: 'Core.ac.uk'
+			},
+			{
+				href: '#',
+				label: 'Redalyc'
+			},
+			{
+				href: '#',
+				label: 'Doaj.org'
+			},
+			{
+				href: '#',
+				label: 'Springer'
+			},
+			{
+				href: '#',
+				label: 'MDPI'
+			},
+			{
+				href: '#',
+				label: 'Scopus'
+			},
+			{
+				href: '#',
+				label: 'E-library'
+			},
+			{
+				href: '#',
+				label: 'РГИС'
+			},
+		]
+	},
+	{
+		href: '#',
+		label: 'conferences'
+	}
+]
 
 function Header() {
 	const { t } = useTranslation('translation');
@@ -29,147 +149,77 @@ function Header() {
 					</div>
 				</Container>
 			</div>
-			<Container className='flex items-center justify-between py-[13px]'>
-				<div className='flex items-center'>
-					<HeadDropdown
-						title={t('books')}
-						wrapperCN='pr-3 mr-3 border-r-[1px] border-white border-solid'
-						options={[
-							{
-								href: '#',
-								label: t('booksOfLeader')
-							},
-							{
-								href: '#',
-								label: t('3dbooks')
-							},
-							{
-								href: '#',
-								label: t('schoolBooks')
-							},
-							{
-								href: '#',
-								label: t('olimpicBooks')
-							},
-							{
-								href: '#',
-								label: t('literature')
-							}
-						]}
-					/>
-					<Link className='font-medium text-white pr-3 mr-3 border-r-[1px] border-white border-solid'>
-						{t('virtualLibrary')}
-					</Link>
-					<Link className='font-medium text-white pr-3 mr-3 border-r-[1px] border-white border-solid'>
-						{t('audioBooks')}
-					</Link>
-					<HeadDropdown
-						title={t('newsPapersAndMagazines')}
-						wrapperCN='pr-3 mr-3 border-r-[1px] border-white border-solid'
-						options={[
-							{
-								href: '#',
-								label: t('eNewspapers')
-							},
-							{
-								href: '#',
-								label: t('eMagazines')
-							}
-						]}
-					/>
-					<HeadDropdown
-						title={t('scienceWorld')}
-						options={[
-							{
-								href: '#',
-								label: t('scienceArticles')
-							},
-							{
-								href: '#',
-								label: t('scienceWorks')
-							},
-							{
-								href: '#',
-								label: t('designWorks')
-							},
-							{
-								href: '#',
-								label: t('scienceSources'),
-								children: [
-									{
-										href: '#',
-										label: 'Google scholar'
-									},
-									{
-										href: '#',
-										label: 'CyberLeninka'
-									},
-									{
-										href: '#',
-										label: 'Ncbi.nlm.nih.gov'
-									},
-									{
-										href: '#',
-										label: 'Mendeleyew'
-									},
-									{
-										href: '#',
-										label: 'Taylorfrancis'
-									},
-									{
-										href: '#',
-										label: 'Sciencedirect'
-									},
-									{
-										href: '#',
-										label: 'Core.ac.uk'
-									},
-									{
-										href: '#',
-										label: 'Redalyc'
-									},
-									{
-										href: '#',
-										label: 'Doaj.org'
-									},
-									{
-										href: '#',
-										label: 'Springer'
-									},
-									{
-										href: '#',
-										label: 'MDPI'
-									},
-									{
-										href: '#',
-										label: 'Scopus'
-									},
-									{
-										href: '#',
-										label: 'E-library'
-									},
-									{
-										href: '#',
-										label: 'РГИС'
-									},
-								]
-							},
-							{
-								href: '#',
-								label: t('conferences')
-							}
-						]}
-					/>
-				</div>
-				<div className='border-solid border-l-white border-l-2 pl-4'>
-					<input
-						className='placeholder:text-accentColor py-1 px-3 rounded-md w-[168px]'
-						type="text"
-						placeholder={t('search') as string}
-					/>
-				</div>
-			</Container>
-		</header>
+			<Disclosure as="nav" className="bg-primaryColor">
+				{({ open }) => (
+					<Container className='relative flex items-center justify-between py-[13px]'>
+						<div className="absolute flex items-center lg:hidden">
+							{/* Mobile menu button*/}
+							<Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+								<span className="sr-only">Open main menu</span>
+								{
+									open ?
+										<XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+										:
+										<Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+								}
+							</Disclosure.Button>
+						</div>
+						<div className="hidden lg:flex">
+							<HeadDropdown
+								title={t('books')}
+								wrapperCN='pr-3 mr-3 border-r-[1px] border-white border-solid'
+								options={bookOptions}
+							/>
+							<Link className='font-medium text-white pr-3 mr-3 border-r-[1px] border-white border-solid'>
+								{t('virtualLibrary')}
+							</Link>
+							<Link className='font-medium text-white pr-3 mr-3 border-r-[1px] border-white border-solid'>
+								{t('audioBooks')}
+							</Link>
+							<HeadDropdown
+								title={t('newsPapersAndMagazines')}
+								wrapperCN='pr-3 mr-3 border-r-[1px] border-white border-solid'
+								options={newsPaperOptions}
+							/>
+							<HeadDropdown
+								title={t('scienceWorld')}
+								options={scienceWorldOptions}
+							/>
+						</div>
+						<div className='border-solid border-l-white border-l-2 pl-4 ml-auto lg:ml-0'>
+							<input
+								className='placeholder:text-accentColor py-1 px-3 rounded-md w-[168px]'
+								type="text"
+								placeholder={t('search') as string}
+							/>
+						</div>
+
+						<Disclosure.Panel className="absolute top-14 left-0 w-full bg-primaryColor lg:hidden">
+							<div className="space-y-1 px-2 pb-3 pt-2 flex flex-col">
+								<Accordion
+									title={t('books')}
+									options={bookOptions}
+								/>
+								<Link className='font-medium text-white px-4 py-2'>
+									{t('virtualLibrary')}
+								</Link>
+								<Link className='font-medium text-white px-4 py-2'>
+									{t('audioBooks')}
+								</Link>
+								<Accordion
+									title={t('newsPapersAndMagazines')}
+									options={newsPaperOptions}
+								/>
+								<Accordion
+									title={t('scienceWorld')}
+									options={scienceWorldOptions}
+								/>
+							</div>
+						</Disclosure.Panel>
+					</Container>
+				)}
+			</Disclosure>
+		</header >
 	)
 }
 

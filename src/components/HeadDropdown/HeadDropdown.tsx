@@ -1,8 +1,9 @@
 // components
 import { Fragment } from 'react';
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { Link } from '@tanstack/react-location'
+// icons
+import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 // styles
 import classNames from 'classnames';
 // hooks
@@ -54,20 +55,57 @@ function HeadDropdown(props: HeadDropdownProps) {
 									<Menu.Item key={index}>
 										{({ active }) => (
 											item.children ?
-												<button
-													className={classNames(
-														active ? 'bg-primaryColor text-white' : 'text-white',
-														'mx-[10px] px-4 py-2 text-base font-medium rounded-md flex flex-nowrap'
-													)}
-												>
-													{item.label}
-													<ChevronRightIcon className="mt-[2px] h-5 w-5 text-white" aria-hidden="true" />
-												</button>
+												<Menu as="div" className={classNames("relative inline-block text-left", wrapperCN)}>
+													<Menu.Button
+														className={classNames(
+															active ? 'bg-primaryColor bg-opacity-80 text-white' : 'text-white',
+															'mx-[10px] px-4 py-2 text-base font-medium rounded-md flex flex-nowrap'
+														)}
+													>
+														{item.label}
+														<ChevronRightIcon className="mt-[2px] h-5 w-5 text-white" aria-hidden="true" />
+													</Menu.Button>
+													<Transition
+														as={Fragment}
+														enter="transition ease-out duration-100"
+														enterFrom="transform opacity-0 scale-95"
+														enterTo="transform opacity-100 scale-100"
+														leave="transition ease-in duration-75"
+														leaveFrom="transform opacity-100 scale-100"
+														leaveTo="transform opacity-0 scale-95"
+													>
+														<Menu.Items className="absolute w-48 translate-x-44 -mt-9 z-10 rounded-md bg-primaryColor bg-opacity-80 border-white border-solid border-[1px] focus:outline-none">
+															<div className="py-3 flex flex-col">
+																{
+																	item.children.map((item, index) => {
+																		return (
+																			<Menu.Item key={index}>
+																				{({ active }) => (
+																					<Menu as="div" className={classNames("relative inline-block text-left", wrapperCN)}>
+																						<Link
+																							to={item.href}
+																							className={classNames(
+																								active ? 'bg-primaryColor bg-opacity-80 text-white' : 'text-white',
+																								'block mx-[10px] px-4 py-2 text-base font-medium rounded-md'
+																							)}
+																						>
+																							{item.label}
+																						</Link>
+																					</Menu>
+																				)}
+																			</Menu.Item>
+																		)
+																	})
+																}
+															</div>
+														</Menu.Items>
+													</Transition>
+												</Menu>
 												:
 												<Link
 													to={item.href}
 													className={classNames(
-														active ? 'bg-primaryColor text-white' : 'text-white',
+														active ? 'bg-primaryColor bg-opacity-80 text-white' : 'text-white',
 														'block mx-[10px] px-4 py-2 text-base font-medium rounded-md'
 													)}
 												>

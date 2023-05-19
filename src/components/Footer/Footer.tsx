@@ -16,10 +16,10 @@ function Footer() {
 						<span className='pl-4 font-bold text-[20px] leading-[24px] text-white'>TITU e-library</span>
 					</div>
 					<div className='flex flex-col justify-center items-end'>
-						<a href='+99312391639' className='font-medium text-[16px] leading-[19px] text-white'>
+						<a href='tel:+99312391639' className='font-medium text-[16px] leading-[19px] text-white'>
 							Tel: +99312 391639
 						</a>
-						<a href='oguzhan@etut.edu.tm' className='font-medium text-[16px] leading-[19px] text-white mt-3'>
+						<a href='mail:oguzhan@etut.edu.tm' className='font-medium text-[16px] leading-[19px] text-white mt-3'>
 							Mail: oguzhan@etut.edu.tm
 						</a>
 					</div>
