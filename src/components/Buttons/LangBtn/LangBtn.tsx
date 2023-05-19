@@ -18,7 +18,7 @@ function LangBtn() {
 
    return (
       <div
-         className='flex justify-between bg-secondaryColor rounded-[6px] font-bold text-[20px] leading-[23px] text-white h-[50px] w-[168px]'
+         className='flex justify-between bg-secondaryColor rounded-[6px] font-bold text-[20px] leading-[23px] text-white h-[40px] w-[140px] md:h-[50px] md:w-[168px]'
       >
          <label className={`flex justify-center items-center h-full w-full hover:cursor-pointer hover:bg-orange-600 rounded-[6px] ${i18n.language === 'tk' ? 'bg-orange-600' : ''}`} htmlFor="tk">
             <input

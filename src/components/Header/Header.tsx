@@ -136,17 +136,15 @@ function Header() {
 			<div className='border-b-[1px]'>
 				<Container className='flex items-center justify-between py-[5px]'>
 					<div className='flex items-center'>
-						<img className='h-[65px] w-[65px]' src={Logo} alt="TITU logo" />
-						<span className='pl-4 font-bold text-[20px] leading-[24px] text-white'>TITU e-library</span>
+						<img className='h-[50px] w-[50px] md:h-[65px] md:w-[65px]' src={Logo} alt="TITU logo" />
+						<span className='pl-4 font-bold text-base md:text-[20px] leading-[24px] text-white'>TITU e-library</span>
 					</div>
 					<div className='max-w-[716px] hidden lg:block px-2'>
 						<h1 className='font-normal text-[16px] leading-[26px] xl:text-[22px] text-white text-center'>
 							Türkmenistanyň Prezidenti Serdar BERDIMUHAMEDOW: — Watan diňe halky bilen Watandyr! Döwlet diňe halky bilen döwletdir
 						</h1>
 					</div>
-					<div className=''>
-						<LangBtn />
-					</div>
+					<LangBtn />
 				</Container>
 			</div>
 			<Disclosure as="nav" className="bg-primaryColor">

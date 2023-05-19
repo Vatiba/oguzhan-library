@@ -28,6 +28,7 @@ function HeadDropdown(props: HeadDropdownProps) {
 		options,
 		wrapperCN
 	} = props;
+	const { t } = useTranslation('translation');
 
 	return (
 		<Menu as="div" className={classNames("relative inline-block text-left", wrapperCN)}>
@@ -62,7 +63,7 @@ function HeadDropdown(props: HeadDropdownProps) {
 															'mx-[10px] px-4 py-2 text-base font-medium rounded-md flex flex-nowrap'
 														)}
 													>
-														{item.label}
+														{t(item.label)}
 														<ChevronRightIcon className="mt-[2px] h-5 w-5 text-white" aria-hidden="true" />
 													</Menu.Button>
 													<Transition
@@ -89,7 +90,7 @@ function HeadDropdown(props: HeadDropdownProps) {
 																								'block mx-[10px] px-4 py-2 text-base font-medium rounded-md'
 																							)}
 																						>
-																							{item.label}
+																							{t(item.label)}
 																						</Link>
 																					</Menu>
 																				)}
@@ -109,7 +110,7 @@ function HeadDropdown(props: HeadDropdownProps) {
 														'block mx-[10px] px-4 py-2 text-base font-medium rounded-md'
 													)}
 												>
-													{item.label}
+													{t(item.label)}
 												</Link>
 										)}
 									</Menu.Item>
