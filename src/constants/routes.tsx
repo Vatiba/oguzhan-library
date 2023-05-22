@@ -4,6 +4,7 @@ import { Route } from "@tanstack/react-location";
 const CommonLayout = React.lazy(() => import("@components/Layouts/Common"));
 // pages
 const Home = React.lazy(() => import("@app/pages/Home"));
+const Search = React.lazy(() => import("@app/pages/Search"));
 
 const routes: Route[] = [
 	{
@@ -11,6 +12,14 @@ const routes: Route[] = [
 		element: (
 			<CommonLayout>
 				<Home />
+			</CommonLayout>
+		),
+	},
+	{
+		path: "/search",
+		element: (
+			<CommonLayout>
+				<Search />
 			</CommonLayout>
 		),
 	},

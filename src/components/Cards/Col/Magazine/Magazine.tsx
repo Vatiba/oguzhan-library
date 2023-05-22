@@ -1,9 +1,8 @@
 import React from 'react'
 // icons
 import { CalendarIcon, HeartIcon, EyeIcon, ArrowDownIcon } from '@heroicons/react/20/solid'
-// trash
-import trashImg from '@app/assets/trash/642a329094859.jpg'
-import DownloadBtn from '@app/components/Buttons/DownloadBtn'
+// components
+import Btn from '@app/components/Buttons/Btn'
 
 type MagazineProps = {
 	imgSrc: string
@@ -32,7 +31,7 @@ function Magazine(props: MagazineProps) {
 		>
 			<img
 				className='max-h-[360px] rounded-md'
-				src={trashImg}
+				src={imgSrc}
 				alt={imgAlt}
 			/>
 			<h4 className='text-lg font-medium leading-[23px] pt-[10px]'>
@@ -41,27 +40,27 @@ function Magazine(props: MagazineProps) {
 			<div className='flex justify-between items-end pt-[10px]'>
 				<div className='flex flex-col'>
 					<span className='flex items-center'>
-						<CalendarIcon className="h-4 w-4 text-black mr-1" aria-hidden="true" />
+						<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 						<span className='text-accentColor'>
 							{date}
 						</span>
 					</span>
 					<span className='flex pt-4'>
 						<span className='flex text-sm font-normal leading-[16px] mr-2'>
-							<HeartIcon className="h-4 w-4 text-black mr-1" aria-hidden="true" />
+							<HeartIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 							{likeCount}
 						</span>
 						<span className='flex text-sm font-normal leading-[16px] mr-2'>
-							<EyeIcon className="h-4 w-4 text-black mr-1" aria-hidden="true" />
+							<EyeIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 							{reviewCount}
 						</span>
 						<span className='flex text-sm font-normal leading-[16px] mr-2'>
-							<ArrowDownIcon className="h-4 w-4 text-black mr-1" aria-hidden="true" />
+							<ArrowDownIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 							{downloadCount}
 						</span>
 					</span>
 				</div>
-				<DownloadBtn />
+				<Btn />
 			</div>
 		</div>
 	)

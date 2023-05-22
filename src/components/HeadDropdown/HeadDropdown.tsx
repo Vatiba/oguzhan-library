@@ -75,7 +75,7 @@ function HeadDropdown(props: HeadDropdownProps) {
 														leaveFrom="transform opacity-100 scale-100"
 														leaveTo="transform opacity-0 scale-95"
 													>
-														<Menu.Items className="absolute w-48 translate-x-44 -mt-9 z-10 rounded-md bg-primaryColor bg-opacity-80 border-white border-solid border-[1px] focus:outline-none">
+														<Menu.Items className="absolute w-48 translate-x-44 -mt-9 z-10 rounded-md bg-primaryColor bg-opacity-80 border-white border-solid border-[1px] focus:outline-none max-h-52 overflow-auto">
 															<div className="py-3 flex flex-col">
 																{
 																	item.children.map((item, index) => {

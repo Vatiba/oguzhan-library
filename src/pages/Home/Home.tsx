@@ -1,178 +1,169 @@
-import Conference from '@app/components/Cards/Col/Conference';
-import Faculty from '@app/components/Cards/Col/Faculty';
-import Magazine from '@app/components/Cards/Col/Magazine';
-import News from '@app/components/Cards/Col/News/News';
+import React from 'react';
+// components
 import Container from '@app/components/Container';
-import React from 'react'
+import MainBanner from '@app/components/MainBanner';
+import Carousel from '@app/components/Carousel';
+import { Link } from '@tanstack/react-location';
+// icons
+import { HomeModernIcon, NewspaperIcon } from '@heroicons/react/20/solid'
+// hooks
+import { useTranslation } from 'react-i18next';
+// trash img
+import img from '@app/assets/trash/uniwersity.jpg';
+import facultyImg from '@app/assets/trash/2650401.jpg'
+import newsImg from '@app/assets/trash/0-1680494938435-1000 1.jpg'
 
 function Home() {
+	const { t } = useTranslation('translation');
+
 	return (
 		<Container>
-			{/* <div
-				className='flex -ml-[7.5px] -mr-[7.5px]'
-			>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/4'>
-					<Faculty
-						imgAlt='text'
-						imgSrc='text'
-						name='Kompýuter ylymlary we maglumat tehnologiýalary fakulteti'
-					/>
-				</div>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/4'>
-					<Faculty
-						imgAlt='text'
-						imgSrc='text'
-						name='Kompýuter ylymlary we maglumat tehnologiýalary fakulteti'
-					/>
-				</div>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/4'>
-					<Faculty
-						imgAlt='text'
-						imgSrc='text'
-						name='Kompýuter ylymlary we maglumat tehnologiýalary fakulteti'
-					/>
-				</div>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/4'>
-					<Faculty
-						imgAlt='text'
-						imgSrc='text'
-						name='Kompýuter ylymlary we maglumat tehnologiýalary fakulteti'
-					/>
-				</div>
+			<div className='mt-4'>
+				<MainBanner
+					imgs={[
+						{
+							alt: 'text',
+							src: img
+						},
+						{
+							alt: 'text',
+							src: img
+						},
+						{
+							alt: 'text',
+							src: img
+						},
+					]}
+				/>
 			</div>
-
-			<div
-				className='flex -ml-[7.5px] -mr-[7.5px]'
-			>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/4'>
-					<News
-						imgAlt='text'
-						imgSrc='text'
-						title='Arkadag şäherinde jaý meselesi nähili çözüler?'
-						text='Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfasdfasdfasdfsdaf'
-						date='04.03.2023'
-					/>
-				</div>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/4'>
-					<News
-						imgAlt='text'
-						imgSrc='text'
-						title='Arkadag şäherinde jaý meselesi nähili çözüler?'
-						text='Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfasdfasdfasdfsdaf'
-						date='04.03.2023'
-					/>
-				</div>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/4'>
-					<News
-						imgAlt='text'
-						imgSrc='text'
-						title='Arkadag şäherinde jaý meselesi nähili çözüler?'
-						text='Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfasdfasdfasdfsdaf'
-						date='04.03.2023'
-					/>
-				</div>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/4'>
-					<News
-						imgAlt='text'
-						imgSrc='text'
-						title='Arkadag şäherinde jaý meselesi nähili çözüler?'
-						text='Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfasdfasdfasdfsdaf'
-						date='04.03.2023'
-					/>
-				</div>
+			<div className='flex flex-col mt-[30px]'>
+				<Link className='flex mb-5'>
+					<HomeModernIcon className="h-6 w-6 text-textColor mr-1" aria-hidden="true" />
+					<h3 className='text-xl font-extrabold underline'>
+						{t('faculties')}
+					</h3>
+				</Link>
+				<Carousel
+					type='faculty'
+					faculties={[
+						{
+							imgAlt: 'text',
+							imgSrc: facultyImg,
+							name: "Kompýuter ylymlary we maglumat tehnologiýalary fakulteti"
+						},
+						{
+							imgAlt: 'text',
+							imgSrc: facultyImg,
+							name: "Kompýuter ylymlary we maglumat"
+						},
+						{
+							imgAlt: 'text',
+							imgSrc: facultyImg,
+							name: "Kompýuter ylymlary we maglumat tehnologiýalary fakulteti"
+						},
+						{
+							imgAlt: 'text',
+							imgSrc: facultyImg,
+							name: "Kompýuter ylymlary we maglumat tehnologiýalary fakulteti"
+						},
+						{
+							imgAlt: 'text',
+							imgSrc: facultyImg,
+							name: "Kompýuter ylymlary we maglumat tehnologiýalary fakulteti"
+						},
+					]}
+				/>
 			</div>
-			<div
-				className='flex -ml-[7.5px] -mr-[7.5px] mt-4'
-			>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/4'>
-					<Magazine
-						imgAlt='text'
-						imgSrc='text'
-						title='Türkmenistan gazeti'
-						date='2023-04-03'
-						downloadCount={50}
-						likeCount={50}
-						reviewCount={50}
-					/>
-				</div>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/4'>
-					<Magazine
-						imgAlt='text'
-						imgSrc='text'
-						title='Türkmenistan gazeti'
-						date='2023-04-03'
-						downloadCount={50}
-						likeCount={50}
-						reviewCount={50}
-					/>
-				</div>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/4'>
-					<Magazine
-						imgAlt='text'
-						imgSrc='text'
-						title='Türkmenistan gazeti'
-						date='2023-04-03'
-						downloadCount={50}
-						likeCount={50}
-						reviewCount={50}
-					/>
-				</div>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/4'>
-					<Magazine
-						imgAlt='text'
-						imgSrc='text'
-						title='Türkmenistan gazeti'
-						date='2023-04-03'
-						downloadCount={50}
-						likeCount={50}
-						reviewCount={50}
-					/>
-				</div>
+			<div className='flex flex-col my-[40px]'>
+				<Link className='flex mb-5'>
+					<NewspaperIcon className="h-6 w-6 text-textColor mr-1" aria-hidden="true" />
+					<h3 className='text-xl font-extrabold underline'>
+						{t('news')}
+					</h3>
+				</Link>
+				<Carousel
+					type='news'
+					news={[
+						{
+							date: '05.19.2023',
+							imgAlt: 'text',
+							imgSrc: newsImg,
+							text: 'Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfsad',
+							title: 'Arkadag şäherinde jaý meselesi nähili çözüler?'
+						},
+						{
+							date: '05.19.2023',
+							imgAlt: 'text',
+							imgSrc: newsImg,
+							text: 'Türkmen banguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfsad',
+							title: 'Arkadag şäherinde jaý meselesi nähili çözüler?'
+						},
+						{
+							date: '05.19.2023',
+							imgAlt: 'text',
+							imgSrc: newsImg,
+							text: 'Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfsad',
+							title: 'Arkadag şäherinde jaý meselesi nähili çözüler?'
+						},
+						{
+							date: '05.19.2023',
+							imgAlt: 'text',
+							imgSrc: newsImg,
+							text: 'Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfsad',
+							title: 'Arkadag şäherinde jaý meselesi nähili çözüler?'
+						},
+						{
+							date: '05.19.2023',
+							imgAlt: 'text',
+							imgSrc: newsImg,
+							text: 'Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfsad',
+							title: 'Arkadag şäherinde jaý meselesi nähili çözüler?'
+						},
+						{
+							date: '05.19.2023',
+							imgAlt: 'text',
+							imgSrc: newsImg,
+							text: 'Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfsad',
+							title: 'Arkadag şäherinde jaý meselesi nähili çözüler?'
+						},
+						{
+							date: '05.19.2023',
+							imgAlt: 'text',
+							imgSrc: newsImg,
+							text: 'Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfsad',
+							title: 'Arkadag şäherinde jaý meselesi nähili çözüler?'
+						},
+						{
+							date: '05.19.2023',
+							imgAlt: 'text',
+							imgSrc: newsImg,
+							text: 'Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfsad',
+							title: 'Arkadag şäherinde jaý meselesi nähili çözüler?'
+						},
+						{
+							date: '05.19.2023',
+							imgAlt: 'text',
+							imgSrc: newsImg,
+							text: 'Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfsad',
+							title: 'Arkadag şäherinde jaý meselesi nähili çözüler?'
+						},
+						{
+							date: '05.19.2023',
+							imgAlt: 'text',
+							imgSrc: newsImg,
+							text: 'Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfsad',
+							title: 'Arkadag şäherinde jaý meselesi nähili çözüler?'
+						},
+						{
+							date: '05.19.2023',
+							imgAlt: 'text',
+							imgSrc: newsImg,
+							text: 'Türkmen halkynyň Milli Lideri, Türkmenistanyň Halk Maslahatynyň Başlygy Gurbanguly Berdimuhamedow 1-nji aprelde Arkadag şäherine amala aşyranasdfsad',
+							title: 'Arkadag şäherinde jaý meselesi nähili çözüler?'
+						},
+					]}
+				/>
 			</div>
-			<div
-				className='flex -ml-[7.5px] -mr-[7.5px] mt-4'
-			>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/5'>
-					<Conference
-						imgAlt='text'
-						imgSrc='text'
-						name='Halkara Bitaraplyk güni mynasybetli ylmy-amaly maslahat'
-						date='Aşgabat - 2021'
-					/>
-				</div>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/5'>
-					<Conference
-						imgAlt='text'
-						imgSrc='text'
-						name='Halkara Bitaraplyk güni mynasybetli ylmy-amaly maslahat'
-						date='Aşgabat - 2021'
-					/>
-				</div>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/5'>
-					<Conference
-						imgAlt='text'
-						imgSrc='text'
-						name='Halkara Bitaraplyk güni mynasybetli ylmy-amaly maslahat'
-						date='Aşgabat - 2021'
-					/>
-				</div>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/5'>
-					<Conference
-						imgAlt='text'
-						imgSrc='text'
-						name='Halkara Bitaraplyk güni mynasybetli ylmy-amaly maslahat'
-						date='Aşgabat - 2021'
-					/>
-				</div>
-				<div className='pl-[7.5px] pr-[7.5px] w-1/5'>
-					<Conference
-						imgAlt='text'
-						imgSrc='text'
-						name='Halkara Bitaraplyk güni mynasybetli ylmy-amaly maslahat'
-						date='Aşgabat - 2021'
-					/>
-				</div>
-			</div> */}
 		</Container>
 	)
 }

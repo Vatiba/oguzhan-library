@@ -1,10 +1,8 @@
 import React from 'react'
 // icons
 import { CalendarIcon } from '@heroicons/react/20/solid'
-// trash
-import trashImg from '@app/assets/trash/0-1680494938435-1000 1.jpg'
 
-type NewsProps = {
+export type NewsProps = {
 	imgSrc: string
 	imgAlt: string
 	title: string
@@ -23,11 +21,11 @@ function News(props: NewsProps) {
 
 	return (
 		<div
-			className='rounded-md shadow-md min-w-[250px] max-w-[350px] bg-mainBgColor flex flex-col'
+			className='rounded-md shadow-md h-[400px] min-w-[250px] max-w-[350px] bg-mainBgColor flex flex-col'
 		>
 			<img
 				className='max-h-[180px]'
-				src={trashImg}
+				src={imgSrc}
 				alt={imgAlt}
 			/>
 			<div className='p-4'>
@@ -38,7 +36,7 @@ function News(props: NewsProps) {
 					{text}
 				</p>
 				<span className='flex items-center pt-4'>
-					<CalendarIcon className="h-4 w-4 text-black mr-1" aria-hidden="true" />
+					<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 					<span className='text-accentColor'>
 						{date}
 					</span>

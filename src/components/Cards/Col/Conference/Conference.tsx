@@ -1,6 +1,4 @@
 import React from 'react'
-// trash
-import trashImg from '@app/assets/trash/image 8.jpg'
 
 type ConferenceProps = {
    imgSrc: string
@@ -23,7 +21,7 @@ function Conference(props: ConferenceProps) {
       >
          <img
             className='max-h-[327px]'
-            src={trashImg}
+            src={imgSrc}
             alt={imgAlt}
          />
          <div className='flex flex-col p-3'>

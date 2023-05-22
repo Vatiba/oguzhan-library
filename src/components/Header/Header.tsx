@@ -147,7 +147,7 @@ function Header() {
 					<LangBtn />
 				</Container>
 			</div>
-			<Disclosure as="nav" className="bg-primaryColor">
+			<Disclosure as="nav" className="bg-primaryColor relative z-10">
 				{({ open }) => (
 					<Container className='relative flex items-center justify-between py-[13px]'>
 						<div className="absolute flex items-center lg:hidden">
