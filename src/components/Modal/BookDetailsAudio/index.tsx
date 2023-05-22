@@ -1,1 +1,1 @@
-export { default } from '../BookDetails/BookDetails';
+export { default } from './BookDetailsAudio';
