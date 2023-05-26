@@ -1,0 +1,1 @@
+export { default as FacultyApi } from './FacultyApi';

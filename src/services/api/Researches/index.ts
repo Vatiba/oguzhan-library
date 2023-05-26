@@ -1,0 +1,1 @@
+export { default as ResearchesApi } from './ResearchesApi';

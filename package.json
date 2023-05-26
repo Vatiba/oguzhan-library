@@ -19,6 +19,7 @@
 		"flip-book": "^1.9.9",
 		"i18next": "^22.4.15",
 		"jquery": "^3.7.0",
+		"rc-slider": "^10.1.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-hot-toast": "^2.4.1",

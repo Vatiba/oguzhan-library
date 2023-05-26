@@ -6,7 +6,6 @@ import Btn from '@app/components/Buttons/Btn';
 // hooks
 import { useTranslation } from 'react-i18next';
 
-
 export type RowProps = {
 	imgSrc: string
 	alt: string

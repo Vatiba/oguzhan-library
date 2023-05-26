@@ -3,7 +3,7 @@ import React from 'react';
 import Container from '@app/components/Container';
 import MainBanner from '@app/components/MainBanner';
 import Carousel from '@app/components/Carousel';
-import { Link } from '@tanstack/react-location';
+import { Link, useLoadRoute, useMatch } from '@tanstack/react-location';
 // icons
 import { HomeModernIcon, NewspaperIcon } from '@heroicons/react/20/solid'
 // hooks
@@ -14,6 +14,7 @@ import facultyImg from '@app/assets/trash/2650401.jpg'
 import newsImg from '@app/assets/trash/0-1680494938435-1000 1.jpg'
 
 function Home() {
+	const load = useMatch();
 	const { t } = useTranslation('translation');
 
 	return (
