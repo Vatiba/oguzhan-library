@@ -8,6 +8,7 @@ export type NewsProps = {
 	title: string
 	text: string
 	date: string
+	slug: string
 }
 
 function News(props: NewsProps) {
@@ -17,6 +18,7 @@ function News(props: NewsProps) {
 		title,
 		text,
 		date,
+		slug,
 	} = props;
 
 	return (

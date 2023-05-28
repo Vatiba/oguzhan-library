@@ -14,6 +14,8 @@ import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { OptionType } from '../Accordion';
 import Accordion from '../Accordion/Accordion';
+import { useGetBookCategories } from '@app/hooks/query/Books';
+import { useGetExternalLinks } from '@app/hooks/query/Main';
 
 
 const bookOptions: OptionType = [
@@ -35,9 +37,46 @@ const bookOptions: OptionType = [
 	},
 	{
 		href: '#',
-		label: 'literature' as const
+		label: 'literature1' as const
+	},
+	{
+		href: '#',
+		label: 'literature2' as const
+	},
+	{
+		href: '#',
+		label: 'literature3' as const
+	},
+	{
+		href: '#',
+		label: 'literature4' as const
+	},
+	{
+		href: '#',
+		label: 'literature5' as const
+	},
+	{
+		href: '#',
+		label: 'literature6' as const
+	},
+	{
+		href: '#',
+		label: 'literature7' as const
+	},
+	{
+		href: '#',
+		label: 'literature8' as const
+	},
+	{
+		href: '#',
+		label: 'literature9' as const
+	},
+	{
+		href: '#',
+		label: 'literature10' as const
 	}
 ]
+
 const newsPaperOptions: OptionType = [
 	{
 		href: '#',
@@ -48,6 +87,7 @@ const newsPaperOptions: OptionType = [
 		label: 'eMagazines'
 	}
 ]
+
 const scienceWorldOptions: OptionType = [
 	{
 		href: '#',
@@ -60,6 +100,10 @@ const scienceWorldOptions: OptionType = [
 	{
 		href: '#',
 		label: 'designWorks'
+	},
+	{
+		href: '#',
+		label: 'conferences'
 	},
 	{
 		href: '#',
@@ -123,14 +167,20 @@ const scienceWorldOptions: OptionType = [
 			},
 		]
 	},
-	{
-		href: '#',
-		label: 'conferences'
-	}
 ]
 
 function Header() {
 	const { t } = useTranslation('translation');
+
+	const {
+		data: bookCategories,
+		isError: bookCategoriesIsError
+	} = useGetBookCategories();
+	const {
+		data: externalLinks,
+		isError: externalLinksIsError
+	} = useGetExternalLinks();
+
 	return (
 		<header className='bg-primaryColor'>
 			<div className='border-b-[1px]'>
@@ -166,7 +216,9 @@ function Header() {
 							<HeadDropdown
 								title={t('books')}
 								wrapperCN='pr-3 mr-3 border-r-[1px] border-white border-solid'
+								dropdownCN='overflow-y-auto overflow-x-hidden max-h-56'
 								options={bookOptions}
+								isTwoColumn
 							/>
 							<Link className='font-medium text-white pr-3 mr-3 border-r-[1px] border-white border-solid'>
 								{t('virtualLibrary')}
@@ -177,7 +229,10 @@ function Header() {
 							<HeadDropdown
 								title={t('newsPapersAndMagazines')}
 								wrapperCN='pr-3 mr-3 border-r-[1px] border-white border-solid'
-								options={newsPaperOptions}
+								options={newsPaperOptions.map(item => ({
+									href: item.href,
+									label: t(item.label)
+								}))}
 							/>
 							<HeadDropdown
 								title={t('scienceWorld')}

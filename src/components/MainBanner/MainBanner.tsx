@@ -1,6 +1,6 @@
 import React from 'react';
 // Swiper
-import { Autoplay, Keyboard, Navigation, Thumbs, Pagination } from 'swiper';
+import { Autoplay, Keyboard, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -19,6 +19,7 @@ function MainBanner(props: MainBannerProps) {
 	} = props;
 
 	return (
+		imgs.length > 0 ?
 		<div className='mainBanner'>
 			<Swiper
 				className='rounded-md'
@@ -50,7 +51,9 @@ function MainBanner(props: MainBannerProps) {
 				}
 			</Swiper >
 		</div>
-	);
+		:
+		<></>
+	)
 }
 
 export default MainBanner;

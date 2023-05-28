@@ -6,16 +6,15 @@ import { MainApi } from "@app/services/api/Main";
 import { FacultyApi } from "@app/services/api/Faculty";
 import { BooksApi } from "@app/services/api/Books";
 // components
-import Pending from "@app/components/common/Pending";
-import { QueryClient } from "@tanstack/react-query";
-import { dehydrate } from "react-query";
-import queryClient from "@app/queryClient";
+const Pending = React.lazy(() => import("@app/components/common/Pending"));
 const CommonLayout = React.lazy(() => import("@components/Layouts/Common"));
+// query client
+import queryClient from "@app/queryClient";
 // pages
 const Home = React.lazy(() => import("@app/pages/Home"));
 const Search = React.lazy(() => import("@app/pages/Search"));
 
-
+// api instances
 const newsApi = NewsApi.getInstance();
 const mainApi = MainApi.getInstance();
 const facultyApi = FacultyApi.getInstance();
@@ -27,47 +26,31 @@ const routes: Route[] = [
 		pendingMinMs: 500,
 		pendingMs: 0,
 		loader: async () => {
-			// const news = await newsApi.getNews();
-			// const bookCategories = await booksApi.getBookCategories();
-			// const externalLinks = await mainApi.getExternalLinks();
-			// const mainBanner = await mainApi.getMainBanner();
-			// const faculties = await facultyApi.getFaculties();
 
 			Promise.all([
-				await queryClient.fetchQuery(
-					[
-						"books",
-						'',
-						'',
-						'',
-						'',
-						'asc',
-						'',
-						1,
-						'',
-						'book'
-					],
-					() => booksApi.getBooks({
-						author: '',
-						category: '',
-						department: '',
-						faculty: '',
-						orderDirection: 'asc',
-						ordering: '',
-						page: 1,
-						search: '',
-						type: 'book'
-					}),
-				)
+				// await queryClient.fetchQuery(
+				// 	["bookCategories"],
+				// 	() => booksApi.getBookCategories(),
+				// ),
+				// await queryClient.fetchQuery(
+				// 	["externalLinks"],
+				// 	() => mainApi.getExternalLinks(),
+				// ),
+				// await queryClient.fetchQuery(
+				// 	["mainBanners"],
+				// 	() => mainApi.getMainBanner(),
+				// ),
+				// await queryClient.fetchQuery(
+				// 	["news"],
+				// 	() => newsApi.getNews(),
+				// ),
+				// await queryClient.fetchQuery(
+				// 	["faculties"],
+				// 	() => facultyApi.getFaculties(),
+				// ),
 			]);
 
-			return {
-				// news,
-				// externalLinks,
-				// mainBanner,
-				// faculties,
-				// bookCategories,
-			}
+			return {};
 		},
 		pendingElement: <Pending />,
 		element: (

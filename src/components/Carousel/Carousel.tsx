@@ -15,8 +15,12 @@ import { ArrowRightIcon, ArrowLeftIcon } from '@heroicons/react/20/solid'
 
 type CarouselProps = {
 	type: 'faculty' | 'news'
-	faculties?: FacultyProps[]
-	news?: NewsProps[]
+	faculties?: Array<FacultyProps & {
+		id: number
+	}>
+	news?: Array<NewsProps & {
+		id: number
+	}>
 }
 
 function Carousel(props: CarouselProps) {
@@ -65,9 +69,9 @@ function Carousel(props: CarouselProps) {
 			>
 				{
 					type === 'faculty' ?
-						faculties && faculties.map((faculty, index) => {
+						faculties && faculties.map((faculty) => {
 							return (
-								<SwiperSlide key={index}>
+								<SwiperSlide key={faculty.id}>
 									<Faculty
 										{...faculty}
 									/>
@@ -75,9 +79,9 @@ function Carousel(props: CarouselProps) {
 							)
 						})
 						:
-						news && news.map((news, index) => {
+						news && news.map((news) => {
 							return (
-								<SwiperSlide key={index}>
+								<SwiperSlide key={news.id}>
 									<News
 										{...news}
 									/>

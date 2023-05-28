@@ -7,7 +7,7 @@ type New = {
    date_created: string
    thumbnail: string
    content: string
-   images: Image[]
+   images: Image[] | null
 }
 
 export default New;
