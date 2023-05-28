@@ -3,7 +3,6 @@ import baseUrl from "@services/api/baseURL";
 import { INS, Pagination } from "@app/services/types/Common";
 import { BooksGetDto, Book } from "@app/services/types/Books";
 
-
 class BooksApi extends HttpClient {
 	private static instance: BooksApi;
 
@@ -21,13 +20,16 @@ class BooksApi extends HttpClient {
 	public async getBooks({
 		orderDirection,
 		ordering,
+		type,
 		...others
 	}: BooksGetDto): Promise<Pagination<Book[]>> {
-		const orderBy = orderDirection === 'asc' ? ordering : `-${ordering}`
+		const bookType = type === 'book' ? 0 : type === 'audioBook' ? 1 : 2;
+		const orderBy = orderDirection === 'asc' ? ordering : ordering ? `-${ordering}` : '';
 		try {
-			return this.instance.get(`/books`, {
+			return this.instance.get(`https://jsonplaceholder.typicode.com/posts`, {
 				params: {
 					...others,
+					type: bookType,
 					ordering: orderBy
 				},
 				headers: {

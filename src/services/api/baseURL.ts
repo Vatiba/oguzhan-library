@@ -1,6 +1,6 @@
 const baseUrl = import.meta.env.MODE === 'development' ?
-	"https://v2-api.yuzharyt.com/api"
+	"http://172.16.0.69/api"
 	:
-	"https://v2-api.yuzharyt.com/api";
+	"http://172.16.0.69/api";
 
 export default baseUrl;

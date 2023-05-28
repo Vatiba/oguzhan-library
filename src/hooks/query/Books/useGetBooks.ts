@@ -4,10 +4,44 @@ import { useQuery } from "@tanstack/react-query";
 
 const booksApi = BooksApi.getInstance();
 
-const useGetBooks = (booksGetDto: BooksGetDto) => {
+const useGetBooks = ({
+	author,
+	category,
+	department,
+	faculty,
+	orderDirection,
+	ordering,
+	page,
+	search,
+	type
+}: BooksGetDto) => {
 	return useQuery(
-		["books", booksGetDto.page, booksGetDto.search, booksGetDto.ordering, booksGetDto.orderDirection],
-		() => booksApi.getBooks(booksGetDto),
+		[
+			"books",
+			author,
+			category,
+			department,
+			faculty,
+			orderDirection,
+			ordering,
+			page,
+			search,
+			type
+		],
+		() => booksApi.getBooks({
+			author,
+			category,
+			department,
+			faculty,
+			orderDirection,
+			ordering,
+			page,
+			search,
+			type
+		}),
+		{
+			staleTime: 1000 * 60
+		}
 	);
 };
 

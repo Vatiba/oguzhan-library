@@ -12,10 +12,29 @@ import { useTranslation } from 'react-i18next';
 import img from '@app/assets/trash/uniwersity.jpg';
 import facultyImg from '@app/assets/trash/2650401.jpg'
 import newsImg from '@app/assets/trash/0-1680494938435-1000 1.jpg'
+import { useGetBooks } from '@app/hooks/query/Books';
+import { QueryClient } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function Home() {
-	const load = useMatch();
+	const { data } = useMatch();
 	const { t } = useTranslation('translation');
+
+	const {
+		data: books
+	} = useGetBooks({
+		author: '',
+		category: '',
+		department: '',
+		faculty: '',
+		orderDirection: 'asc',
+		ordering: '',
+		page: 1,
+		search: '',
+		type: 'book'
+	},);
+	console.log(books)
 
 	return (
 		<Container>

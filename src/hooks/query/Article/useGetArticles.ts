@@ -4,10 +4,38 @@ import { useQuery } from "@tanstack/react-query";
 
 const articleApi = ArticleApi.getInstance();
 
-const useGetArticles = (articlesGetDto: ArticleGetDto) => {
+const useGetArticles = ({
+	author,
+	category,
+	department,
+	faculty,
+	orderDirection,
+	ordering,
+	page,
+	search,
+}: ArticleGetDto) => {
 	return useQuery(
-		["articles", articlesGetDto.page, articlesGetDto.search, articlesGetDto.ordering,],
-		() => articleApi.getArticles(articlesGetDto),
+		[
+			"articles",
+			author,
+			category,
+			department,
+			faculty,
+			orderDirection,
+			ordering,
+			page,
+			search,
+		],
+		() => articleApi.getArticles({
+			author,
+			category,
+			department,
+			faculty,
+			orderDirection,
+			ordering,
+			page,
+			search,
+		}),
 	);
 };
 

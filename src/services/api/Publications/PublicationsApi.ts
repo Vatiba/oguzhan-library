@@ -32,11 +32,16 @@ class PublicationsApi extends HttpClient {
       }
    }
 
-   public async getPuplicationsPublishers(publishersGetDto: PublishersGetDto): Promise<Pagination<Publisher[]>> {
+   public async getPuplicationsPublishers({
+      type,
+      ...others
+   }: PublishersGetDto): Promise<Pagination<Publisher[]>> {
+      const publisherType = type == 'newspaper' ? 0 : 1;
       try {
          return this.instance.get(`/publications/publishers`, {
             params: {
-               ...publishersGetDto
+               ...others,
+               type: publisherType,
             },
             headers: {
                ...HttpClient.headers,
