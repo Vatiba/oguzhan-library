@@ -13,6 +13,7 @@ const useGetArticles = ({
 	ordering,
 	page,
 	search,
+	lang
 }: ArticleGetDto) => {
 	return useQuery(
 		[
@@ -25,6 +26,7 @@ const useGetArticles = ({
 			ordering,
 			page,
 			search,
+			lang
 		],
 		() => articleApi.getArticles({
 			author,
@@ -35,6 +37,7 @@ const useGetArticles = ({
 			ordering,
 			page,
 			search,
+			lang
 		}),
 	);
 };

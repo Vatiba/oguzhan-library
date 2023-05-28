@@ -12,7 +12,8 @@ const useGetResearches = ({
 	orderDirection,
 	ordering,
 	page,
-	search
+	search,
+	lang
 }: ResearchesGetDto) => {
 	return useQuery(
 		[
@@ -24,7 +25,8 @@ const useGetResearches = ({
 			orderDirection,
 			ordering,
 			page,
-			search
+			search,
+			lang
 		],
 		() => researchesApi.getResearches({
 			author,
@@ -34,7 +36,8 @@ const useGetResearches = ({
 			orderDirection,
 			ordering,
 			page,
-			search
+			search,
+			lang
 		}),
 	);
 };

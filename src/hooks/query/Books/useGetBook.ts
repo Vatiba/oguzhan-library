@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 const booksApi = BooksApi.getInstance();
 
-const useGetBook = (id: number) => {
+const useGetBook = (id: number, lang: string) => {
    return useQuery(
       ["book", id],
-      () => booksApi.getBook(id),
+      () => booksApi.getBook(id, lang),
    );
 };
 

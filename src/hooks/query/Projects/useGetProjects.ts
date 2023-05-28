@@ -13,7 +13,8 @@ const useGetProjects = ({
 	orderDirection,
 	ordering,
 	page,
-	search
+	search,
+	lang
 }: ProjectsGetDto) => {
 	return useQuery(
 		[
@@ -26,7 +27,8 @@ const useGetProjects = ({
 			orderDirection,
 			ordering,
 			page,
-			search
+			search,
+			lang
 		],
 		() => projectsApi.getProjects({
 			author,
@@ -37,7 +39,8 @@ const useGetProjects = ({
 			orderDirection,
 			ordering,
 			page,
-			search
+			search,
+			lang
 		}),
 	);
 };

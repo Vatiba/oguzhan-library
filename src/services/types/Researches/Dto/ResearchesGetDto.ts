@@ -9,6 +9,7 @@ type ResearchesGetDto = {
 	ordering: string
 	search: string
 	page: number
+   lang: string
 }
 
 export default ResearchesGetDto;

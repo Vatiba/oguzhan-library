@@ -20,5 +20,10 @@
 	"faculties": "Faculties",
 	"news": "News",
 	"download": "Download",
-	"read": "Read"
+	"read": "Read",
+	"all": "All",
+	"book": "Book",
+	"audioBook": "Audio book",
+	"3dBook": "3D book",
+	"mainPage": "Main page"
 }

@@ -17,13 +17,17 @@ class ConferenceApi extends HttpClient {
       return ConferenceApi.instance;
    }
 
-   public async getConferences(conferenceGetDto: ConferenceGetDto): Promise<Pagination<Conference[]>> {
+   public async getConferences({
+      lang,
+      ...others
+   }: ConferenceGetDto): Promise<Pagination<Conference[]>> {
       try {
          return this.instance.get(`/conferences`, {
             params: {
-               ...conferenceGetDto
+               ...others
             },
             headers: {
+					'Accept-Language': lang,
                ...HttpClient.headers,
             },
          });

@@ -6,11 +6,12 @@ type BooksGetDto = {
    department: string
    author: string
    category: string
-   type: typeof bookTypes[number]
+   type: typeof bookTypes[number] | string
    orderDirection: OrderDirection
    ordering: string
    search: string
    page: number
+   lang: string
 }
 
 export default BooksGetDto;

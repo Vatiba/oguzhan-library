@@ -21,18 +21,20 @@ class BooksApi extends HttpClient {
 		orderDirection,
 		ordering,
 		type,
+		lang,
 		...others
 	}: BooksGetDto): Promise<Pagination<Book[]>> {
 		const bookType = type === 'book' ? 0 : type === 'audioBook' ? 1 : 2;
 		const orderBy = orderDirection === 'asc' ? ordering : ordering ? `-${ordering}` : '';
 		try {
-			return this.instance.get(`https://jsonplaceholder.typicode.com/posts`, {
+			return this.instance.get(`/books`, {
 				params: {
 					...others,
 					type: bookType,
 					ordering: orderBy
 				},
 				headers: {
+					'Accept-Language': lang,
 					...HttpClient.headers,
 				},
 			});
@@ -41,10 +43,11 @@ class BooksApi extends HttpClient {
 		}
 	}
 
-	public async getBooksAuthors(): Promise<INS[]> {
+	public async getBooksAuthors(lang: string): Promise<INS[]> {
 		try {
 			return this.instance.get(`/books/authors`, {
 				headers: {
+					'Accept-Language': lang,
 					...HttpClient.headers,
 				},
 			});
@@ -53,12 +56,13 @@ class BooksApi extends HttpClient {
 		}
 	}
 
-	public async getBookCategories(): Promise<INS[]> {
+	public async getBookCategories(lang: string): Promise<INS[]> {
 		try {
 			return this.instance.get(
 				`/books/categories`,
 				{
 					headers: {
+						'Accept-Language': lang,
 						...HttpClient.headers,
 					},
 				}
@@ -68,12 +72,13 @@ class BooksApi extends HttpClient {
 		}
 	}
 
-	public async getBook(id: number): Promise<Book> {
+	public async getBook(id: number, lang: string): Promise<Book> {
 		try {
 			return this.instance.patch(
 				`/books/${id}`,
 				{
 					headers: {
+						'Accept-Language': lang,
 						...HttpClient.headers,
 					},
 				}

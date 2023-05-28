@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 const projectsApi = ProjectsApi.getInstance();
 
-const useGetProjectCategories = () => {
+const useGetProjectCategories = (lang: string) => {
 	return useQuery(
 		["projectsCategories"],
-		() => projectsApi.getProjectCategories(),
+		() => projectsApi.getProjectCategories(lang),
 	);
 };
 

@@ -12,7 +12,7 @@ export type RowProps = {
 	title: string
 	subTitles: string[]
 	text: string
-	date: string
+	date: string | number
 	likeCount: number
 	viewedCount: number
 	downloadCount: number

@@ -3,15 +3,17 @@ import { useQuery } from "@tanstack/react-query";
 
 const facultyApi = FacultyApi.getInstance();
 
-const useGetFacultyDepartment = (faculty: string) => {
+const useGetFacultyDepartment = (lang: string, faculty?: string) => {
    return useQuery(
       [
          "facultyDepartments",
-         faculty
+         faculty,
+         lang
       ],
-      () => facultyApi.getFacultyDepartment(faculty),
+      () => facultyApi.getFacultyDepartment(faculty as string, lang),
       {
-         staleTime: 1000 * 60
+         staleTime: 1000 * 60,
+         enabled: !!faculty
       }
    );
 };

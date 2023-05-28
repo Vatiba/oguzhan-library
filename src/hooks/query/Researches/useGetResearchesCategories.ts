@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 const researchesApi = ResearchesApi.getInstance();
 
-const useGetResearchesCategories = () => {
+const useGetResearchesCategories = (lang: string) => {
 	return useQuery(
 		["researchesCategories"],
-		() => researchesApi.getResearchesCategories(),
+		() => researchesApi.getResearchesCategories(lang),
 	);
 };
 

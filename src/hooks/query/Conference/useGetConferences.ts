@@ -8,7 +8,8 @@ const useGetConferences = ({
    end_date,
    page,
    search,
-   start_date
+   start_date,
+   lang
 }: ConferenceGetDto) => {
    return useQuery(
       [
@@ -16,13 +17,15 @@ const useGetConferences = ({
          end_date,
          page,
          search,
-         start_date
+         start_date,
+         lang
       ],
       () => conferenceApi.getConferences({
          end_date,
          page,
          search,
-         start_date
+         start_date,
+         lang
       }),
       {
          staleTime: 1000 * 60

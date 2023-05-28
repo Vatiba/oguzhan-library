@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 const booksApi = BooksApi.getInstance();
 
-const useGetBookCategories = () => {
+const useGetBookCategories = (lang: string) => {
 	return useQuery(
 		["bookCategories"],
-		() => booksApi.getBookCategories(),
+		() => booksApi.getBookCategories(lang),
 	);
 };
 

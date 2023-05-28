@@ -17,13 +17,17 @@ class PublicationsApi extends HttpClient {
       return PublicationsApi.instance;
    }
 
-   public async getPuplications(publicationGetDto: PublicationsGetDto): Promise<Pagination<Publication[]>> {
+   public async getPuplications({
+      lang,
+      ...others
+   }: PublicationsGetDto): Promise<Pagination<Publication[]>> {
       try {
          return this.instance.get(`/publications`, {
             params: {
-               ...publicationGetDto
+               ...others
             },
             headers: {
+					'Accept-Language': lang,
                ...HttpClient.headers,
             },
          });
@@ -34,6 +38,7 @@ class PublicationsApi extends HttpClient {
 
    public async getPuplicationsPublishers({
       type,
+      lang,
       ...others
    }: PublishersGetDto): Promise<Pagination<Publisher[]>> {
       const publisherType = type == 'newspaper' ? 0 : 1;
@@ -44,6 +49,7 @@ class PublicationsApi extends HttpClient {
                type: publisherType,
             },
             headers: {
+					'Accept-Language': lang,
                ...HttpClient.headers,
             },
          });
@@ -52,12 +58,13 @@ class PublicationsApi extends HttpClient {
       }
    }
 
-   public async getPublication(id: number): Promise<Publication> {
+   public async getPublication(id: number, lang: string): Promise<Publication> {
       try {
          return this.instance.patch(
             `/publications/${id}`,
             {
                headers: {
+                  'Accept-Language': lang,
                   ...HttpClient.headers,
                },
             }

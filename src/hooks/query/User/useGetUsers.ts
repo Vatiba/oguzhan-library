@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 const userApi = UserApi.getInstance();
 
-const useGetUsers = (id: number) => {
+const useGetUsers = (id: number, lang: string) => {
    return useQuery(
       ["user"],
-      () => userApi.getUsers(id),
+      () => userApi.getUsers(id, lang),
    );
 };
 

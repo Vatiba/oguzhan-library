@@ -3,6 +3,7 @@ type Faculty = {
    name: string
    image: string | null
    slug: string
+   lang: string
 }
 
 export default Faculty;

@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 const newsApi = NewsApi.getInstance();
 
-const useGetNews = () => {
+const useGetNews = (lang: string) => {
    return useQuery(
       ["news"],
-      () => newsApi.getNews(),
+      () => newsApi.getNews(lang),
       {
          staleTime: 1000 * 60
       }

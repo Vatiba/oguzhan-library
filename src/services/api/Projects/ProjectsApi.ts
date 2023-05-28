@@ -20,6 +20,7 @@ class ProjectsApi extends HttpClient {
 	public async getProjects({
 		orderDirection,
 		ordering,
+		lang,
 		...others
 	}: ProjectsGetDto): Promise<Pagination<Project[]>> {
 		const orderBy = orderDirection === 'asc' ? ordering : `-${ordering}`
@@ -30,6 +31,7 @@ class ProjectsApi extends HttpClient {
 					ordering: orderBy
 				},
 				headers: {
+					'Accept-Language': lang,
 					...HttpClient.headers,
 				},
 			});
@@ -38,10 +40,11 @@ class ProjectsApi extends HttpClient {
 		}
 	}
 
-	public async getProjectCategories(): Promise<Category[]> {
+	public async getProjectCategories(lang: string): Promise<Category[]> {
 		try {
 			return this.instance.get(`/projects/categories`, {
 				headers: {
+					'Accept-Language': lang,
 					...HttpClient.headers,
 				},
 			});
@@ -50,12 +53,13 @@ class ProjectsApi extends HttpClient {
 		}
 	}
 
-	public async getProject(id: number): Promise<Project> {
+	public async getProject(id: number, lang: string): Promise<Project> {
 		try {
 			return this.instance.patch(
 				`/projects/${id}`,
 				{
 					headers: {
+						'Accept-Language': lang,
 						...HttpClient.headers,
 					},
 				}

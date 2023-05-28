@@ -61,6 +61,40 @@ const routes: Route[] = [
 	},
 	{
 		path: "/search",
+		pendingMinMs: 500,
+		pendingMs: 0,
+		pendingElement: <Pending />,
+		loader: async ({ search }) => {
+			Promise.all([
+				// await queryClient.fetchQuery(
+				// 	[
+				// 		"books",
+				// 		search['author'] as string || '',
+				// 		search['category'] as string || '',
+				// 		search['department'] as string || '',
+				// 		search['faculty'] as string || '',
+				// 		'desc',
+				// 		'id',
+				// 		search['page'] as number || 1,
+				// 		search['search'] as string || '',
+				// 		search['type'] as string || ''
+				// 	],
+				// 	() => booksApi.getBooks({
+				// 		author: search['author'] as string || '',
+				// 		category: search['category'] as string || '',
+				// 		department: search['department'] as string || '',
+				// 		faculty: search['faculty'] as string || '',
+				// 		orderDirection: 'desc',
+				// 		ordering: 'id',
+				// 		page: search['page'] as number || 1,
+				// 		search: search['search'] as string || '',
+				// 		type: search['type'] as string || '',
+				// 	}),
+				// ),
+			]);
+
+			return {}
+		},
 		element: (
 			<CommonLayout>
 				<Search />

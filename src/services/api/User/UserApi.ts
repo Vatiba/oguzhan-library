@@ -16,13 +16,14 @@ class UserApi extends HttpClient {
 		return UserApi.instance;
 	}
 
-	public async getUsers(page: number): Promise<Pagination<Author[]>> {
+	public async getUsers(page: number, lang: string): Promise<Pagination<Author[]>> {
 		try {
 			return this.instance.get(`/users`, {
 				params: {
 					page
 				},
 				headers: {
+					'Accept-Language': lang,
 					...HttpClient.headers,
 				},
 			});

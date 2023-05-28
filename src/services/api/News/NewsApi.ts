@@ -17,10 +17,11 @@ class NewsApi extends HttpClient {
 		return NewsApi.instance;
 	}
 
-	public async getNews(): Promise<Pagination<New[]>> {
+	public async getNews(lang: string): Promise<Pagination<New[]>> {
 		try {
 			return this.instance.get(`/news`, {
 				headers: {
+					'Accept-Language': lang,
 					...HttpClient.headers,
 				},
 			});
@@ -29,10 +30,11 @@ class NewsApi extends HttpClient {
 		}
 	}
 
-	public async getNew(id: number): Promise<New> {
+	public async getNew(id: number, lang: string): Promise<New> {
 		try {
 			return this.instance.get(`/news/${id}`, {
 				headers: {
+					'Accept-Language': lang,
 					...HttpClient.headers,
 				},
 			});

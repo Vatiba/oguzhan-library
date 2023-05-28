@@ -20,6 +20,7 @@ class ResearchesApi extends HttpClient {
 	public async getResearches({
 		orderDirection,
 		ordering,
+		lang,
 		...others
 	}: ResearchesGetDto): Promise<Pagination<Research[]>> {
 		const orderBy = orderDirection === 'asc' ? ordering : `-${ordering}`
@@ -30,6 +31,7 @@ class ResearchesApi extends HttpClient {
 					ordering: orderBy
 				},
 				headers: {
+					'Accept-Language': lang,
 					...HttpClient.headers,
 				},
 			});
@@ -38,10 +40,11 @@ class ResearchesApi extends HttpClient {
 		}
 	}
 
-	public async getResearchesCategories(): Promise<Category[]> {
+	public async getResearchesCategories(lang: string): Promise<Category[]> {
 		try {
 			return this.instance.get(`/researches/categories`, {
 				headers: {
+					'Accept-Language': lang,
 					...HttpClient.headers,
 				},
 			});
@@ -50,12 +53,13 @@ class ResearchesApi extends HttpClient {
 		}
 	}
 
-	public async getResearch(id: number): Promise<Research> {
+	public async getResearch(id: number, lang: string): Promise<Research> {
 		try {
 			return this.instance.patch(
 				`/researches/${id}`,
 				{
 					headers: {
+						'Accept-Language': lang,
 						...HttpClient.headers,
 					},
 				}

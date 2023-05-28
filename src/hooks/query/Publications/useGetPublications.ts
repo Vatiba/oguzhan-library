@@ -7,19 +7,22 @@ const publicationsApi = PublicationsApi.getInstance();
 const useGetPublications = ({
 	end_date,
 	page,
-	start_date
+	start_date,
+	lang
 }: PublicationsGetDto) => {
 	return useQuery(
 		[
 			"publications",
 			end_date,
 			page,
-			start_date
+			start_date,
+			lang,
 		],
 		() => publicationsApi.getPuplications({
 			end_date,
 			page,
-			start_date
+			start_date,
+			lang
 		}),
 	);
 };

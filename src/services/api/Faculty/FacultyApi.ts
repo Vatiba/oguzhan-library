@@ -18,10 +18,11 @@ class FacultyApi extends HttpClient {
 		return FacultyApi.instance;
 	}
 
-	public async getFaculties(): Promise<Faculty[]> {
+	public async getFaculties(lang: string): Promise<Faculty[]> {
 		try {
 			return this.instance.get(`/faculties`, {
 				headers: {
+					'Accept-Language': lang,
 					...HttpClient.headers,
 				},
 			});
@@ -30,13 +31,14 @@ class FacultyApi extends HttpClient {
 		}
 	}
 
-	public async getFacultyDepartment(faculty: string): Promise<Department[]> {
+	public async getFacultyDepartment(faculty: string, lang: string): Promise<Department[]> {
 		try {
 			return this.instance.get(`/faculties/departments`, {
 				params: {
 					faculty
 				},
 				headers: {
+					'Accept-Language': lang,
 					...HttpClient.headers,
 				},
 			});

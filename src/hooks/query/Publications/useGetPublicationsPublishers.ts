@@ -6,17 +6,20 @@ const publicationsApi = PublicationsApi.getInstance();
 
 const useGetPublicationsPublishers = ({
 	page,
-	type
+	type,
+	lang
 }: PublishersGetDto) => {
 	return useQuery(
 		[
 			"publicationsPublishers",
 			page,
-			type
+			type,
+			lang
 		],
 		() => publicationsApi.getPuplicationsPublishers({
 			page,
-			type
+			type,
+			lang
 		}),
 	);
 };

@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 const projectsApi = ProjectsApi.getInstance();
 
-const useGetProject = (id: number) => {
+const useGetProject = (id: number, lang: string) => {
    return useQuery(
       ["project", id],
-      () => projectsApi.getProject(id),
+      () => projectsApi.getProject(id, lang),
    );
 };
 

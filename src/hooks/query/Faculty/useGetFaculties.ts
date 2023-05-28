@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 const facultyApi = FacultyApi.getInstance();
 
-const useGetFaculties = () => {
+const useGetFaculties = (lang: string) => {
 	return useQuery(
 		["faculties"],
-		() => facultyApi.getFaculties(),
+		() => facultyApi.getFaculties(lang),
 		{
 			staleTime: 1000 * 60
 		}
