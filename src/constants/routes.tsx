@@ -15,6 +15,7 @@ import { ConferenceApi } from "@app/services/api/Conference";
 import { PublicationsApi } from "@app/services/api/Publications";
 import { ArticleApi } from "@app/services/api/Article";
 import { ResearchesApi } from "@app/services/api/Researches";
+import { ProjectsApi } from "@app/services/api/Projects";
 
 // pages
 const Home = React.lazy(() => import("@app/pages/Home"));
@@ -28,6 +29,7 @@ const NewsPage = React.lazy(() => import("@app/pages/NewsPage"));
 const NewsDetailsPage = React.lazy(() => import("@app/pages/NewsDetailsPage"));
 const Articles = React.lazy(() => import("@app/pages/Articles"));
 const Researches = React.lazy(() => import("@app/pages/Researches"));
+const Projects = React.lazy(() => import("@app/pages/Projects"));
 const Test = React.lazy(() => import("@app/pages/Test"));
 
 // api instances
@@ -39,6 +41,7 @@ const conferencesApi = ConferenceApi.getInstance();
 const publicationsApi = PublicationsApi.getInstance();
 const articlesApi = ArticleApi.getInstance();
 const researchApi = ResearchesApi.getInstance();
+const projectsApi = ProjectsApi.getInstance();
 
 const routes: Route[] = [
 	{
@@ -300,12 +303,18 @@ const routes: Route[] = [
 				pendingMs: 0,
 				pendingElement: <Pending />,
 				loader: async () => {
-					// Promise.all([
-					// 	await queryClient.fetchQuery(
-					// 		["news", i18n.language],
-					// 		() => newsApi.getNews(i18n.language),
-					// 	),
-					// ]);
+					Promise.all([
+						await queryClient.fetchQuery(
+							["news", i18n.language],
+							() => newsApi.getNews({
+								start_date: '',
+								end_date: '',
+								lang: i18n.language,
+								page: 1,
+								search: ''
+							}),
+						),
+					]);
 
 					return {};
 				},
@@ -322,12 +331,12 @@ const routes: Route[] = [
 				pendingElement: <Pending />,
 				loader: async ({ params }) => {
 					const id = parseInt(params['id']);
-					// Promise.all([
-					// 	await queryClient.fetchQuery(
-					// 		["news", id],
-					// 		() => newsApi.getNew(id, i18n.language),
-					// 	),
-					// ]);
+					Promise.all([
+						await queryClient.fetchQuery(
+							["news", id],
+							() => newsApi.getNew(id, i18n.language),
+						),
+					]);
 
 					return {};
 				},
@@ -356,7 +365,7 @@ const routes: Route[] = [
 						'',
 						'',
 						'desc',
-						'',
+						'id',
 						1,
 						'',
 						i18n.language
@@ -367,10 +376,10 @@ const routes: Route[] = [
 						department: '',
 						faculty: '',
 						orderDirection: 'desc',
-						ordering: '',
+						ordering: 'id',
 						page: 1,
 						search: '',
-						lang: ''
+						lang: i18n.language
 					}),
 				),
 			]);
@@ -398,7 +407,7 @@ const routes: Route[] = [
 						'',
 						'',
 						'desc',
-						'',
+						'id',
 						1,
 						'',
 						i18n.language
@@ -409,10 +418,10 @@ const routes: Route[] = [
 						department: '',
 						faculty: '',
 						orderDirection: 'desc',
-						ordering: '',
+						ordering: 'id',
 						page: 1,
 						search: '',
-						lang: ''
+						lang: i18n.language
 					}),
 				),
 			]);
@@ -434,27 +443,29 @@ const routes: Route[] = [
 			Promise.all([
 				await queryClient.fetchQuery(
 					[
-						"researches",
+						"projects",
+						'',
 						'',
 						'',
 						'',
 						'',
 						'desc',
-						'',
+						'id',
 						1,
 						'',
 						i18n.language
 					],
-					() => researchApi.getResearches({
+					() => projectsApi.getProjects({
 						author: '',
 						category: '',
 						department: '',
 						faculty: '',
 						orderDirection: 'desc',
-						ordering: '',
+						ordering: 'id',
 						page: 1,
 						search: '',
-						lang: ''
+						lang: i18n.language,
+						manager: ''
 					}),
 				),
 			]);
@@ -463,7 +474,7 @@ const routes: Route[] = [
 		},
 		element: (
 			<CommonLayout>
-				<Researches />
+				<Projects />
 			</CommonLayout>
 		),
 	},
