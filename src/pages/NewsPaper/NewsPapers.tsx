@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 // components
 import Container from '@app/components/Container/Container';
-import { Link, useSearch } from '@tanstack/react-location';
+import { Link, useMatch, useSearch } from '@tanstack/react-location';
 import Pagination from '@app/components/common/Pagination';
 // hooks
 import { useTranslation } from 'react-i18next';
@@ -9,8 +9,10 @@ import { useGetPublications } from '@app/hooks/query/Publications';
 // helpers
 import { isNumber } from '@app/utils/helpers';
 import Magazine from '@app/components/Cards/Col/Magazine/Magazine';
+import { usePublicationDownloadCount, usePublicationLikeCount } from '@app/hooks/mutation/Publications';
 
 function NewsPapers() {
+	const { params } = useMatch()
 	const search = useSearch();
 	const { t, i18n } = useTranslation('translation');
 
@@ -19,6 +21,7 @@ function NewsPapers() {
 
 	const page = isNumber(Number(search['page'])) ? Number(search['page']) : 1;
 
+	const id = parseInt(params['id']);
 	const {
 		data: newsPaper,
 		isError: newsPaperIsError,
@@ -28,6 +31,8 @@ function NewsPapers() {
 		end_date: endDate,
 		lang: i18n.language,
 		page: page,
+		publisher: id,
+		type: 'newspaper'
 	});
 
 	const pageCount = useMemo(() => {
@@ -36,6 +41,14 @@ function NewsPapers() {
 		}
 		return 12;
 	}, [newsPaper, newsPaperIsError]);
+
+	const {
+		mutate: download
+	} = usePublicationDownloadCount();
+
+	const {
+		mutate: like
+	} = usePublicationLikeCount();
 
 	return (
 		<Container className='pt-[120px] md:pt-[135px]'>
@@ -91,13 +104,20 @@ function NewsPapers() {
 							return (
 								<div className='p-2 w-1/2 md:w-1/3 lg:w-1/4'>
 									<Magazine
-										date='05.29.2023'
+										date={item.date_created}
 										imgAlt='News image'
-										imgSrc={item.file}
+										imgSrc={item.thumbnail}
 										downloadCount={item.download_count}
 										likeCount={item.like_count}
 										reviewCount={item.view_count}
 										title={item.publisher.name}
+										onDownloadClick={() => {
+											window.open(item.file, '_blank');
+											download(item.id)
+										}}
+										onClickLike={() => {
+											like(item.id)
+										}}
 									/>
 								</div>
 							)

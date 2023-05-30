@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 // components
 import Container from '@app/components/Container/Container';
-import { Link, useSearch } from '@tanstack/react-location';
+import { Link, useMatch, useSearch } from '@tanstack/react-location';
 import Pagination from '@app/components/common/Pagination';
 // hooks
 import { useTranslation } from 'react-i18next';
@@ -9,8 +9,10 @@ import { useGetPublications } from '@app/hooks/query/Publications';
 // helpers
 import { isNumber } from '@app/utils/helpers';
 import Magazine from '@app/components/Cards/Col/Magazine/Magazine';
+import { usePublicationDownloadCount, usePublicationLikeCount } from '@app/hooks/mutation/Publications';
 
 function Magazines() {
+   const { params } = useMatch()
    const search = useSearch();
    const { t, i18n } = useTranslation('translation');
 
@@ -19,6 +21,8 @@ function Magazines() {
 
    const page = isNumber(Number(search['page'])) ? Number(search['page']) : 1;
 
+
+   const id = parseInt(params['id']);
    const {
       data: magazine,
       isError: magazineIsError,
@@ -28,7 +32,18 @@ function Magazines() {
       end_date: endDate,
       lang: i18n.language,
       page: page,
+      publisher: id,
+      type: 'magazine'
    });
+
+
+   const {
+      mutate: download
+   } = usePublicationDownloadCount();
+
+   const {
+      mutate: like
+   } = usePublicationLikeCount();
 
    const pageCount = useMemo(() => {
       if (!magazineIsError && magazine) {
@@ -91,13 +106,20 @@ function Magazines() {
                      return (
                         <div className='p-2 w-1/2 md:w-1/3 lg:w-1/4'>
                            <Magazine
-                              date='05.29.2023'
+                              date={item.date_created}
                               imgAlt='News image'
-                              imgSrc={item.file}
+                              imgSrc={item.thumbnail}
                               downloadCount={item.download_count}
                               likeCount={item.like_count}
                               reviewCount={item.view_count}
                               title={item.publisher.name}
+                              onDownloadClick={() => {
+                                 window.open(item.file, '_blank');
+                                 download(item.id)
+                              }}
+                              onClickLike={() => {
+                                 like(item.id)
+                              }}
                            />
                         </div>
                      )

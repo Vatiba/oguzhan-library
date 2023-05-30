@@ -19,15 +19,18 @@ class PublicationsApi extends HttpClient {
 
    public async getPuplications({
       lang,
+      type,
       ...others
    }: PublicationsGetDto): Promise<Pagination<Publication[]>> {
+      const publicationType = type == 'newspaper' ? 0 : 1;
       try {
          return this.instance.get(`/publications`, {
             params: {
+               type: publicationType,
                ...others
             },
             headers: {
-					'Accept-Language': lang,
+               'Accept-Language': lang,
                ...HttpClient.headers,
             },
          });
@@ -49,7 +52,7 @@ class PublicationsApi extends HttpClient {
                type: publisherType,
             },
             headers: {
-					'Accept-Language': lang,
+               'Accept-Language': lang,
                ...HttpClient.headers,
             },
          });

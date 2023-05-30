@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
 import { Route } from "@tanstack/react-location";
+import CommonLayout from '@components/Layouts/Common';
 // components
 const Pending = React.lazy(() => import("@app/components/common/Pending"));
-const CommonLayout = React.lazy(() => import("@components/Layouts/Common"));
 // query client
 import queryClient from "@app/queryClient";
 import i18n from "@app/libs/i18";
@@ -199,19 +199,24 @@ const routes: Route[] = [
 				pendingMinMs: 500,
 				pendingMs: 0,
 				pendingElement: <Pending />,
-				loader: async () => {
+				loader: async ({ params }) => {
+					const id = parseInt(params['id']);
 					Promise.all([
 						await queryClient.fetchQuery(
 							[
-								"publicationsPublishers",
+								"publications",
 								1,
+								i18n.language,
 								'newspaper',
-								i18n.language
+								id
 							],
-							() => publicationsApi.getPuplicationsPublishers({
-								lang: i18n.language,
+							() => publicationsApi.getPuplications({
+								start_date: '',
+								end_date: '',
 								page: 1,
-								type: 'newspaper'
+								type: 'newspaper',
+								publisher: id,
+								lang: i18n.language,
 							}),
 						),
 					]);
@@ -251,7 +256,6 @@ const routes: Route[] = [
 							}),
 						),
 					]);
-
 					return {}
 				},
 				element: (
@@ -265,31 +269,33 @@ const routes: Route[] = [
 				pendingMinMs: 500,
 				pendingMs: 0,
 				pendingElement: <Pending />,
-				loader: async () => {
+				loader: async ({ params }) => {
+					const id = parseInt(params['id']);
 					Promise.all([
 						await queryClient.fetchQuery(
 							[
-								"publicationsPublishers",
+								"publications",
 								1,
+								i18n.language,
 								'magazine',
-								i18n.language
+								id
 							],
-							() => publicationsApi.getPuplicationsPublishers({
-								lang: i18n.language,
+							() => publicationsApi.getPuplications({
+								start_date: '',
+								end_date: '',
 								page: 1,
-								type: 'magazine'
+								type: 'magazine',
+								publisher: id,
+								lang: i18n.language,
 							}),
 						),
 					]);
-
 					return {}
 				},
 				element: (
-					<Suspense fallback={<Pending />}>
-						<CommonLayout>
-							<Magazines />
-						</CommonLayout>
-					</Suspense>
+					<CommonLayout>
+						<Magazines />
+					</CommonLayout>
 				),
 			},
 		]

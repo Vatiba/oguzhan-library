@@ -8,10 +8,12 @@ type MagazineProps = {
 	imgSrc: string
 	imgAlt: string
 	title: string
-	date: string
+	date: string | number
 	likeCount: number
 	reviewCount: number
 	downloadCount: number
+	onDownloadClick: () => void
+	onClickLike: () => void
 }
 
 function Magazine(props: MagazineProps) {
@@ -23,6 +25,8 @@ function Magazine(props: MagazineProps) {
 		likeCount,
 		reviewCount,
 		downloadCount,
+		onDownloadClick,
+		onClickLike
 	} = props;
 
 	return (
@@ -46,10 +50,10 @@ function Magazine(props: MagazineProps) {
 						</span>
 					</span>
 					<span className='flex pt-4'>
-						<span className='flex text-sm font-normal leading-[16px] mr-2'>
+						<button className='flex text-sm font-normal leading-[16px] mr-2' onClick={() => onClickLike()}>
 							<HeartIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 							{likeCount}
-						</span>
+						</button>
 						<span className='flex text-sm font-normal leading-[16px] mr-2'>
 							<EyeIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 							{reviewCount}
@@ -60,7 +64,7 @@ function Magazine(props: MagazineProps) {
 						</span>
 					</span>
 				</div>
-				<Btn downLoad/>
+				<Btn downLoad onClick={() => onDownloadClick()} />
 			</div>
 		</div>
 	)

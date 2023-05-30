@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 // components
 import Container from '@app/components/Container/Container';
 import { Link, useSearch } from '@tanstack/react-location';
