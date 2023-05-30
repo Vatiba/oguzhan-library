@@ -9,6 +9,7 @@ type Project = {
    file: string
    view_count: number
    download_count: number
+   liked_count: number
    author: Author
    category: Category
    images: Image[]

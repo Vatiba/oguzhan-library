@@ -8,7 +8,8 @@ import Btn from '@app/components/Buttons/Btn/Btn';
 import { useTranslation } from 'react-i18next';
 
 type BookDetailsProps = RowProps & {
-
+	isOpen: boolean
+	setIsOpen: (isOpen: boolean) => void
 }
 
 function BookDetails(props: BookDetailsProps) {

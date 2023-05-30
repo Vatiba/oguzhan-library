@@ -1,5 +1,11 @@
 import React, { Suspense } from "react";
 import { Route } from "@tanstack/react-location";
+// components
+const Pending = React.lazy(() => import("@app/components/common/Pending"));
+const CommonLayout = React.lazy(() => import("@components/Layouts/Common"));
+// query client
+import queryClient from "@app/queryClient";
+import i18n from "@app/libs/i18";
 // api
 import { NewsApi } from "@app/services/api/News";
 import { MainApi } from "@app/services/api/Main";
@@ -7,12 +13,8 @@ import { FacultyApi } from "@app/services/api/Faculty";
 import { BooksApi } from "@app/services/api/Books";
 import { ConferenceApi } from "@app/services/api/Conference";
 import { PublicationsApi } from "@app/services/api/Publications";
-// components
-const Pending = React.lazy(() => import("@app/components/common/Pending"));
-const CommonLayout = React.lazy(() => import("@components/Layouts/Common"));
-// query client
-import queryClient from "@app/queryClient";
-import i18n from "@app/libs/i18";
+import { ArticleApi } from "@app/services/api/Article";
+import { ResearchesApi } from "@app/services/api/Researches";
 
 // pages
 const Home = React.lazy(() => import("@app/pages/Home"));
@@ -24,6 +26,8 @@ const MagazinesPublishers = React.lazy(() => import("@app/pages/MagazinesPublish
 const Magazines = React.lazy(() => import("@app/pages/Magazines"));
 const NewsPage = React.lazy(() => import("@app/pages/NewsPage"));
 const NewsDetailsPage = React.lazy(() => import("@app/pages/NewsDetailsPage"));
+const Articles = React.lazy(() => import("@app/pages/Articles"));
+const Researches = React.lazy(() => import("@app/pages/Researches"));
 const Test = React.lazy(() => import("@app/pages/Test"));
 
 // api instances
@@ -33,6 +37,8 @@ const facultyApi = FacultyApi.getInstance();
 const booksApi = BooksApi.getInstance();
 const conferencesApi = ConferenceApi.getInstance();
 const publicationsApi = PublicationsApi.getInstance();
+const articlesApi = ArticleApi.getInstance();
+const researchApi = ResearchesApi.getInstance();
 
 const routes: Route[] = [
 	{
@@ -334,6 +340,132 @@ const routes: Route[] = [
 				),
 			},
 		]
+	},
+	{
+		path: "/articles",
+		pendingMinMs: 500,
+		pendingMs: 0,
+		pendingElement: <Pending />,
+		loader: async () => {
+			Promise.all([
+				await queryClient.fetchQuery(
+					[
+						"articles",
+						'',
+						'',
+						'',
+						'',
+						'desc',
+						'',
+						1,
+						'',
+						i18n.language
+					],
+					() => articlesApi.getArticles({
+						author: '',
+						category: '',
+						department: '',
+						faculty: '',
+						orderDirection: 'desc',
+						ordering: '',
+						page: 1,
+						search: '',
+						lang: ''
+					}),
+				),
+			]);
+
+			return {}
+		},
+		element: (
+			<CommonLayout>
+				<Articles />
+			</CommonLayout>
+		),
+	},
+	{
+		path: "/researches",
+		pendingMinMs: 500,
+		pendingMs: 0,
+		pendingElement: <Pending />,
+		loader: async () => {
+			Promise.all([
+				await queryClient.fetchQuery(
+					[
+						"researches",
+						'',
+						'',
+						'',
+						'',
+						'desc',
+						'',
+						1,
+						'',
+						i18n.language
+					],
+					() => researchApi.getResearches({
+						author: '',
+						category: '',
+						department: '',
+						faculty: '',
+						orderDirection: 'desc',
+						ordering: '',
+						page: 1,
+						search: '',
+						lang: ''
+					}),
+				),
+			]);
+
+			return {}
+		},
+		element: (
+			<CommonLayout>
+				<Researches />
+			</CommonLayout>
+		),
+	},
+	{
+		path: "/projects",
+		pendingMinMs: 500,
+		pendingMs: 0,
+		pendingElement: <Pending />,
+		loader: async () => {
+			Promise.all([
+				await queryClient.fetchQuery(
+					[
+						"researches",
+						'',
+						'',
+						'',
+						'',
+						'desc',
+						'',
+						1,
+						'',
+						i18n.language
+					],
+					() => researchApi.getResearches({
+						author: '',
+						category: '',
+						department: '',
+						faculty: '',
+						orderDirection: 'desc',
+						ordering: '',
+						page: 1,
+						search: '',
+						lang: ''
+					}),
+				),
+			]);
+
+			return {}
+		},
+		element: (
+			<CommonLayout>
+				<Researches />
+			</CommonLayout>
+		),
 	},
 	{
 		path: "/test",

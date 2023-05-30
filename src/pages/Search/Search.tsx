@@ -17,6 +17,7 @@ import { isNumber } from '@app/utils/helpers';
 import { useBookDownloadCount, useBookLikeCount } from '@app/hooks/mutation/Books';
 // types
 import { Book } from '@app/services/types/Books';
+import BookDetails from '@app/components/Modal/BookDetails/BookDetails';
 
 function Search() {
 	const search = useSearch();
@@ -87,7 +88,7 @@ function Search() {
 
 			{
 				openBookModal && bookDetails &&
-				<BookDetailsAudio
+				<BookDetails
 					alt='audio book image'
 					date={bookDetails.year}
 					downloadCount={bookDetails.download_count}
@@ -96,7 +97,6 @@ function Search() {
 					onClickLike={() => {
 						like(bookDetails.id)
 					}}
-					src={bookDetails.interactive_file}
 					subTitles={[bookDetails.author.name]}
 					text={bookDetails.description}
 					title={bookDetails.name}
