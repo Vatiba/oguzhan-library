@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Route } from "@tanstack/react-location";
 // api
 import { NewsApi } from "@app/services/api/News";
@@ -209,9 +209,11 @@ const routes: Route[] = [
 					return {}
 				},
 				element: (
-					<CommonLayout>
-						<NewsPapers />
-					</CommonLayout>
+					<Suspense fallback={<Pending />}>
+						<CommonLayout>
+							<NewsPapers />
+						</CommonLayout>
+					</Suspense>
 				),
 			}
 		]
@@ -274,9 +276,11 @@ const routes: Route[] = [
 					return {}
 				},
 				element: (
-					<CommonLayout>
-						<Magazines />
-					</CommonLayout>
+					<Suspense fallback={<Pending />}>
+						<CommonLayout>
+							<Magazines />
+						</CommonLayout>
+					</Suspense>
 				),
 			},
 		]
@@ -322,9 +326,11 @@ const routes: Route[] = [
 					return {};
 				},
 				element: (
-					<CommonLayout>
-						<NewsDetailsPage />
-					</CommonLayout>
+					<Suspense fallback={<Pending />}>
+						<CommonLayout>
+							<NewsDetailsPage />
+						</CommonLayout>
+					</Suspense>
 				),
 			},
 		]

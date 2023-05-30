@@ -3,6 +3,7 @@ type Conference = {
    file: string
    name: string
    date_created: string
+   thumbnail: string
 }
 
 export default Conference;

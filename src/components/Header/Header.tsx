@@ -7,15 +7,15 @@ import HeadDropdown from '../HeadDropdown';
 import Logo from '@app/assets/img/logo.png';
 // hooks
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useSearch } from '@tanstack/react-location';
+import { Link, useNavigate, useSearch } from '@tanstack/react-location';
+import { useGetBookCategories } from '@app/hooks/query/Books';
+import { useGetExternalLinks } from '@app/hooks/query/Main';
 // components
 import { Disclosure } from '@headlessui/react'
 // icons
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { OptionType } from '../Accordion';
-import Accordion from '../Accordion/Accordion';
-import { useGetBookCategories } from '@app/hooks/query/Books';
-import { useGetExternalLinks } from '@app/hooks/query/Main';
+import Accordion from '../Accordion';
 
 const newsPaperOptions: OptionType = [
 	{
@@ -30,19 +30,19 @@ const newsPaperOptions: OptionType = [
 
 const scienceWorldOptions: OptionType = [
 	{
-		href: '#',
+		href: '/articles',
 		label: 'scienceArticles'
 	},
 	{
-		href: '#',
+		href: '/researches',
 		label: 'scienceWorks'
 	},
 	{
-		href: '#',
+		href: '/projects',
 		label: 'designWorks'
 	},
 	{
-		href: '#',
+		href: '/conferences',
 		label: 'conferences'
 	}
 ]
@@ -69,10 +69,10 @@ function Header() {
 		<header className='bg-primaryColor fixed w-full z-20'>
 			<div className='border-b-[1px]'>
 				<Container className='flex items-center justify-between py-[5px]'>
-					<div className='flex items-center'>
+					<Link className='flex items-center' to='/'>
 						<img className='h-[50px] w-[50px] md:h-[65px] md:w-[65px]' src={Logo} alt="TITU logo" />
 						<span className='pl-4 font-bold text-base md:text-[20px] leading-[24px] text-white'>TITU e-library</span>
-					</div>
+					</Link>
 					<div className='max-w-[716px] hidden lg:block px-2'>
 						<h1 className='font-normal text-[16px] leading-[26px] xl:text-[22px] text-white text-center'>
 							Türkmenistanyň Prezidenti Serdar BERDIMUHAMEDOW: — Watan diňe halky bilen Watandyr! Döwlet diňe halky bilen döwletdir
@@ -106,7 +106,7 @@ function Header() {
 									options={
 										bookCategories?.map(item => {
 											return {
-												href: `/search?category=${item.slug}`,
+												href: `/search?category=${item.id}`,
 												label: item.name,
 											}
 										}) || []

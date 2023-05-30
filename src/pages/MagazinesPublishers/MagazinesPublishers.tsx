@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 // components
 import Container from '@app/components/Container/Container';
 import { Link, useSearch } from '@tanstack/react-location';
@@ -23,6 +23,13 @@ function MagazinesPublishers() {
 		page: page,
 		type: 'magazine'
 	});
+
+	const pageCount = useMemo(() => {
+		if (!magazinesIsError && magazines) {
+			return Math.ceil(Number(magazines && magazines.count / 10));
+		}
+		return 12;
+	}, [magazines, magazinesIsError]);
 
 	return (
 		<Container className='pt-[120px] md:pt-[135px]'>
@@ -58,7 +65,7 @@ function MagazinesPublishers() {
 				magazines?.count && magazines.results.length > 0 ?
 					<div className='w-full flex justify-end'>
 						<Pagination
-							pageCount={magazines.count}
+							pageCount={pageCount}
 							itemsPerPage={10}
 							page={page}
 							onPageChange={() => { }}

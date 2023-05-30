@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 // components
 import Container from '@app/components/Container/Container'
 import { Link, useSearch } from '@tanstack/react-location'
@@ -32,6 +32,13 @@ function Conferences() {
 		search: conferenceName
 	});
 
+	const pageCount = useMemo(() => {
+		if (!conferencesIsError && conferences) {
+			return Math.ceil(Number(conferences && conferences.count / 10));
+		}
+		return 12;
+	}, [conferences, conferencesIsError]);
+console.log(conferences)
 	return (
 		<Container
 			className='pt-[120px] md:pt-[135px]'
@@ -92,7 +99,7 @@ function Conferences() {
 
 
 			{/* ==== Content ==== */}
-			<div className='flex -mx-2'>
+			<div className='flex -mx-2 my-3'>
 				{
 					!conferencesIsError &&
 					!conferencesIsLoading && conferences &&
@@ -102,7 +109,7 @@ function Conferences() {
 								<Conference
 									date={item.date_created}
 									imgAlt='Conference image'
-									imgSrc={item.file}
+									imgSrc={item.thumbnail}
 									name={item.name}
 								/>
 							</div>
@@ -114,10 +121,10 @@ function Conferences() {
 
 			{/* ==== Pagination ==== */}
 			{
-				conferences?.count && conferences.results.length > 0 ?
+				conferences?.count && conferences.results.length > 0 && pageCount > 1 ?
 					<div className='w-full flex justify-end'>
 						<Pagination
-							pageCount={conferences.count}
+							pageCount={pageCount}
 							itemsPerPage={10}
 							page={page}
 							onPageChange={() => { }}

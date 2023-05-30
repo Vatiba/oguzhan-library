@@ -34,9 +34,9 @@ function Accordion(props: AccordionProps) {
                </Disclosure.Button>
                <Disclosure.Panel className="px-4 pt-1 pb-2 text-sm text-gray-500">
                   {
-                     options.map(item =>
+                     options.map((item, index) =>
                         item.children ?
-                           <Disclosure>
+                           <Disclosure key={index}>
                               {({ open }) => (
                                  <>
                                     <Disclosure.Button className="flex w-full justify-between rounded-lg px-4 py-2 text-left text-sm font-medium hover:bg-primaryColor focus:outline-none focus-visible:ring focus-visible:bg-opacity-80 bg-opacity-60 focus-visible:ring-opacity-75">
@@ -48,18 +48,19 @@ function Accordion(props: AccordionProps) {
                                     </Disclosure.Button>
                                     <Disclosure.Panel className="px-4 pt-1 pb-2 text-sm text-gray-500">
                                        {
-                                          item.children && item.children.map(item => {
+                                          item.children && item.children.map((item, index) => {
                                              if (!item.children)
                                                 return (
-                                                   <Link
-                                                      to={item.href}
+                                                   <a
+                                                      href={item.href}
                                                       className={classNames(
                                                          'text-white',
                                                          'block mx-[10px] py-2 text-base font-medium rounded-md'
                                                       )}
+                                                      key={index}
                                                    >
                                                       {t(item.label)}
-                                                   </Link>
+                                                   </a>
                                                 )
 
                                           })
@@ -71,6 +72,7 @@ function Accordion(props: AccordionProps) {
                            :
                            <Link
                               to={item.href}
+                              key={index}
                               className={classNames(
                                  'text-white',
                                  'block mx-[10px] py-2 text-base font-medium rounded-md'

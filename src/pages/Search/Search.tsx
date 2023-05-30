@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 // components
 import Container from '@app/components/Container';
 import { Link, useSearch } from '@tanstack/react-location';
@@ -6,6 +6,7 @@ import SearchFilter from '@app/components/Filters/SearchFilter';
 import Row from '@app/components/Cards/Row/Row';
 import Pagination from '@app/components/common/Pagination';
 import Drawer from '@app/components/common/Drawer/Drawer';
+import BookDetailsAudio from '@app/components/Modal/BookDetailsAudio';
 // hooks
 import { useTranslation } from 'react-i18next';
 import { useGetBooks } from '@app/hooks/query/Books';
@@ -13,12 +14,21 @@ import { useGetBooks } from '@app/hooks/query/Books';
 import { ListBulletIcon } from '@heroicons/react/20/solid';
 // helpers
 import { isNumber } from '@app/utils/helpers';
+import { useBookDownloadCount, useBookLikeCount } from '@app/hooks/mutation/Books';
+// types
+import { Book } from '@app/services/types/Books';
 
 function Search() {
 	const search = useSearch();
 	const { t, i18n } = useTranslation('translation');
 
 	const [drawerOpen, setDrawerOpen] = useState(false);
+
+	const [openAudioBookModal, setOpenAudioBookModal] = useState(false);
+	const [audioBookDetails, setAudioBookDetails] = useState<Book>();
+
+	const [openBookModal, setOpenBookModal] = useState(false);
+	const [bookDetails, setBookDetails] = useState<Book>();
 
 	const page = isNumber(Number(search['page'])) ? Number(search['page']) : 1;
 
@@ -34,12 +44,67 @@ function Search() {
 		ordering: 'id',
 		page: search['page'] as number || 1,
 		search: search['search'] as string || '',
-		type: search['type'] as string || '',
+		type: search['type'] as string || 'book',
 		lang: i18n.language
 	});
 
+	const {
+		mutate: like
+	} = useBookLikeCount();
+	const {
+		mutate: download
+	} = useBookDownloadCount();
+
+	const pageCount = useMemo(() => {
+		if (!booksIsError && books) {
+			return Math.ceil(Number(books && books.count / 10));
+		}
+		return 12;
+	}, [books, booksIsError]);
+
 	return (
 		<>
+			{
+				openAudioBookModal && audioBookDetails &&
+				<BookDetailsAudio
+					alt='audio book image'
+					date={audioBookDetails.year}
+					downloadCount={audioBookDetails.download_count}
+					imgSrc={audioBookDetails.thumbnail}
+					likeCount={audioBookDetails.liked_count}
+					onClickLike={() => {
+						like(audioBookDetails.id)
+					}}
+					src={audioBookDetails.interactive_file}
+					subTitles={[audioBookDetails.author.name]}
+					text={audioBookDetails.description}
+					title={audioBookDetails.name}
+					viewedCount={audioBookDetails.view_count}
+					setIsOpen={setOpenAudioBookModal}
+					isOpen={openAudioBookModal}
+				/>
+			}
+
+			{
+				openBookModal && bookDetails &&
+				<BookDetailsAudio
+					alt='audio book image'
+					date={bookDetails.year}
+					downloadCount={bookDetails.download_count}
+					imgSrc={bookDetails.thumbnail}
+					likeCount={bookDetails.liked_count}
+					onClickLike={() => {
+						like(bookDetails.id)
+					}}
+					src={bookDetails.interactive_file}
+					subTitles={[bookDetails.author.name]}
+					text={bookDetails.description}
+					title={bookDetails.name}
+					viewedCount={bookDetails.view_count}
+					setIsOpen={setOpenBookModal}
+					isOpen={openBookModal}
+				/>
+			}
 			{/* ==== Filter drawers ==== */}
 			<Drawer open={drawerOpen} setOpen={setDrawerOpen}>
 				<SearchFilter />
@@ -70,7 +135,7 @@ function Search() {
 							<SearchFilter />
 						</div>
 					</div>
-					<div className='2xl:w-3/4 lg:w-5/7 w-full px-2'>
+					<div className='2xl:w-3/4 lg:w-5/7 w-full px-2 my-3'>
 						<div className='flex flex-col'>
 							{
 								!booksIsError && books ?
@@ -78,50 +143,65 @@ function Search() {
 										books.results.map(item => {
 
 											return (
-												<Row
+												<div
 													key={item.id}
-													alt={'Books image'}
-													date={item.year}
-													downloadCount={item.download_count}
-													imgSrc={item.thumbnail}
-													likeCount={item.liked_count}
-													viewedCount={item.view_count}
-													subTitles={[item.author.name]}
-													text={item.description}
-													title={item.name}
-													onPlay={() => {
-
-													}}
-													onClickLike={() => { }}
-												/>
+													className='mb-2'
+												>
+													<Row
+														key={item.id}
+														alt={'Books image'}
+														date={item.year}
+														downloadCount={item.download_count}
+														imgSrc={item.thumbnail}
+														likeCount={item.liked_count}
+														viewedCount={item.view_count}
+														subTitles={[item.author.name]}
+														text={item.description}
+														title={item.name}
+														onPlay={() => {
+															setAudioBookDetails(item);
+															setOpenAudioBookModal(true);
+														}}
+														onClickLike={() => {
+															like(item.id)
+														}}
+													/>
+												</div>
 											)
 										})
 										:
 										books.results.map(item => {
 											return (
-												<Row
+												<div
 													key={item.id}
-													alt={'Books image'}
-													date={item.year}
-													downloadCount={item.download_count}
-													imgSrc={item.thumbnail}
-													likeCount={item.liked_count}
-													viewedCount={item.view_count}
-													subTitles={[item.author.name]}
-													text={item.description}
-													title={item.name}
-													onClick={
-														search['type'] !== 'audioBook' ?
-															() => {
-
-															}
-															:
-															undefined
-													}
-													onDownload={() => { }}
-													onRead={() => { }}
-													onClickLike={() => { }}
-												/>
+													className='mb-2'
+												>
+													<Row
+														alt={'Books image'}
+														date={item.year}
+														downloadCount={item.download_count}
+														imgSrc={item.thumbnail}
+														likeCount={item.liked_count}
+														viewedCount={item.view_count}
+														subTitles={[item.author.name]}
+														text={item.description}
+														title={item.name}
+														onClick={() => {
+															setBookDetails(item);
+															setOpenBookModal(true);
+														}}
+														onDownload={() => {
+															window.open(item.file, '_blank');
+															download(item.id)
+														}}
+														onRead={() => {
+															window.open(item.file, '_blank');
+														}}
+														onClickLike={() => {
+															like(item.id)
+														}}
+													/>
+												</div>
 											)
 										})
 									:
@@ -134,16 +214,18 @@ function Search() {
 
 				{/* ==== Pagination ==== */}
 				{
-					books?.count && books.results.length > 0 &&
-					<div className='w-full flex justify-end'>
-						<Pagination
-							pageCount={books.count}
-							itemsPerPage={10}
-							page={page}
-							onPageChange={() => { }}
-							pageRangeDisplayed={3}
-						/>
-					</div>
+					books?.count && books.results.length > 0 && pageCount > 1 ?
+						<div className='w-full flex justify-end my-3'>
+							<Pagination
+								pageCount={pageCount}
+								itemsPerPage={10}
+								page={page}
+								onPageChange={() => { }}
+								pageRangeDisplayed={3}
+							/>
+						</div>
+						:
+						null
 				}
 			</Container>
 		</>

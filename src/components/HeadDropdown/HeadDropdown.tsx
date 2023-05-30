@@ -238,15 +238,16 @@ function HeadDropdown(props: HeadDropdownProps) {
 																				<Menu.Item key={index}>
 																					{({ active }) => (
 																						<Menu as="div" className={classNames("relative inline-block text-left", wrapperCN)}>
-																							<Link
-																								to={item.href}
+																							<a
+																								href={item.href}
+																								target='_blank'
 																								className={classNames(
 																									active ? 'bg-primaryColor bg-opacity-80 text-white' : 'text-white',
 																									'block mx-[10px] px-4 py-2 text-base font-medium rounded-md'
 																								)}
 																							>
 																								{item.label}
-																							</Link>
+																							</a>
 																						</Menu>
 																					)}
 																				</Menu.Item>

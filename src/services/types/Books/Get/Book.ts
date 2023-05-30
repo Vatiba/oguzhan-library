@@ -16,6 +16,7 @@ type Book = {
    department: INS & {
       image: string
    }
+   interactive_file: string | null
 }
 
 export default Book;

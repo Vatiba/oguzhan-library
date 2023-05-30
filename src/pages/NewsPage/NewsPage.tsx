@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 // components
 import Container from '@app/components/Container/Container'
 import { Link, useSearch } from '@tanstack/react-location'
@@ -31,6 +31,13 @@ function NewsPage() {
 		page: page,
 		search: newsName
 	});
+
+	const pageCount = useMemo(() => {
+		if (!newsIsError && news && !newsIsLoading) {
+			return Math.ceil(Number(news && news.count / 10));
+		}
+		return 12;
+	}, [news, newsIsError]);
 
 	return (
 		<Container
@@ -119,7 +126,7 @@ function NewsPage() {
 				news?.count && news.results.length > 0 ?
 					<div className='w-full flex justify-end'>
 						<Pagination
-							pageCount={news.count}
+							pageCount={pageCount}
 							itemsPerPage={10}
 							page={page}
 							onPageChange={() => { }}

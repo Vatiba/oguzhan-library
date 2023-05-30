@@ -11,6 +11,7 @@ import Faculty, { FacultyProps } from '../Cards/Col/Faculty/Faculty';
 import News, { NewsProps } from '../Cards/Col/News/News';
 // icons
 import { ArrowRightIcon, ArrowLeftIcon } from '@heroicons/react/20/solid'
+import { Link } from '@tanstack/react-location';
 
 
 type CarouselProps = {
@@ -72,9 +73,11 @@ function Carousel(props: CarouselProps) {
 						faculties && faculties.map((faculty) => {
 							return (
 								<SwiperSlide key={faculty.id}>
-									<Faculty
-										{...faculty}
-									/>
+									<Link to={`/search?faculty=${faculty.id}`}>
+										<Faculty
+											{...faculty}
+										/>
+									</Link>
 								</SwiperSlide>
 							)
 						})
@@ -82,9 +85,11 @@ function Carousel(props: CarouselProps) {
 						news && news.map((news) => {
 							return (
 								<SwiperSlide key={news.id}>
-									<News
-										{...news}
-									/>
+									<Link to={`/news/${news.id}`}>
+										<News
+											{...news}
+										/>
+									</Link>
 								</SwiperSlide>
 							)
 						})

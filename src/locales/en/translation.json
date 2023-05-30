@@ -18,7 +18,7 @@
 	"virtualLibrary": "Virtual library",
 	"audioBooks": "Audio books",
 	"faculties": "Faculties",
-	"news": "News",
+	"news": "Wonders",
 	"download": "Download",
 	"read": "Read",
 	"all": "All",
@@ -32,6 +32,6 @@
 	"startDate": "Start date",
 	"endDate": "End date",
 	"conferenceName": "Conference name",
-	"newsName": "News name",
-	"latestNews": "Latest news"
+	"newsName": "Wonder name",
+	"latestNews": "Latest wonders"
 }

@@ -1,9 +1,6 @@
 import React from 'react';
 // Swiper
-import { Autoplay, Keyboard, Pagination } from 'swiper';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import { Keyboard, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 type MainBannerProps = {
@@ -23,20 +20,15 @@ function MainBanner(props: MainBannerProps) {
 		<div className='mainBanner'>
 			<Swiper
 				className='rounded-md'
-				modules={[Keyboard, Autoplay, Pagination]}
+				modules={[Keyboard, Pagination]}
 				speed={300}
-				autoplay={{
-					delay: 5000,
-					disableOnInteraction: true,
-				}}
 				keyboard={{
 					enabled: true,
 				}}
 				slidesPerView='auto'
 				spaceBetween={9}
-				pagination
 				centeredSlides
-				loop
+				pagination
 			>
 				{
 					imgs.map((item, index) => (

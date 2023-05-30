@@ -17,19 +17,18 @@ function Faculty(props: FacultyProps) {
 	} = props;
 
 	return (
-		<Link
-			to='#'
+		<div
 			className='rounded-md shadow-md h-[290px] min-w-[250px] max-w-[350px] bg-mainBgColor flex flex-col'
 		>
 			<img
-				className='max-h-[190px]'
+				className='max-h-[190px] rounded-t-md'
 				src={imgSrc}
 				alt={imgAlt}
 			/>
 			<span className='text-lg p-4 font-medium leading-[23px]'>
 				{name}
 			</span>
-		</Link>
+		</div>
 	)
 }
 

@@ -74,7 +74,7 @@ class BooksApi extends HttpClient {
 
 	public async getBook(id: number, lang: string): Promise<Book> {
 		try {
-			return this.instance.patch(
+			return this.instance.get(
 				`/books/${id}`,
 				{
 					headers: {

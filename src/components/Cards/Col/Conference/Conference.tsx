@@ -20,7 +20,7 @@ function Conference(props: ConferenceProps) {
 			className='rounded-md shadow-md min-w-[250px] max-w-[350px] bg-mainBgColor flex flex-col'
 		>
 			<img
-				className='max-h-[327px]'
+				className='max-h-[327px] rounded-t-md'
 				src={imgSrc}
 				alt={imgAlt}
 			/>

@@ -18,7 +18,7 @@
 	"virtualLibrary": "Virtual kitaphana",
 	"audioBooks": "Audio kitaplar",
 	"faculties": "Fakultetler",
-	"news": "Täzelikler",
+	"news": "Täsinlikler",
 	"download": "Ýükle",
 	"read": "Okamak",
 	"all": "Hemmesi",
@@ -32,6 +32,6 @@
 	"startDate": "Başlangyç sene",
 	"endDate": "Soňky sene",
 	"conferenceName": "Konferensiýanyň ady",
-	"newsName": "Täzeligiň ady",
-	"latestNews": "Soňky täzelikler"
+	"newsName": "Täsinligiň ady",
+	"latestNews": "Soňky täsinlikler"
 }
