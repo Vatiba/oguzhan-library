@@ -25,5 +25,13 @@
 	"book": "Книги",
 	"audioBook": "Аудио книги",
 	"3dBook": "3D книги",
-	"mainPage": "Главная страница"
+	"mainPage": "Главная страница",
+	"authors": "Авторы",
+	"categories": "Категории",
+	"department": "Кафедра",
+	"startDate": "Начальная дата",
+	"endDate": "Конечная дата",
+	"conferenceName": "Имя конференции",
+	"newsName": "Имя новостей",
+	"latestNews": "Последние новости"
 }

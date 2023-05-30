@@ -3,12 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 
 const newsApi = NewsApi.getInstance();
 
-const useGetNew = (id: number, lang: string) => {
+const useGetNew = (lang: string, id?: number) => {
    return useQuery(
       ["news", id],
-      () => newsApi.getNew(id, lang),
+      () => newsApi.getNew(id as number, lang),
       {
-         staleTime: 1000 * 60
+         staleTime: 1000 * 60,
+         enabled: !!id
       }
    );
 };

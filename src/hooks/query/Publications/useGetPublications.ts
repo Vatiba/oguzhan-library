@@ -13,9 +13,7 @@ const useGetPublications = ({
 	return useQuery(
 		[
 			"publications",
-			end_date,
 			page,
-			start_date,
 			lang,
 		],
 		() => publicationsApi.getPuplications({

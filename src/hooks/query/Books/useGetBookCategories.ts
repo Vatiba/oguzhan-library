@@ -5,7 +5,7 @@ const booksApi = BooksApi.getInstance();
 
 const useGetBookCategories = (lang: string) => {
 	return useQuery(
-		["bookCategories"],
+		["bookCategories", lang],
 		() => booksApi.getBookCategories(lang),
 	);
 };

@@ -25,5 +25,13 @@
 	"book": "Kitaplar",
 	"audioBook": "Audio kitaplar",
 	"3dBook": "3D kitaplar",
-	"mainPage": "Esasy sahypa"
+	"mainPage": "Esasy sahypa",
+	"authors": "Awtorlar",
+	"categories": "Kategoriýalar",
+	"department": "Kafedralar",
+	"startDate": "Başlangyç sene",
+	"endDate": "Soňky sene",
+	"conferenceName": "Konferensiýanyň ady",
+	"newsName": "Täzeligiň ady",
+	"latestNews": "Soňky täzelikler"
 }

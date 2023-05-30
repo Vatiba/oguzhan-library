@@ -14,10 +14,7 @@ const useGetConferences = ({
    return useQuery(
       [
          "conferences",
-         end_date,
          page,
-         search,
-         start_date,
          lang
       ],
       () => conferenceApi.getConferences({

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // components
 import AutoComplete from '@app/components/common/AutoComplete';
 // hooks
@@ -13,23 +13,28 @@ import useDebounceFunction from '@app/hooks/useDebounceFunction';
 function SearchFilter() {
 	const search = useSearch();
 	const navigate = useNavigate();
-	const { t } = useTranslation('translation');
+	const { t, i18n } = useTranslation('translation');
 
 	const [searchValueInput, setSearchValueInput] = useState(search['search'] as string || '');
+
+	useEffect(() => {
+		setSearchValueInput(search['search'] as string || '')
+	}, [search['search']])
+
 
 	// queries
 	const {
 		data: authors,
 		isError: authorsIsError
-	} = useGetBooksAuthors();
+	} = useGetBooksAuthors(i18n.language);
 	const {
 		data: bookCategories,
 		isError: bookCategoriesIsError
-	} = useGetBookCategories();
+	} = useGetBookCategories(i18n.language);
 	const {
 		data: faculties,
 		isError: facultiesIsError
-	} = useGetFaculties();
+	} = useGetFaculties(i18n.language);
 	const {
 		data: departments,
 		isError: departmentsIsError
@@ -47,8 +52,8 @@ function SearchFilter() {
 	}, 500)
 
 	const handleSearchChange = (value: string) => {
-		setSearchValueInput(value)
-		debouncedChanger(value)
+		setSearchValueInput(value);
+		debouncedChanger(value);
 	}
 
 	return (
@@ -61,6 +66,7 @@ function SearchFilter() {
 				className="block w-full rounded-md border-0 py-1.5 focus:outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6"
 				value={searchValueInput}
 				onChange={({ currentTarget: { value } }) => handleSearchChange(value)}
+				placeholder={t('search') as string}
 			/>
 			<div className='mt-2'>
 				<AutoComplete
@@ -79,7 +85,10 @@ function SearchFilter() {
 								id: type,
 								name: t(type)
 							}
-						return
+						return {
+							id: 'book',
+							name: t('book')
+						}
 					})()
 					}
 					urlKey='type'
@@ -103,8 +112,8 @@ function SearchFilter() {
 									name: author.name
 								}
 							return
-						})()
-						}
+						})()}
+						placeholder={t('authors') as string}
 						urlKey='authors'
 					/>
 				</div>
@@ -127,8 +136,8 @@ function SearchFilter() {
 									name: category.name
 								}
 							return
-						})()
-						}
+						})()}
+						placeholder={t('categories') as string}
 						urlKey='category'
 					/>
 				</div>
@@ -151,8 +160,8 @@ function SearchFilter() {
 									name: faculty.name
 								}
 							return
-						})()
-						}
+						})()}
+						placeholder={t('faculties') as string}
 						urlKey='faculty'
 					/>
 				</div>
@@ -175,8 +184,8 @@ function SearchFilter() {
 									name: department.name
 								}
 							return
-						})()
-						}
+						})()}
+						placeholder={t('department') as string}
 						urlKey='department'
 					/>
 				</div>

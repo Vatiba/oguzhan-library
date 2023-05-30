@@ -60,7 +60,7 @@ function Magazine(props: MagazineProps) {
 						</span>
 					</span>
 				</div>
-				<Btn />
+				<Btn downLoad/>
 			</div>
 		</div>
 	)

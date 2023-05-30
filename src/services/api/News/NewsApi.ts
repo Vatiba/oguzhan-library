@@ -1,7 +1,7 @@
 import HttpClient from "@services/api/httpClient";
 import baseUrl from "@services/api/baseURL";
 import { Pagination } from "@app/services/types/Common";
-import { New } from "@app/services/types/News";
+import { New, NewsGetDto } from "@app/services/types/News";
 
 class NewsApi extends HttpClient {
 	private static instance: NewsApi;
@@ -17,9 +17,21 @@ class NewsApi extends HttpClient {
 		return NewsApi.instance;
 	}
 
-	public async getNews(lang: string): Promise<Pagination<New[]>> {
+	public async getNews({
+		start_date,
+		end_date,
+		search,
+		page,
+		lang
+	}: NewsGetDto): Promise<Pagination<New[]>> {
 		try {
 			return this.instance.get(`/news`, {
+				params: {
+					start_date,
+					end_date,
+					search,
+					page,
+				},
 				headers: {
 					'Accept-Language': lang,
 					...HttpClient.headers,

@@ -13,3 +13,7 @@ export const secondsToHours = (sec?: number) => {
 		seconds.toString().padStart(2, '0')
 	);
 }
+
+export const isNumber = (x: any): x is number => {
+	return typeof x === 'number' && !Number.isNaN(Number(x));
+}

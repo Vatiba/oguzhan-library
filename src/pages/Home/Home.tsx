@@ -14,7 +14,7 @@ import { useGetFaculties } from '@app/hooks/query/Faculty';
 import { useGetNews } from '@app/hooks/query/News';
 
 function Home() {
-	const { t } = useTranslation('translation');
+	const { t, i18n } = useTranslation('translation');
 
 	const {
 		data: mainBanners,
@@ -23,20 +23,26 @@ function Home() {
 	const {
 		data: faculties,
 		isError: facultiesIsError
-	} = useGetFaculties();
+	} = useGetFaculties(i18n.language);
 	const {
 		data: news,
 		isError: newsIsError
-	} = useGetNews();
+	} = useGetNews({
+		start_date: '',
+		end_date: '',
+		lang: i18n.language,
+		page: 1,
+		search: ''
+	});
 
 	return (
-		<Container>
+		<Container className='pt-[120px] md:pt-[135px]'>
 			{
 				!mainBannersIsError && mainBanners &&
 				<div className='mt-4'>
 					<MainBanner
 						imgs={
-							mainBanners.results.map(item => ({
+							mainBanners.map(item => ({
 								alt: "Banner image",
 								src: item.image
 							})) || []
@@ -68,7 +74,7 @@ function Home() {
 				</div>
 			}
 			{
-				!newsIsError && news &&
+				!newsIsError && news?.results &&
 				<div className='flex flex-col my-[40px]'>
 					<Link className='flex mb-5'>
 						<NewspaperIcon className="h-6 w-6 text-textColor mr-1" aria-hidden="true" />

@@ -13,6 +13,7 @@ type AutoCompleteProps<T> = {
 	onChange?: (option: Option<T> | string) => void
 	defaultValue?: Option<T>,
 	urlKey?: string
+	placeholder?: string
 }
 
 function AutoComplete<T extends string | number>(props: AutoCompleteProps<T>) {
@@ -20,7 +21,8 @@ function AutoComplete<T extends string | number>(props: AutoCompleteProps<T>) {
 		options,
 		onChange,
 		defaultValue = '',
-		urlKey
+		urlKey,
+		placeholder
 	} = props;
 
 	const navigate = useNavigate();
@@ -57,6 +59,7 @@ function AutoComplete<T extends string | number>(props: AutoCompleteProps<T>) {
 						className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
 						displayValue={(person) => (person as any)?.name}
 						onChange={(event) => setQuery(event.target.value)}
+						placeholder={placeholder}
 					/>
 					<Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
 						<ChevronUpDownIcon
@@ -72,7 +75,7 @@ function AutoComplete<T extends string | number>(props: AutoCompleteProps<T>) {
 					leaveTo="opacity-0"
 					afterLeave={() => setQuery('')}
 				>
-					<Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base border ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+					<Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base border ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-20">
 						{filteredPeople.length === 0 && query !== '' ? (
 							<div className="relative cursor-default select-none py-2 px-4 text-gray-700">
 								Nothing found.

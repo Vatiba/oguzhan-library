@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 // components
 import Container from '../Container'
 import LangBtn from '../Buttons/LangBtn';
@@ -7,7 +7,7 @@ import HeadDropdown from '../HeadDropdown';
 import Logo from '@app/assets/img/logo.png';
 // hooks
 import { useTranslation } from 'react-i18next';
-import { Link } from '@tanstack/react-location';
+import { useNavigate, useSearch } from '@tanstack/react-location';
 // components
 import { Disclosure } from '@headlessui/react'
 // icons
@@ -17,73 +17,13 @@ import Accordion from '../Accordion/Accordion';
 import { useGetBookCategories } from '@app/hooks/query/Books';
 import { useGetExternalLinks } from '@app/hooks/query/Main';
 
-
-const bookOptions: OptionType = [
-	{
-		href: '#',
-		label: 'booksOfLeader' as const
-	},
-	{
-		href: '#',
-		label: '3dbooks' as const
-	},
-	{
-		href: '#',
-		label: 'schoolBooks' as const
-	},
-	{
-		href: '#',
-		label: 'olimpicBooks' as const
-	},
-	{
-		href: '#',
-		label: 'literature1' as const
-	},
-	{
-		href: '#',
-		label: 'literature2' as const
-	},
-	{
-		href: '#',
-		label: 'literature3' as const
-	},
-	{
-		href: '#',
-		label: 'literature4' as const
-	},
-	{
-		href: '#',
-		label: 'literature5' as const
-	},
-	{
-		href: '#',
-		label: 'literature6' as const
-	},
-	{
-		href: '#',
-		label: 'literature7' as const
-	},
-	{
-		href: '#',
-		label: 'literature8' as const
-	},
-	{
-		href: '#',
-		label: 'literature9' as const
-	},
-	{
-		href: '#',
-		label: 'literature10' as const
-	}
-]
-
 const newsPaperOptions: OptionType = [
 	{
-		href: '#',
+		href: '/newsPapers',
 		label: 'eNewspapers'
 	},
 	{
-		href: '#',
+		href: '/magazines',
 		label: 'eMagazines'
 	}
 ]
@@ -104,85 +44,29 @@ const scienceWorldOptions: OptionType = [
 	{
 		href: '#',
 		label: 'conferences'
-	},
-	{
-		href: '#',
-		label: 'scienceSources',
-		children: [
-			{
-				href: '#',
-				label: 'Google scholar',
-			},
-			{
-				href: '#',
-				label: 'CyberLeninka'
-			},
-			{
-				href: '#',
-				label: 'Ncbi.nlm.nih.gov'
-			},
-			{
-				href: '#',
-				label: 'Mendeleyew'
-			},
-			{
-				href: '#',
-				label: 'Taylorfrancis'
-			},
-			{
-				href: '#',
-				label: 'Sciencedirect'
-			},
-			{
-				href: '#',
-				label: 'Core.ac.uk'
-			},
-			{
-				href: '#',
-				label: 'Redalyc'
-			},
-			{
-				href: '#',
-				label: 'Doaj.org'
-			},
-			{
-				href: '#',
-				label: 'Springer'
-			},
-			{
-				href: '#',
-				label: 'MDPI'
-			},
-			{
-				href: '#',
-				label: 'Scopus'
-			},
-			{
-				href: '#',
-				label: 'E-library'
-			},
-			{
-				href: '#',
-				label: 'РГИС'
-			},
-		]
-	},
+	}
 ]
 
 function Header() {
-	const { t } = useTranslation('translation');
+	const navigate = useNavigate();
+	const search = useSearch();
+	const { t, i18n } = useTranslation('translation');
 
+	const [searchValueInput, setSearchValueInput] = useState(search['search'] as string || '');
+
+	// queries
 	const {
 		data: bookCategories,
-		isError: bookCategoriesIsError
-	} = useGetBookCategories();
+		isError: bookCategoriesIsError,
+		isLoading: bookCategoriesIsLoading
+	} = useGetBookCategories(i18n.language);
 	const {
 		data: externalLinks,
 		isError: externalLinksIsError
 	} = useGetExternalLinks();
 
 	return (
-		<header className='bg-primaryColor'>
+		<header className='bg-primaryColor fixed w-full z-20'>
 			<div className='border-b-[1px]'>
 				<Container className='flex items-center justify-between py-[5px]'>
 					<div className='flex items-center'>
@@ -213,19 +97,31 @@ function Header() {
 							</Disclosure.Button>
 						</div>
 						<div className="hidden lg:flex">
-							<HeadDropdown
-								title={t('books')}
-								wrapperCN='pr-3 mr-3 border-r-[1px] border-white border-solid'
-								dropdownCN='overflow-y-auto overflow-x-hidden max-h-56'
-								options={bookOptions}
-								isTwoColumn
-							/>
-							<Link className='font-medium text-white pr-3 mr-3 border-r-[1px] border-white border-solid'>
+							{
+								!bookCategoriesIsError &&
+								<HeadDropdown
+									title={t('books')}
+									wrapperCN='pr-3 mr-3 border-r-[1px] border-white border-solid'
+									dropdownCN='overflow-y-auto overflow-x-hidden max-h-56'
+									options={
+										bookCategories?.map(item => {
+											return {
+												href: `/search?category=${item.slug}`,
+												label: item.name,
+											}
+										}) || []
+									}
+									isTwoColumn
+									isLoading={bookCategoriesIsLoading}
+								/>
+							}
+							<a
+								className='font-medium text-white pr-3 mr-3 border-r-[1px] border-white border-solid'
+								href="http://172.16.0.71/360/"
+								target="_blank"
+							>
 								{t('virtualLibrary')}
-							</Link>
-							<Link className='font-medium text-white pr-3 mr-3 border-r-[1px] border-white border-solid'>
-								{t('audioBooks')}
-							</Link>
+							</a>
 							<HeadDropdown
 								title={t('newsPapersAndMagazines')}
 								wrapperCN='pr-3 mr-3 border-r-[1px] border-white border-solid'
@@ -236,7 +132,29 @@ function Header() {
 							/>
 							<HeadDropdown
 								title={t('scienceWorld')}
-								options={scienceWorldOptions}
+								options={externalLinks ? [
+									...scienceWorldOptions.map(item => {
+										return {
+											href: item.href,
+											label: t(item.label)
+										}
+									}),
+									{
+										href: '#',
+										label: t('scienceSources'),
+										children: externalLinks.map(item => {
+											return {
+												href: item.link,
+												label: item.name
+											}
+										})
+									}
+								] : scienceWorldOptions.map(item => {
+									return {
+										href: item.href,
+										label: t(item.label)
+									}
+								})}
 							/>
 						</div>
 						<div className='border-solid border-l-white border-l-2 pl-4 ml-auto lg:ml-0'>
@@ -244,28 +162,75 @@ function Header() {
 								className='placeholder:text-accentColor py-1 px-3 rounded-md w-[168px]'
 								type="text"
 								placeholder={t('search') as string}
+								value={searchValueInput}
+								onChange={({ currentTarget: { value } }) => setSearchValueInput(value)}
+								onKeyDown={({ key }) => {
+									if (key === 'Enter')
+										navigate({
+											to: '/search',
+											search(prev) {
+												return {
+													...prev,
+													'search': searchValueInput
+												}
+											},
+										})
+								}}
 							/>
 						</div>
 
 						<Disclosure.Panel className="absolute top-14 left-0 w-full bg-primaryColor lg:hidden">
 							<div className="space-y-1 px-2 pb-3 pt-2 flex flex-col">
-								<Accordion
-									title={t('books')}
-									options={bookOptions}
-								/>
-								<Link className='font-medium text-white px-4 py-2'>
+								{
+									!bookCategoriesIsError && bookCategories &&
+									<Accordion
+										title={t('books')}
+										options={
+											bookCategories.map(item => {
+												return {
+													href: `/search?category=${item.slug}`,
+													label: item.name,
+												}
+											})
+										}
+									/>
+								}
+								<a
+									className='font-medium text-white px-4 py-2'
+									href="http://172.16.0.71/360/"
+									target="_blank"
+								>
 									{t('virtualLibrary')}
-								</Link>
-								<Link className='font-medium text-white px-4 py-2'>
-									{t('audioBooks')}
-								</Link>
+								</a>
 								<Accordion
 									title={t('newsPapersAndMagazines')}
 									options={newsPaperOptions}
 								/>
 								<Accordion
 									title={t('scienceWorld')}
-									options={scienceWorldOptions}
+									options={externalLinks ? [
+										...scienceWorldOptions.map(item => {
+											return {
+												href: item.href,
+												label: t(item.label)
+											}
+										}),
+										{
+											href: '#',
+											label: t('scienceSources'),
+											children: externalLinks.map(item => {
+												return {
+													href: item.link,
+													label: item.name
+												}
+											})
+										}
+									] : scienceWorldOptions.map(item => {
+										return {
+											href: item.href,
+											label: t(item.label)
+										}
+									})}
 								/>
 							</div>
 						</Disclosure.Panel>

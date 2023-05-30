@@ -20,6 +20,7 @@ export type RowProps = {
 	onDownload?: () => void
 	onRead?: () => void
 	onPlay?: () => void
+	onClickLike: () => void
 }
 
 function Row(props: RowProps) {
@@ -36,7 +37,8 @@ function Row(props: RowProps) {
 		onClick,
 		onDownload,
 		onPlay,
-		onRead
+		onRead,
+		onClickLike,
 	} = props;
 
 	const { t } = useTranslation('translation');
@@ -95,10 +97,13 @@ function Row(props: RowProps) {
 								</span>
 							</span>
 							<span className='static sm:absolute right-0 top-0 flex sm:p-3'>
-								<span className='flex text-sm font-normal leading-[16px] mr-2'>
+								<button
+									className='flex text-sm font-normal leading-[16px] mr-2'
+									onClick={() => onClickLike()}
+								>
 									<HeartIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 									{likeCount}
-								</span>
+								</button>
 								<span className='flex text-sm font-normal leading-[16px] mr-2'>
 									<EyeIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 									{viewedCount}
