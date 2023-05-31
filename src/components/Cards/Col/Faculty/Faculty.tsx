@@ -21,7 +21,7 @@ function Faculty(props: FacultyProps) {
 			className='rounded-md shadow-md h-[290px] min-w-[250px] max-w-[350px] bg-mainBgColor flex flex-col'
 		>
 			<img
-				className='max-h-[190px] rounded-t-md'
+				className='h-[190px] rounded-t-md'
 				src={imgSrc}
 				alt={imgAlt}
 			/>

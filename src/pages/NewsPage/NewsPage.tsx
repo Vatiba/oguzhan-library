@@ -99,13 +99,13 @@ function NewsPage() {
 
 
 			{/* ==== Content ==== */}
-			<div className='flex -mx-2'>
+			<div className='flex -mx-2 flex-wrap my-4'>
 				{
 					!newsIsError &&
 					!newsIsLoading && news &&
 					news.results.map(item => {
 						return (
-							<div className='px-2 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5' key={item.id}>
+							<Link to={`/news/${item.id}`} className='p-2 w-1/2 md:w-1/3 lg:w-1/4' key={item.id}>
 								<News
 									date={item.date_created}
 									imgAlt='News image'
@@ -114,7 +114,7 @@ function NewsPage() {
 									text={item.content}
 									title={item.name}
 								/>
-							</div>
+							</Link>
 						)
 					})
 				}
@@ -123,7 +123,7 @@ function NewsPage() {
 
 			{/* ==== Pagination ==== */}
 			{
-				news?.count && news.results.length > 0 ?
+				news?.count && news.results.length > 0 && pageCount > 1 ?
 					<div className='w-full flex justify-end'>
 						<Pagination
 							pageCount={pageCount}

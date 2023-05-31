@@ -25,13 +25,15 @@ function News(props: NewsProps) {
 		<div
 			className='rounded-md shadow-md h-[400px] min-w-[250px] max-w-[350px] bg-mainBgColor flex flex-col'
 		>
-			<img
-				className='max-h-[180px] rounded-t-md'
-				src={imgSrc}
-				alt={imgAlt}
-			/>
+			<div className='h-[180px]'>
+				<img
+					className='h-full w-full rounded-t-md'
+					src={imgSrc}
+					alt={imgAlt}
+				/>
+			</div>
 			<div className='p-4'>
-				<h4 className='text-base font-medium leading-[19px]'>
+				<h4 className='text-base font-medium leading-[19px] line-clamp-2'>
 					{title}
 				</h4>
 				<p className='text-base font-normal leading-[19px] line-clamp-5 pt-4'>

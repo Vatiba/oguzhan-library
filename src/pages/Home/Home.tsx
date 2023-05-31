@@ -53,7 +53,7 @@ function Home() {
 			{
 				!facultiesIsError && faculties &&
 				<div className='flex flex-col mt-[30px]'>
-					<Link className='flex mb-5' to='/search'>
+					<Link className='flex mb-1' to='/search'>
 						<HomeModernIcon className="h-6 w-6 text-textColor mr-1" aria-hidden="true" />
 						<h3 className='text-xl font-extrabold underline'>
 							{t('faculties')}
@@ -76,7 +76,7 @@ function Home() {
 			{
 				!newsIsError && news?.results &&
 				<div className='flex flex-col my-[40px]'>
-					<Link className='flex mb-5'>
+					<Link className='flex mb-1' to="/news">
 						<NewspaperIcon className="h-6 w-6 text-textColor mr-1" aria-hidden="true" />
 						<h3 className='text-xl font-extrabold underline'>
 							{t('news')}

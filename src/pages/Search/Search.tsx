@@ -68,13 +68,13 @@ function Search() {
 			{
 				openAudioBookModal && audioBookDetails &&
 				<BookDetailsAudio
-					alt='audio book image'
+					alt='Audio book image'
 					date={audioBookDetails.year}
 					downloadCount={audioBookDetails.download_count}
 					imgSrc={audioBookDetails.thumbnail}
 					likeCount={audioBookDetails.liked_count}
 					onClickLike={() => {
-						like(audioBookDetails.id)
+						like(audioBookDetails.id);
 					}}
 					src={audioBookDetails.interactive_file}
 					subTitles={[audioBookDetails.author.name]}
@@ -89,7 +89,7 @@ function Search() {
 			{
 				openBookModal && bookDetails &&
 				<BookDetails
-					alt='audio book image'
+					alt='Book image'
 					date={bookDetails.year}
 					downloadCount={bookDetails.download_count}
 					imgSrc={bookDetails.thumbnail}
@@ -161,9 +161,6 @@ function Search() {
 														onPlay={() => {
 															setAudioBookDetails(item);
 															setOpenAudioBookModal(true);
-														}}
-														onClickLike={() => {
-															like(item.id)
 														}}
 													/>
 												</div>

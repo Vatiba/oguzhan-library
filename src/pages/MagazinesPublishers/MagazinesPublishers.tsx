@@ -62,7 +62,7 @@ function MagazinesPublishers() {
 
 			{/* ==== Pagination ==== */}
 			{
-				magazines?.count && magazines.results.length > 0 ?
+				magazines?.count && magazines.results.length > 0 && pageCount > 1 ?
 					<div className='w-full flex justify-end'>
 						<Pagination
 							pageCount={pageCount}

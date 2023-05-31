@@ -1,10 +1,5 @@
 import React from 'react';
-// icons
-import { CalendarIcon, HeartIcon, EyeIcon, ArrowDownIcon, PlayIcon } from '@heroicons/react/20/solid';
 // components
-import Btn from '@app/components/Buttons/Btn';
-// hooks
-import { useTranslation } from 'react-i18next';
 import RowContent from './RowContent';
 
 export type RowProps = {
@@ -21,7 +16,7 @@ export type RowProps = {
 	onDownload?: () => void
 	onRead?: () => void
 	onPlay?: () => void
-	onClickLike: () => void
+	onClickLike?: () => void
 }
 
 function Row(props: RowProps) {
@@ -42,10 +37,8 @@ function Row(props: RowProps) {
 		onClickLike,
 	} = props;
 
-	const { t } = useTranslation('translation');
-
 	return (
-		<div className='relative bg-white shadow-md'>
+		<div className='relative bg-white shadow-md rounded-md'>
 			<RowContent
 				imgSrc={imgSrc}
 				alt={alt}

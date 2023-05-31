@@ -38,7 +38,7 @@ function Conferences() {
 		}
 		return 12;
 	}, [conferences, conferencesIsError]);
-console.log(conferences)
+
 	return (
 		<Container
 			className='pt-[120px] md:pt-[135px]'

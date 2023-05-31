@@ -38,7 +38,7 @@ function SearchFilter() {
 	const {
 		data: departments,
 		isError: departmentsIsError
-	} = useGetFacultyDepartment(search['faculty'] as string);
+	} = useGetFacultyDepartment(i18n.language, search['faculty'] as string);
 
 	const debouncedChanger = useDebounceFunction((value: string) => {
 		navigate({
@@ -114,7 +114,7 @@ function SearchFilter() {
 							return
 						})()}
 						placeholder={t('authors') as string}
-						urlKey='authors'
+						urlKey='author'
 					/>
 				</div>
 			}

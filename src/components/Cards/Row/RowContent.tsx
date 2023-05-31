@@ -20,7 +20,7 @@ export type RowContentProps = {
    onDownload?: () => void
    onRead?: () => void
    onPlay?: () => void
-   onClickLike: () => void
+   onClickLike?: () => void
 }
 
 function RowContent(props: RowContentProps) {
@@ -65,9 +65,9 @@ function RowContent(props: RowContentProps) {
                   onClick={() => onClick?.()}
                />
             </div>
-            <div className='flex flex-col sm:pl-[15px] mr-auto'>
-               <div className='sm:pr-36 flex flex-col'>
-                  <h3 className='text-xl font-medium'>
+            <div className='flex flex-col w-full'>
+               <div className='sm:pr-36 flex flex-col sm:pl-[15px] mr-auto'>
+                  <h3 className='text-xl font-medium line-clamp-2'>
                      {title}
                   </h3>
                   <div className='pb-3 flex flex-col'>
@@ -88,7 +88,7 @@ function RowContent(props: RowContentProps) {
                      {text}
                   </p>
                </div>
-               <div className='flex justify-between w-full flex-wrap pt-2'>
+               <div className='flex justify-between w-full flex-wrap pt-2 sm:pl-[15px]'>
                   <div className='flex flex-col'>
                      <span className='flex items-center pt-0 sm:pt-4'>
                         <CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
@@ -101,7 +101,7 @@ function RowContent(props: RowContentProps) {
                            likeCount !== undefined &&
                            <button
                               className='flex text-sm font-normal leading-[16px] mr-2'
-                              onClick={() => onClickLike()}
+                              onClick={() => onClickLike?.()}
                            >
                               <HeartIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
                               {likeCount}

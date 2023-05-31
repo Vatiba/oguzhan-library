@@ -5,7 +5,7 @@ import { Link, useSearch } from '@tanstack/react-location';
 import Row from '@app/components/Cards/Row/Row';
 import Pagination from '@app/components/common/Pagination';
 import Drawer from '@app/components/common/Drawer/Drawer';
-import OtherFilter from '@app/components/Filters/OtherFilter';
+import ProjectsFilter from '@app/components/Filters/ProjectsFilter';
 // hooks
 import { useTranslation } from 'react-i18next';
 import { useGetProjects } from '@app/hooks/query/Projects';
@@ -57,7 +57,7 @@ function Projects() {
       <>
          {/* ==== Filter drawers ==== */}
          <Drawer open={drawerOpen} setOpen={setDrawerOpen}>
-            <OtherFilter />
+            <ProjectsFilter />
          </Drawer>
          <Container className='pt-[120px] md:pt-[135px]'>
             {/* ==== Breadcrumb ==== */}
@@ -82,7 +82,7 @@ function Projects() {
             <div className='flex'>
                <div className='lg:block hidden 2xl:w-1/4 lg:w-2/7 pb-10'>
                   <div className='rounded-md shadow-md bg-white py-7 px-7'>
-                     <OtherFilter />
+                     <ProjectsFilter />
                   </div>
                </div>
                <div className='2xl:w-3/4 lg:w-5/7 w-full px-2 my-3'>

@@ -98,8 +98,8 @@ function BookDetailsAudio(props: BookDetailsAudioProps) {
 									{
 										likeCount !== undefined &&
 										<button
-											className='flex text-sm font-normal leading-[16px] mr-2'
-											onClick={() => onClickLike()}
+											className='flex text-sm font-normal leading-[16px] mr-2 cursor-pointer'
+											onClick={() => onClickLike?.()}
 										>
 											<HeartIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 											{likeCount}

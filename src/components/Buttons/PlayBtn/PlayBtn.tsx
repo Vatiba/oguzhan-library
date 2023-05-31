@@ -1,3 +1,4 @@
+import { PlayIcon } from '@heroicons/react/20/solid';
 import React from 'react';
 
 type PlayBtnProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {

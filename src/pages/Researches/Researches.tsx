@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react'
 // components
 import Container from '@app/components/Container';
 import { Link, useSearch } from '@tanstack/react-location';
-import OtherFilter from '@app/components/Filters/OtherFilter';
+import ResearchesFilter from '@app/components/Filters/ResearchesFilter';
 import Row from '@app/components/Cards/Row/Row';
 import Pagination from '@app/components/common/Pagination';
 import Drawer from '@app/components/common/Drawer/Drawer';
@@ -56,7 +56,7 @@ function Researches() {
       <>
          {/* ==== Filter drawers ==== */}
          <Drawer open={drawerOpen} setOpen={setDrawerOpen}>
-            <OtherFilter />
+            <ResearchesFilter />
          </Drawer>
          <Container className='pt-[120px] md:pt-[135px]'>
             {/* ==== Breadcrumb ==== */}
@@ -81,7 +81,7 @@ function Researches() {
             <div className='flex'>
                <div className='lg:block hidden 2xl:w-1/4 lg:w-2/7 pb-10'>
                   <div className='rounded-md shadow-md bg-white py-7 px-7'>
-                     <OtherFilter />
+                     <ResearchesFilter />
                   </div>
                </div>
                <div className='2xl:w-3/4 lg:w-5/7 w-full px-2 my-3'>

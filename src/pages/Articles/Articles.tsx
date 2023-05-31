@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react'
 // components
 import Container from '@app/components/Container';
 import { Link, useSearch } from '@tanstack/react-location';
-import OtherFilter from '@app/components/Filters/OtherFilter';
+import ArticleFilter from '@app/components/Filters/ArticleFilter';
 import Row from '@app/components/Cards/Row/Row';
 import Pagination from '@app/components/common/Pagination';
 import Drawer from '@app/components/common/Drawer/Drawer';
@@ -56,7 +56,7 @@ function Articles() {
 		<>
 			{/* ==== Filter drawers ==== */}
 			<Drawer open={drawerOpen} setOpen={setDrawerOpen}>
-				<OtherFilter />
+				<ArticleFilter />
 			</Drawer>
 			<Container className='pt-[120px] md:pt-[135px]'>
 				{/* ==== Breadcrumb ==== */}
@@ -81,7 +81,7 @@ function Articles() {
 				<div className='flex'>
 					<div className='lg:block hidden 2xl:w-1/4 lg:w-2/7 pb-10'>
 						<div className='rounded-md shadow-md bg-white py-7 px-7'>
-							<OtherFilter />
+							<ArticleFilter />
 						</div>
 					</div>
 					<div className='2xl:w-3/4 lg:w-5/7 w-full px-2 my-3'>
@@ -89,7 +89,6 @@ function Articles() {
 							{
 								!articlesIsError && articles ?
 									articles.results.map(item => {
-
 										return (
 											<div
 												key={item.id}
@@ -103,7 +102,7 @@ function Articles() {
 													imgSrc={item.file}
 													likeCount={item.liked_count}
 													viewedCount={item.view_count}
-													subTitles={[`${item.author.first_name} ${item.author.last_name}`]}
+													subTitles={[`${item.author?.first_name || ''} ${item.author?.last_name || ''}`]}
 													text={item.content}
 													title={item.name}
 													onDownload={() => {

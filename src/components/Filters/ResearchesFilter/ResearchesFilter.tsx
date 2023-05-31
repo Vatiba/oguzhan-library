@@ -2,16 +2,15 @@ import React, { useEffect, useState } from 'react'
 // components
 import AutoComplete from '@app/components/common/AutoComplete';
 // hooks
-import { useGetBookCategories } from '@app/hooks/query/Books';
+import { useGetResearchesCategories } from '@app/hooks/query/Researches';
 import { useGetFaculties, useGetFacultyDepartment } from '@app/hooks/query/Faculty';
 import { useNavigate, useSearch } from '@tanstack/react-location';
 import { useTranslation } from 'react-i18next';
 import { useGetUsers } from '@app/hooks/query/User';
 // types
-import bookTypes from '@app/constants/bookTypes';
 import useDebounceFunction from '@app/hooks/useDebounceFunction';
 
-function OtherFilter() {
+function ResearchesFilter() {
    const search = useSearch();
    const navigate = useNavigate();
    const { t, i18n } = useTranslation('translation');
@@ -20,7 +19,7 @@ function OtherFilter() {
 
    useEffect(() => {
       setSearchValueInput(search['search'] as string || '')
-   }, [search['search']])
+   }, [search['search']]);
 
 
    // queries
@@ -29,9 +28,9 @@ function OtherFilter() {
       isError: authorsIsError
    } = useGetUsers(1, i18n.language);
    const {
-      data: bookCategories,
-      isError: bookCategoriesIsError
-   } = useGetBookCategories(i18n.language);
+      data: articleCategories,
+      isError: articleCategoriesIsError
+   } = useGetResearchesCategories(i18n.language);
    const {
       data: faculties,
       isError: facultiesIsError
@@ -39,7 +38,7 @@ function OtherFilter() {
    const {
       data: departments,
       isError: departmentsIsError
-   } = useGetFacultyDepartment(search['faculty'] as string);
+   } = useGetFacultyDepartment(i18n.language, search['faculty'] as string);
 
    const debouncedChanger = useDebounceFunction((value: string) => {
       navigate({
@@ -69,34 +68,8 @@ function OtherFilter() {
             onChange={({ currentTarget: { value } }) => handleSearchChange(value)}
             placeholder={t('search') as string}
          />
-         <div className='mt-2'>
-            <AutoComplete
-               options={
-                  [
-                     ...bookTypes.map(item => ({
-                        id: item,
-                        name: t(item)
-                     })),
-                  ] || []
-               }
-               defaultValue={(() => {
-                  const type = bookTypes.find(item => item == search['type']);
-                  if (type)
-                     return {
-                        id: type,
-                        name: t(type)
-                     }
-                  return {
-                     id: 'book',
-                     name: t('book')
-                  }
-               })()
-               }
-               urlKey='type'
-            />
-         </div>
          {
-            !authorsIsError && authors &&
+            !authorsIsError && authors?.results &&
             <div className='mt-2'>
                <AutoComplete
                   options={
@@ -120,17 +93,17 @@ function OtherFilter() {
             </div>
          }
          {
-            !bookCategoriesIsError && bookCategories &&
+            !articleCategoriesIsError && articleCategories &&
             <div className='mt-2'>
                <AutoComplete
                   options={
-                     bookCategories.map(item => ({
+                     articleCategories.map(item => ({
                         id: item.id,
                         name: item.name
                      })) || []
                   }
                   defaultValue={(() => {
-                     const category = bookCategories.find(item => item.id == search['category']);
+                     const category = articleCategories.find(item => item.id == search['category']);
                      if (category)
                         return {
                            id: category.id,
@@ -195,4 +168,4 @@ function OtherFilter() {
    )
 }
 
-export default OtherFilter;
+export default ResearchesFilter;

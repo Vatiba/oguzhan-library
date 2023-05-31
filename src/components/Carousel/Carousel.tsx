@@ -37,7 +37,7 @@ function Carousel(props: CarouselProps) {
 	return (
 		<div className='relative'>
 			<Swiper
-				className='-mx-3 -my-3'
+				wrapperClass='my-3'
 				modules={[Navigation]}
 				spaceBetween={12}
 				breakpoints={{

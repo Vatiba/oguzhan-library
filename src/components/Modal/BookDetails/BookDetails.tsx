@@ -28,10 +28,11 @@ function BookDetails(props: BookDetailsProps) {
 		onDownload,
 		onPlay,
 		onRead,
+		isOpen,
+		setIsOpen
 	} = props;
 	const { t } = useTranslation('translation');
 
-	const [isOpen, setIsOpen] = useState(false);
 	return (
 		<Modal
 			isOpen={isOpen}
@@ -94,7 +95,7 @@ function BookDetails(props: BookDetailsProps) {
 										likeCount !== undefined &&
 										<button
 											className='flex text-sm font-normal leading-[16px] mr-2'
-											onClick={() => onClickLike()}
+											onClick={() => onClickLike?.()}
 										>
 											<HeartIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 											{likeCount}

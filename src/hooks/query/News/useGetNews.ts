@@ -14,9 +14,6 @@ const useGetNews = ({
 	return useQuery(
 		[
 			"news",
-			start_date,
-			end_date,
-			search,
 			page,
 			lang
 		],
