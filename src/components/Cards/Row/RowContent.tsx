@@ -57,14 +57,12 @@ function RowContent(props: RowContentProps) {
             </div>
          }
          <div className='flex flex-col justify-center items-center sm:flex-row p-2'>
-            <div className='flex justify-center max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px] '>
-               <img
-                  className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer'
-                  src={imgSrc}
-                  alt={alt}
-                  onClick={() => onClick?.()}
-               />
-            </div>
+            <img
+               className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px]'
+               src={imgSrc}
+               alt={alt}
+               onClick={() => onClick?.()}
+            />
             <div className='flex flex-col w-full'>
                <div className='sm:pr-36 flex flex-col sm:pl-[15px] mr-auto'>
                   <h3 className='text-xl font-medium line-clamp-2'>
