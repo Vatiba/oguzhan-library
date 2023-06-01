@@ -99,7 +99,7 @@ function Articles() {
 													alt='Articles image'
 													date={item.date_created}
 													downloadCount={item.download_count}
-													imgSrc={item.file}
+													imgSrc={item.author.avatar}
 													likeCount={item.liked_count}
 													viewedCount={item.view_count}
 													subTitles={[`${item.author?.first_name || ''} ${item.author?.last_name || ''}`]}

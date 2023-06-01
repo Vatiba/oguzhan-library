@@ -33,5 +33,7 @@
 	"endDate": "End date",
 	"conferenceName": "Conference name",
 	"newsName": "Wonder name",
-	"latestNews": "Latest wonders"
+	"latestNews": "Latest wonders",
+	"author": "Author",
+	"leader": "Leader"
 }

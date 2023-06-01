@@ -3,7 +3,7 @@ import React from 'react';
 import RowContent from './RowContent';
 
 export type RowProps = {
-	imgSrc: string
+	imgSrc: string | null
 	alt: string
 	title: string
 	subTitles: string[]

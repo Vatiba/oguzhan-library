@@ -27,7 +27,7 @@ function News(props: NewsProps) {
 		>
 			<div className='h-[180px]'>
 				<img
-					className='h-full w-full rounded-t-md'
+					className='h-full w-full rounded-t-md object-cover'
 					src={imgSrc}
 					alt={imgAlt}
 				/>
@@ -36,9 +36,10 @@ function News(props: NewsProps) {
 				<h4 className='text-base font-medium leading-[19px] line-clamp-2'>
 					{title}
 				</h4>
-				<p className='text-base font-normal leading-[19px] line-clamp-5 pt-4'>
-					{text}
-				</p>
+				<p
+					className='text-base font-normal leading-[19px] line-clamp-5 pt-4'
+					dangerouslySetInnerHTML={{ __html: text }}
+				/>
 				<span className='flex items-center pt-4'>
 					<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 					<span className='text-accentColor'>

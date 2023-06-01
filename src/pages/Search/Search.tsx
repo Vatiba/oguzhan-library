@@ -73,9 +73,6 @@ function Search() {
 					downloadCount={audioBookDetails.download_count}
 					imgSrc={audioBookDetails.thumbnail}
 					likeCount={audioBookDetails.liked_count}
-					onClickLike={() => {
-						like(audioBookDetails.id);
-					}}
 					src={audioBookDetails.interactive_file}
 					subTitles={[audioBookDetails.author.name]}
 					text={audioBookDetails.description}
@@ -83,6 +80,16 @@ function Search() {
 					viewedCount={audioBookDetails.view_count}
 					setIsOpen={setOpenAudioBookModal}
 					isOpen={openAudioBookModal}
+					onDownload={() => {
+						window.open(audioBookDetails.file, '_blank');
+						download(audioBookDetails.id)
+					}}
+					onRead={() => {
+						window.open(audioBookDetails.file, '_blank');
+					}}
+					onClickLike={() => {
+						like(audioBookDetails.id);
+					}}
 				/>
 			}
 

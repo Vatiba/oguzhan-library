@@ -55,17 +55,15 @@ function BookDetailsAudio(props: BookDetailsAudioProps) {
 					</div>
 				}
 				<div className='flex flex-col justify-center items-center sm:flex-row p-2'>
-					<div className='flex justify-center max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px] '>
-						<img
-							className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer'
-							src={imgSrc}
-							alt={alt}
-							onClick={() => onClick?.()}
-						/>
-					</div>
-					<div className='flex flex-col sm:pl-[15px] mr-auto'>
-						<div className='sm:pr-36 flex flex-col'>
-							<h3 className='text-xl font-medium'>
+					<img
+						className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px]'
+						src={imgSrc || ''}
+						alt={alt}
+						onClick={() => onClick?.()}
+					/>
+					<div className='flex flex-col w-full'>
+						<div className='sm:pr-36 flex flex-col sm:pl-[15px] mr-auto'>
+							<h3 className='text-xl font-medium line-clamp-2'>
 								{title}
 							</h3>
 							<div className='pb-3 flex flex-col'>
@@ -82,11 +80,9 @@ function BookDetailsAudio(props: BookDetailsAudioProps) {
 									})
 								}
 							</div>
-							<p className='text-sm font-light'>
-								{text}
-							</p>
+							<p className='text-sm font-light line-clamp-3' dangerouslySetInnerHTML={{ __html: text }} />
 						</div>
-						<div className='flex justify-between w-full flex-wrap pt-2'>
+						<div className='flex justify-between w-full flex-wrap pt-2 sm:pl-[15px]'>
 							<div className='flex flex-col'>
 								<span className='flex items-center pt-0 sm:pt-4'>
 									<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
@@ -98,7 +94,7 @@ function BookDetailsAudio(props: BookDetailsAudioProps) {
 									{
 										likeCount !== undefined &&
 										<button
-											className='flex text-sm font-normal leading-[16px] mr-2 cursor-pointer'
+											className='flex text-sm font-normal leading-[16px] mr-2'
 											onClick={() => onClickLike?.()}
 										>
 											<HeartIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />

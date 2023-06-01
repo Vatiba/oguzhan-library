@@ -14,6 +14,7 @@ type Project = {
    category: Category
    images: Image[]
    date_created: string
+   manager: Author
 }
 
 export default Project;

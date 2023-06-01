@@ -7,7 +7,7 @@ import Btn from '@app/components/Buttons/Btn';
 import { useTranslation } from 'react-i18next';
 
 export type RowContentProps = {
-   imgSrc: string
+   imgSrc: string | null
    alt: string
    title: string
    subTitles: string[]
@@ -59,7 +59,7 @@ function RowContent(props: RowContentProps) {
          <div className='flex flex-col justify-center items-center sm:flex-row p-2'>
             <img
                className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px]'
-               src={imgSrc}
+               src={imgSrc || ''}
                alt={alt}
                onClick={() => onClick?.()}
             />
@@ -82,9 +82,7 @@ function RowContent(props: RowContentProps) {
                         })
                      }
                   </div>
-                  <p className='text-sm font-light line-clamp-3'>
-                     {text}
-                  </p>
+                  <p className='text-sm font-light line-clamp-3' dangerouslySetInnerHTML={{ __html: text }} />
                </div>
                <div className='flex justify-between w-full flex-wrap pt-2 sm:pl-[15px]'>
                   <div className='flex flex-col'>

@@ -105,7 +105,10 @@ function NewsPage() {
 					!newsIsLoading && news &&
 					news.results.map(item => {
 						return (
-							<Link to={`/news/${item.id}`} className='p-2 w-1/2 md:w-1/3 lg:w-1/4' key={item.id}>
+							<Link
+								key={item.id}
+								to={`/news/${item.id}`} className='p-2 w-1/2 md:w-1/3 lg:w-1/4'
+							>
 								<News
 									date={item.date_created}
 									imgAlt='News image'

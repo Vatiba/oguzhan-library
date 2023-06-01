@@ -104,7 +104,10 @@ function Projects() {
                                        imgSrc={item.file}
                                        likeCount={item.liked_count}
                                        viewedCount={item.view_count}
-                                       subTitles={[`${item.author.first_name} ${item.author.last_name}`]}
+                                       subTitles={[
+                                          `${t('author')}: ${item.author.first_name} ${item.author.last_name}`,
+                                          `${t('leader')}: ${item.manager.first_name} ${item.manager.last_name}`
+                                       ]}
                                        text={item.content}
                                        title={item.name}
                                        onDownload={() => {

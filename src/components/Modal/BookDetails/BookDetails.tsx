@@ -54,7 +54,7 @@ function BookDetails(props: BookDetailsProps) {
 					<div className='flex justify-center max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px] '>
 						<img
 							className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer'
-							src={imgSrc}
+							src={imgSrc || ''}
 							alt={alt}
 							onClick={() => onClick?.()}
 						/>

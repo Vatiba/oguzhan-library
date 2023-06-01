@@ -34,7 +34,7 @@ function Home() {
 		page: 1,
 		search: ''
 	});
-
+	
 	return (
 		<Container className='pt-[120px] md:pt-[135px]'>
 			{
