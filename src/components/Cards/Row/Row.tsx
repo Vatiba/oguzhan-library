@@ -7,8 +7,8 @@ export type RowProps = {
 	alt: string
 	title: string
 	subTitles: string[]
-	text: string
-	date: string | number
+	text: string | null
+	date: string | number | null
 	likeCount: number
 	viewedCount: number
 	downloadCount: number

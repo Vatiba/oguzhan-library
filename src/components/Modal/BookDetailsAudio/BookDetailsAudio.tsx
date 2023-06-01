@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Modal from '@app/components/common/Modal';
 import { RowProps } from '@app/components/Cards/Row/Row';
 import Player from '@app/components/Player';
-import RowContent from '@app/components/Cards/Row/RowContent';
 import { ArrowDownIcon, CalendarIcon, EyeIcon, HeartIcon, PlayIcon } from '@heroicons/react/20/solid';
 import Btn from '@app/components/Buttons/Btn/Btn';
 import { useTranslation } from 'react-i18next';
@@ -55,12 +54,15 @@ function BookDetailsAudio(props: BookDetailsAudioProps) {
 					</div>
 				}
 				<div className='flex flex-col justify-center items-center sm:flex-row p-2'>
-					<img
-						className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px]'
-						src={imgSrc || ''}
-						alt={alt}
-						onClick={() => onClick?.()}
-					/>
+					{
+						imgSrc &&
+						<img
+							className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px]'
+							src={imgSrc}
+							alt={alt}
+							onClick={() => onClick?.()}
+						/>
+					}
 					<div className='flex flex-col w-full'>
 						<div className='sm:pr-36 flex flex-col sm:pl-[15px] mr-auto'>
 							<h3 className='text-xl font-medium line-clamp-2'>
@@ -80,16 +82,24 @@ function BookDetailsAudio(props: BookDetailsAudioProps) {
 									})
 								}
 							</div>
-							<p className='text-sm font-light line-clamp-3' dangerouslySetInnerHTML={{ __html: text }} />
+							{
+								text &&
+								<p className='text-sm font-light line-clamp-3' dangerouslySetInnerHTML={{ __html: text }} />
+							}
 						</div>
 						<div className='flex justify-between w-full flex-wrap pt-2 sm:pl-[15px]'>
 							<div className='flex flex-col'>
-								<span className='flex items-center pt-0 sm:pt-4'>
-									<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
-									<span className='text-accentColor'>
-										{date}
-									</span>
-								</span>
+								{
+									date ?
+										<span className='flex items-center pt-0 sm:pt-4'>
+											<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
+											<span className='text-accentColor'>
+												{date}
+											</span>
+										</span>
+										:
+										null
+								}
 								<span className='static sm:absolute right-0 top-0 flex sm:p-3'>
 									{
 										likeCount !== undefined &&
@@ -160,7 +170,7 @@ function BookDetailsAudio(props: BookDetailsAudioProps) {
 				</div>
 				{
 					src &&
-					<div className='w-full flex justify-center pt-2'>
+					<div className='w-full flex justify-center mt-2 md:px-5 pb-2'>
 						<Player src={src} />
 					</div>
 				}

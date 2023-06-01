@@ -74,7 +74,7 @@ function Search() {
 					imgSrc={audioBookDetails.thumbnail}
 					likeCount={audioBookDetails.liked_count}
 					src={audioBookDetails.interactive_file}
-					subTitles={[audioBookDetails.author.name]}
+					subTitles={audioBookDetails.author?.name ? [audioBookDetails.author.name] : []}
 					text={audioBookDetails.description}
 					title={audioBookDetails.name}
 					viewedCount={audioBookDetails.view_count}
@@ -104,7 +104,7 @@ function Search() {
 					onClickLike={() => {
 						like(bookDetails.id)
 					}}
-					subTitles={[bookDetails.author.name]}
+					subTitles={bookDetails.author ? [bookDetails.author.name] : []}
 					text={bookDetails.description}
 					title={bookDetails.name}
 					viewedCount={bookDetails.view_count}
@@ -162,7 +162,7 @@ function Search() {
 														imgSrc={item.thumbnail}
 														likeCount={item.liked_count}
 														viewedCount={item.view_count}
-														subTitles={[item.author.name]}
+														subTitles={item.author ? [item.author.name] : []}
 														text={item.description}
 														title={item.name}
 														onPlay={() => {
@@ -187,7 +187,7 @@ function Search() {
 														imgSrc={item.thumbnail}
 														likeCount={item.liked_count}
 														viewedCount={item.view_count}
-														subTitles={[item.author.name]}
+														subTitles={item.author ? [item.author.name] : []}
 														text={item.description}
 														title={item.name}
 														onClick={() => {

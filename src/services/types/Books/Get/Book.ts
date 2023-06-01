@@ -1,17 +1,17 @@
-import { Author, INS } from "../../Common"
+import { INS } from "../../Common"
 
 type Book = {
    id: number
    name: string
    slug: string
-   thumbnail: string
-   description: string
+   thumbnail: string | null
+   description: string | null
    file: string
-   year: number
+   year: number | null
    view_count: number
    download_count: number
    liked_count: number
-   author: INS
+   author: INS | null
    category: INS
    department: INS & {
       image: string

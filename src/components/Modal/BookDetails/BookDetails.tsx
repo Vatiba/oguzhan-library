@@ -52,12 +52,15 @@ function BookDetails(props: BookDetailsProps) {
 				}
 				<div className='flex flex-col justify-center items-center sm:flex-row p-2'>
 					<div className='flex justify-center max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px] '>
-						<img
-							className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer'
-							src={imgSrc || ''}
-							alt={alt}
-							onClick={() => onClick?.()}
-						/>
+						{
+							imgSrc &&
+							<img
+								className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer'
+								src={imgSrc}
+								alt={alt}
+								onClick={() => onClick?.()}
+							/>
+						}
 					</div>
 					<div className='flex flex-col sm:pl-[15px] mr-auto'>
 						<div className='sm:pr-36 flex flex-col'>
@@ -78,18 +81,24 @@ function BookDetails(props: BookDetailsProps) {
 									})
 								}
 							</div>
-							<p className='text-sm font-light'>
-								{text}
-							</p>
+							{
+								text &&
+								<p className='text-sm font-light' dangerouslySetInnerHTML={{ __html: text }} />
+							}
 						</div>
 						<div className='flex justify-between w-full flex-wrap pt-2'>
 							<div className='flex flex-col'>
-								<span className='flex items-center pt-0 sm:pt-4'>
-									<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
-									<span className='text-accentColor'>
-										{date}
-									</span>
-								</span>
+								{
+									date ?
+										<span className='flex items-center pt-0 sm:pt-4'>
+											<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
+											<span className='text-accentColor'>
+												{date}
+											</span>
+										</span>
+										:
+										null
+								}
 								<span className='static sm:absolute right-0 top-0 flex sm:p-3'>
 									{
 										likeCount !== undefined &&

@@ -11,8 +11,8 @@ export type RowContentProps = {
    alt: string
    title: string
    subTitles: string[]
-   text: string
-   date: string | number
+   text: string | null
+   date: string | number | null
    likeCount: number
    viewedCount: number
    downloadCount: number
@@ -57,18 +57,28 @@ function RowContent(props: RowContentProps) {
             </div>
          }
          <div className='flex flex-col justify-center items-center sm:flex-row p-2'>
-            <img
-               className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px]'
-               src={imgSrc || ''}
-               alt={alt}
-               onClick={() => onClick?.()}
-            />
-            <div className='flex flex-col w-full'>
+            {
+               imgSrc &&
+               <img
+                  className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px]'
+                  src={imgSrc}
+                  alt={alt}
+                  onClick={() => onClick?.()}
+               />
+            }
+            <div className='flex flex-col w-full'
+            >
                <div className='sm:pr-36 flex flex-col sm:pl-[15px] mr-auto'>
-                  <h3 className='text-xl font-medium line-clamp-2'>
+                  <h3
+                     className='text-xl font-medium line-clamp-2'
+                     onClick={() => onClick?.()}
+                  >
                      {title}
                   </h3>
-                  <div className='pb-3 flex flex-col'>
+                  <div
+                     className='pb-3 flex flex-col'
+                     onClick={() => onClick?.()}
+                  >
                      {
                         subTitles.map((item, index) => {
                            return (
@@ -82,16 +92,28 @@ function RowContent(props: RowContentProps) {
                         })
                      }
                   </div>
-                  <p className='text-sm font-light line-clamp-3' dangerouslySetInnerHTML={{ __html: text }} />
+                  {
+                     text &&
+                     <p
+                        className='text-sm font-light line-clamp-3'
+                        dangerouslySetInnerHTML={{ __html: text }}
+                        onClick={() => onClick?.()}
+                     />
+                  }
                </div>
                <div className='flex justify-between w-full flex-wrap pt-2 sm:pl-[15px]'>
                   <div className='flex flex-col'>
-                     <span className='flex items-center pt-0 sm:pt-4'>
-                        <CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
-                        <span className='text-accentColor'>
-                           {date}
-                        </span>
-                     </span>
+                     {
+                        date ?
+                           <span className='flex items-center pt-0 sm:pt-4'>
+                              <CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
+                              <span className='text-accentColor'>
+                                 {date}
+                              </span>
+                           </span>
+                           :
+                           null
+                     }
                      <span className='static sm:absolute right-0 top-0 flex sm:p-3'>
                         {
                            likeCount !== undefined &&

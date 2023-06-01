@@ -58,9 +58,9 @@ function Player(props: PlayerProps) {
 	}, [src]);
 
 	return (
-		<div className='flex'>
+		<>
 			<button
-				className='rounded-full p-3 bg-secondaryColor text-white'
+				className='rounded-full p-3 bg-secondaryColor text-white mr-1'
 				onClick={() => {
 					if (isPlaying) {
 						audioRef.current?.pause();
@@ -76,7 +76,7 @@ function Player(props: PlayerProps) {
 						<PlayIcon className='h-6 w-6' />
 				}
 			</button>
-			<div className='flex flex-col items-center ml-2'>
+			<div className='flex flex-col items-center ml-2 w-full'>
 				<span className='text-base font-medium pb-1'>
 					{secondsToHours(currentMusic.currentTime)} / {secondsToHours(currentMusic.duration)}
 				</span>
@@ -86,7 +86,7 @@ function Player(props: PlayerProps) {
 						border: '2px solid #FF7700',
 						background: '#FF7700',
 						boxShadow: 'none',
-						opacity: 1
+						opacity: 1,
 					}}
 					min={0}
 					max={currentMusic.duration}
@@ -96,7 +96,7 @@ function Player(props: PlayerProps) {
 					}}
 				/>
 			</div>
-		</div>
+		</>
 	)
 }
 
