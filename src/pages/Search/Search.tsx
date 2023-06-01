@@ -148,7 +148,6 @@ function Search() {
 								!booksIsError && books ?
 									search['type'] === 'audioBook' ?
 										books.results.map(item => {
-
 											return (
 												<div
 													key={item.id}
@@ -199,7 +198,7 @@ function Search() {
 															download(item.id)
 														}}
 														onRead={() => {
-															window.open(item.file, '_blank');
+															window.open(item.interactive_file ? item.interactive_file : item.file, '_blank');
 														}}
 														onClickLike={() => {
 															like(item.id)

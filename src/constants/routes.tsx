@@ -52,7 +52,7 @@ const routes: Route[] = [
 
 			Promise.all([
 				await queryClient.fetchQuery(
-					["bookCategories"],
+					["bookCategories", i18n.language],
 					() => booksApi.getBookCategories(i18n.language),
 				),
 				await queryClient.fetchQuery(
