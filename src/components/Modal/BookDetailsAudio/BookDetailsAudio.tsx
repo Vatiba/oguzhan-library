@@ -60,7 +60,7 @@ function BookDetailsAudio(props: BookDetailsAudioProps) {
 							className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px]'
 							src={imgSrc}
 							alt={alt}
-							onClick={() => onClick?.()}
+							onClick={() => onRead?.()}
 						/>
 					}
 					<div className='flex flex-col w-full'>

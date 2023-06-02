@@ -20,7 +20,7 @@ class FacultyApi extends HttpClient {
 
 	public async getFaculties(lang: string): Promise<Faculty[]> {
 		try {
-			return this.instance.get(`/faculties`, {
+			return this.instance.get(`/faculties/`, {
 				headers: {
 					'Accept-Language': lang,
 					...HttpClient.headers,
@@ -33,10 +33,23 @@ class FacultyApi extends HttpClient {
 
 	public async getFacultyDepartment(faculty: string, lang: string): Promise<Department[]> {
 		try {
-			return this.instance.get(`/faculties/departments`, {
+			return this.instance.get(`/faculties/departments/`, {
 				params: {
 					faculty
 				},
+				headers: {
+					'Accept-Language': lang,
+					...HttpClient.headers,
+				},
+			});
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	public async getResearchCenters(lang: string): Promise<Department[]> {
+		try {
+			return this.instance.get(`/faculties/research_and_production_center/`, {
 				headers: {
 					'Accept-Language': lang,
 					...HttpClient.headers,

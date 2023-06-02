@@ -10,14 +10,19 @@ import Drawer from '@app/components/common/Drawer/Drawer';
 import { useTranslation } from 'react-i18next';
 import { useGetArticles } from '@app/hooks/query/Article';
 import { useArticleLikeCount, useArticleDownloadCount } from '@app/hooks/mutation/Article';
+import { useQueryClient } from '@tanstack/react-query';
 // icons
 import { ListBulletIcon } from '@heroicons/react/20/solid';
 // helpers
-import { isNumber } from '@app/utils/helpers';
+import { downloadFile, isNumber } from '@app/utils/helpers';
+import { ArticleApi } from '@app/services/api/Article';
+
+const noticeViewCount = ArticleApi.getInstance();
 
 function Articles() {
 	const search = useSearch();
 	const { t, i18n } = useTranslation('translation');
+	const queryClient = useQueryClient();
 
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -27,7 +32,7 @@ function Articles() {
 		data: articles,
 		isError: articlesIsError
 	} = useGetArticles({
-		author: search['author'] as string || '',
+		author: search['authors'] as string || '',
 		category: search['category'] as string || '',
 		department: search['department'] as string || '',
 		faculty: search['faculty'] as string || '',
@@ -42,14 +47,14 @@ function Articles() {
 		mutate: like
 	} = useArticleLikeCount();
 	const {
-		mutate: download
+		mutateAsync: download
 	} = useArticleDownloadCount();
 
 	const pageCount = useMemo(() => {
 		if (!articlesIsError && articles) {
 			return Math.ceil(Number(articles && articles.count / 10));
 		}
-		return 12;
+		return 1;
 	}, [articles, articlesIsError]);
 
 	return (
@@ -100,20 +105,24 @@ function Articles() {
 													date={item.date_created}
 													downloadCount={item.download_count}
 													imgSrc={item.author.avatar}
-													likeCount={item.liked_count}
+													likeCount={item.like_count}
 													viewedCount={item.view_count}
 													subTitles={[`${item.author?.first_name || ''} ${item.author?.last_name || ''}`]}
 													text={item.content}
 													title={item.name}
-													onDownload={() => {
-														window.open(item.file, '_blank');
-														download(item.id)
+													onDownload={async () => {
+														await download(item.id);
+														downloadFile(item.file);
 													}}
 													onRead={() => {
 														window.open(item.file, '_blank');
 													}}
 													onClickLike={() => {
 														like(item.id)
+													}}
+													onClick={async () => {
+														await noticeViewCount.getArticle(item.id, i18n.language);
+														queryClient.invalidateQueries(["articles"]);
 													}}
 												/>
 											</div>

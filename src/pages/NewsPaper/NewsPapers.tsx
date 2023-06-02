@@ -7,7 +7,7 @@ import Pagination from '@app/components/common/Pagination';
 import { useTranslation } from 'react-i18next';
 import { useGetPublications } from '@app/hooks/query/Publications';
 // helpers
-import { isNumber } from '@app/utils/helpers';
+import { downloadFile, isNumber } from '@app/utils/helpers';
 import Magazine from '@app/components/Cards/Col/Magazine/Magazine';
 import { usePublicationDownloadCount, usePublicationLikeCount } from '@app/hooks/mutation/Publications';
 
@@ -39,11 +39,11 @@ function NewsPapers() {
 		if (!newsPaperIsError && newsPaper) {
 			return Math.ceil(Number(newsPaper && newsPaper.count / 10));
 		}
-		return 12;
+		return 1;
 	}, [newsPaper, newsPaperIsError]);
 
 	const {
-		mutate: download
+		mutateAsync: download
 	} = usePublicationDownloadCount();
 
 	const {
@@ -111,9 +111,9 @@ function NewsPapers() {
 										likeCount={item.like_count}
 										reviewCount={item.view_count}
 										title={item.publisher.name}
-										onDownloadClick={() => {
-											window.open(item.file, '_blank');
-											download(item.id)
+										onDownloadClick={async () => {
+											await download(item.id)
+											downloadFile(item.file);
 										}}
 										onClickLike={() => {
 											like(item.id)

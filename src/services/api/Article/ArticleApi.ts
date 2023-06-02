@@ -42,7 +42,7 @@ class ArticleApi extends HttpClient {
 
 	public async getArticleCategories(lang: string): Promise<Category[]> {
 		try {
-			return this.instance.get(`/article/categories`, {
+			return this.instance.get(`/articles/categories`, {
 				headers: {
 					'Accept-Language': lang,
 					...HttpClient.headers,
@@ -55,8 +55,8 @@ class ArticleApi extends HttpClient {
 
 	public async getArticle(id: number, lang: string): Promise<Article> {
 		try {
-			return this.instance.patch(
-				`/article/${id}`,
+			return this.instance.get(
+				`/articles/${id}`,
 				{
 					headers: {
 						'Accept-Language': lang,
@@ -72,7 +72,7 @@ class ArticleApi extends HttpClient {
 	public async articleDownloadCount(id: number): Promise<void> {
 		try {
 			return this.instance.post(
-				`/article/${id}/download`,
+				`/articles/${id}/download/`,
 				{},
 				{
 					headers: {
@@ -88,7 +88,7 @@ class ArticleApi extends HttpClient {
 	public async articleLikeCount(id: number): Promise<void> {
 		try {
 			return this.instance.post(
-				`/article/${id}/like`,
+				`/articles/${id}/like/`,
 				{},
 				{
 					headers: {

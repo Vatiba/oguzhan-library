@@ -55,7 +55,7 @@ class ProjectsApi extends HttpClient {
 
 	public async getProject(id: number, lang: string): Promise<Project> {
 		try {
-			return this.instance.patch(
+			return this.instance.get(
 				`/projects/${id}`,
 				{
 					headers: {
@@ -72,7 +72,7 @@ class ProjectsApi extends HttpClient {
 	public async projectDownloadCount(id: number): Promise<void> {
 		try {
 			return this.instance.post(
-				`/projects/${id}/download`,
+				`/projects/${id}/download/`,
 				{},
 				{
 					headers: {
@@ -88,7 +88,7 @@ class ProjectsApi extends HttpClient {
 	public async projectsLikeCount(id: number): Promise<void> {
 		try {
 			return this.instance.post(
-				`/projects/${id}/like`,
+				`/projects/${id}/like/`,
 				{},
 				{
 					headers: {

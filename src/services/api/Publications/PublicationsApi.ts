@@ -80,7 +80,7 @@ class PublicationsApi extends HttpClient {
    public async publicationDownloadCount(id: number): Promise<void> {
       try {
          return this.instance.post(
-            `/publications/${id}/download`,
+            `/publications/${id}/download/`,
             {},
             {
                headers: {
@@ -96,7 +96,7 @@ class PublicationsApi extends HttpClient {
    public async publicationLikeCount(id: number): Promise<void> {
       try {
          return this.instance.post(
-            `/publications/${id}/like`,
+            `/publications/${id}/like/`,
             {},
             {
                headers: {

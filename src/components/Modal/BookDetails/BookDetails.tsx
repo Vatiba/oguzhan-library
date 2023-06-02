@@ -58,7 +58,7 @@ function BookDetails(props: BookDetailsProps) {
 								className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer'
 								src={imgSrc}
 								alt={alt}
-								onClick={() => onClick?.()}
+								onClick={() => onRead?.()}
 							/>
 						}
 					</div>

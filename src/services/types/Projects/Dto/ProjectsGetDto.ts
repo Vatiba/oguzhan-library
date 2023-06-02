@@ -10,7 +10,8 @@ type ProjectsGetDto = {
 	ordering: string
 	search: string
 	page: number
-   lang: string
+	lang: string
+	research_and_production_center: string
 }
 
 export default ProjectsGetDto;

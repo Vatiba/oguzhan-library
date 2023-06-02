@@ -9,9 +9,9 @@ type Option<T> = {
 }
 
 type AutoCompleteProps<T> = {
-	options: Option<T>[]
-	onChange?: (option: Option<T> | string) => void
-	defaultValue?: Option<T>,
+	options: Option<T | string>[]
+	onChange?: (option: Option<T | string> | string) => void
+	defaultValue?: Option<T | string>,
 	urlKey?: string
 	placeholder?: string
 }
@@ -43,13 +43,16 @@ function AutoComplete<T extends string | number>(props: AutoCompleteProps<T>) {
 	useEffect(() => {
 		if (urlKey && search[urlKey]) {
 			const option = options.find(item => item.id == search[urlKey]);
-			if (option)
+			if (option) {
 				setSelected({
 					id: option.id,
 					name: option.name
 				})
+			}
+		}else {
+			setSelected('')
 		}
-	}, [search])
+	}, [urlKey, search])
 
 	return (
 		<Combobox value={selected} onChange={(value) => {

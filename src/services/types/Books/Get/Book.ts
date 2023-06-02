@@ -10,7 +10,7 @@ type Book = {
    year: number | null
    view_count: number
    download_count: number
-   liked_count: number
+   like_count: number
    author: INS | null
    category: INS
    department: INS & {

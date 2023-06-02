@@ -46,7 +46,7 @@ const projectsApi = ProjectsApi.getInstance();
 const routes: Route[] = [
 	{
 		path: "/",
-		pendingMinMs: 500,
+		pendingMinMs: 5000,
 		pendingMs: 0,
 		loader: async () => {
 
@@ -471,7 +471,8 @@ const routes: Route[] = [
 						page: 1,
 						search: '',
 						lang: i18n.language,
-						manager: ''
+						manager: '',
+						research_and_production_center: ''
 					}),
 				),
 			]);

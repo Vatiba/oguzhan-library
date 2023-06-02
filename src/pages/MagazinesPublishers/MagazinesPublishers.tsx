@@ -28,7 +28,7 @@ function MagazinesPublishers() {
 		if (!magazinesIsError && magazines) {
 			return Math.ceil(Number(magazines && magazines.count / 10));
 		}
-		return 12;
+		return 1;
 	}, [magazines, magazinesIsError]);
 
 	return (

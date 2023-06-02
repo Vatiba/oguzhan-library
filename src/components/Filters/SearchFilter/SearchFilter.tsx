@@ -190,6 +190,12 @@ function SearchFilter() {
 					/>
 				</div>
 			}
+			<button
+				className='bg-secondaryColor rounded-md w-full text-white font-bold p-1 mt-4'
+				onClick={() => navigate({ to: '/search' })}
+			>
+				{t('clear')}
+			</button>
 		</div>
 	)
 }

@@ -91,7 +91,7 @@ class BooksApi extends HttpClient {
 	public async bookDownloadCount(id: number): Promise<void> {
 		try {
 			return this.instance.post(
-				`/books/${id}/download`,
+				`/books/${id}/download/`,
 				{},
 				{
 					headers: {
@@ -107,7 +107,7 @@ class BooksApi extends HttpClient {
 	public async bookLikeCount(id: number): Promise<void> {
 		try {
 			return this.instance.post(
-				`/books/${id}/like`,
+				`/books/${id}/like/`,
 				{},
 				{
 					headers: {

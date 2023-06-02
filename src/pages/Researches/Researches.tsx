@@ -13,11 +13,16 @@ import { useResearchesDownloadCount, useResearchesLikeCount } from '@app/hooks/m
 // icons
 import { ListBulletIcon } from '@heroicons/react/20/solid';
 // helpers
-import { isNumber } from '@app/utils/helpers';
+import { downloadFile, isNumber } from '@app/utils/helpers';
+import { ResearchesApi } from '@app/services/api/Researches';
+import { useQueryClient } from '@tanstack/react-query';
+
+const noticeViewCount = ResearchesApi.getInstance();
 
 function Researches() {
    const search = useSearch();
    const { t, i18n } = useTranslation('translation');
+   const queryClient = useQueryClient();
 
    const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -42,14 +47,14 @@ function Researches() {
       mutate: like
    } = useResearchesLikeCount();
    const {
-      mutate: download
+      mutateAsync: download
    } = useResearchesDownloadCount();
 
    const pageCount = useMemo(() => {
       if (!articlesIsError && articles) {
          return Math.ceil(Number(articles && articles.count / 10));
       }
-      return 12;
+      return 1;
    }, [articles, articlesIsError]);
 
    return (
@@ -89,7 +94,6 @@ function Researches() {
                      {
                         !articlesIsError && articles ?
                            articles.results.map(item => {
-
                               return (
                                  <div
                                     key={item.id}
@@ -101,20 +105,24 @@ function Researches() {
                                        date={item.date_created}
                                        downloadCount={item.download_count}
                                        imgSrc={item.author.avatar}
-                                       likeCount={item.liked_count}
+                                       likeCount={item.like_count}
                                        viewedCount={item.view_count}
                                        subTitles={[`${item.author.first_name} ${item.author.last_name}`]}
                                        text={item.content}
                                        title={item.name}
-                                       onDownload={() => {
-                                          window.open(item.file, '_blank');
-                                          download(item.id)
+                                       onDownload={async () => {
+                                          await download(item.id)
+                                          downloadFile(item.file)
                                        }}
                                        onRead={() => {
                                           window.open(item.file, '_blank');
                                        }}
                                        onClickLike={() => {
                                           like(item.id)
+                                       }}
+                                       onClick={async () => {
+                                          await noticeViewCount.getResearch(item.id, i18n.language);
+                                          queryClient.invalidateQueries(["researches"]);
                                        }}
                                     />
                                  </div>

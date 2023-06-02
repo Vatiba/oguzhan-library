@@ -164,6 +164,12 @@ function ResearchesFilter() {
                />
             </div>
          }
+			<button
+				className='bg-secondaryColor rounded-md w-full text-white font-bold p-1 mt-4'
+				onClick={() => navigate({ to: '/researches' })}
+			>
+				{t('clear')}
+			</button>
       </div>
    )
 }

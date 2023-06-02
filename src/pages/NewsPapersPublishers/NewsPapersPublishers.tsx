@@ -28,7 +28,7 @@ function NewsPapersPublishers() {
 		if (!newsPaperIsError && newsPaper) {
 			return Math.ceil(Number(newsPaper && newsPaper.count / 10));
 		}
-		return 12;
+		return 1;
 	}, [newsPaper, newsPaperIsError]);
 
 	return (

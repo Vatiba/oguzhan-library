@@ -35,5 +35,7 @@
 	"newsName": "Wonder name",
 	"latestNews": "Latest wonders",
 	"author": "Author",
-	"leader": "Leader"
+	"leader": "Leader",
+	"clear": "Clear",
+	"researchCenters": "Research and production center"
 }

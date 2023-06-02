@@ -17,3 +17,10 @@ export const secondsToHours = (sec?: number) => {
 export const isNumber = (x: any): x is number => {
 	return typeof x === 'number' && !Number.isNaN(Number(x));
 }
+
+export const downloadFile = (filePath: string) => {
+	var link = document.createElement('a');
+	link.href = filePath;
+	link.download = filePath.substr(filePath.lastIndexOf('/') + 1);
+	link.click();
+}

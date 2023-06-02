@@ -13,11 +13,16 @@ import { useProjectDownloadCount, useProjectLikeCount } from '@app/hooks/mutatio
 // icons
 import { ListBulletIcon } from '@heroicons/react/20/solid';
 // helpers
-import { isNumber } from '@app/utils/helpers';
+import { downloadFile, isNumber } from '@app/utils/helpers';
+import { ProjectsApi } from '@app/services/api/Projects';
+import { useQueryClient } from '@tanstack/react-query';
+
+const noticeViewCount = ProjectsApi.getInstance();
 
 function Projects() {
    const search = useSearch();
    const { t, i18n } = useTranslation('translation');
+   const queryClient = useQueryClient();
 
    const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -36,21 +41,22 @@ function Projects() {
       page: search['page'] as number || 1,
       search: search['search'] as string || '',
       lang: i18n.language,
-      manager: ''
+      manager: '',
+      research_and_production_center: ''
    });
 
    const {
       mutate: like
    } = useProjectLikeCount();
    const {
-      mutate: download
+      mutateAsync: download
    } = useProjectDownloadCount();
 
    const pageCount = useMemo(() => {
       if (!articlesIsError && articles) {
          return Math.ceil(Number(articles && articles.count / 10));
       }
-      return 12;
+      return 1;
    }, [articles, articlesIsError]);
 
    return (
@@ -90,7 +96,6 @@ function Projects() {
                      {
                         !articlesIsError && articles ?
                            articles.results.map(item => {
-
                               return (
                                  <div
                                     key={item.id}
@@ -101,24 +106,34 @@ function Projects() {
                                        alt='Articles image'
                                        date={item.date_created}
                                        downloadCount={item.download_count}
-                                       imgSrc={item.file}
-                                       likeCount={item.liked_count}
+                                       imgSrc={item.thumbnail}
+                                       likeCount={item.like_count}
                                        viewedCount={item.view_count}
                                        subTitles={[
-                                          `${t('author')}: ${item.author.first_name} ${item.author.last_name}`,
-                                          `${t('leader')}: ${item.manager.first_name} ${item.manager.last_name}`
+                                          `${t('author')}: ${item.authors}`,
+                                          `${t('leader')}: ${item.manager?.first_name || ''} ${item.manager?.last_name || ''}`
                                        ]}
                                        text={item.content}
                                        title={item.name}
-                                       onDownload={() => {
-                                          window.open(item.file, '_blank');
-                                          download(item.id)
+                                       onDownload={async () => {
+                                          await download(item.id);
+                                          downloadFile(item.file);
                                        }}
                                        onRead={() => {
                                           window.open(item.file, '_blank');
                                        }}
                                        onClickLike={() => {
                                           like(item.id)
+                                       }}
+                                       research_production_center={
+                                          item.research_and_production_center?.name ?
+                                             item.research_and_production_center?.name
+                                             :
+                                             item.department.name
+                                       }
+                                       onClick={async () => {
+                                          await noticeViewCount.getProject(item.id, i18n.language);
+                                          queryClient.invalidateQueries(["projects"]);
                                        }}
                                     />
                                  </div>

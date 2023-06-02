@@ -17,6 +17,7 @@ export type RowProps = {
 	onRead?: () => void
 	onPlay?: () => void
 	onClickLike?: () => void
+	research_production_center?: string
 }
 
 function Row(props: RowProps) {
@@ -35,6 +36,7 @@ function Row(props: RowProps) {
 		onPlay,
 		onRead,
 		onClickLike,
+		research_production_center
 	} = props;
 
 	return (
@@ -54,6 +56,7 @@ function Row(props: RowProps) {
 				onRead={onRead}
 				onPlay={onPlay}
 				onClickLike={onClickLike}
+				research_production_center={research_production_center}
 			/>
 		</div>
 	)

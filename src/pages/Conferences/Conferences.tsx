@@ -36,7 +36,7 @@ function Conferences() {
 		if (!conferencesIsError && conferences) {
 			return Math.ceil(Number(conferences && conferences.count / 10));
 		}
-		return 12;
+		return 1;
 	}, [conferences, conferencesIsError]);
 
 	return (
@@ -111,6 +111,7 @@ function Conferences() {
 									imgAlt='Conference image'
 									imgSrc={item.thumbnail}
 									name={item.name}
+									file={item.file}
 								/>
 							</div>
 						)

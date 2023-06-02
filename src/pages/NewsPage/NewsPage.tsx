@@ -36,7 +36,7 @@ function NewsPage() {
 		if (!newsIsError && news && !newsIsLoading) {
 			return Math.ceil(Number(news && news.count / 10));
 		}
-		return 12;
+		return 1;
 	}, [news, newsIsError]);
 
 	return (

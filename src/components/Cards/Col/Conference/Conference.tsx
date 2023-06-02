@@ -1,3 +1,4 @@
+import { downloadFile } from '@app/utils/helpers';
 import React from 'react';
 
 type ConferenceProps = {
@@ -5,6 +6,7 @@ type ConferenceProps = {
 	imgAlt: string
 	name: string
 	date: string
+	file: string
 }
 
 function Conference(props: ConferenceProps) {
@@ -12,7 +14,8 @@ function Conference(props: ConferenceProps) {
 		imgSrc,
 		imgAlt,
 		name,
-		date
+		date,
+		file
 	} = props;
 
 	return (
@@ -20,9 +23,10 @@ function Conference(props: ConferenceProps) {
 			className='rounded-md shadow-md min-w-[250px] max-w-[350px] bg-mainBgColor flex flex-col'
 		>
 			<img
-				className='max-h-[327px] rounded-t-md'
+				className='max-h-[327px] rounded-t-md cursor-pointer'
 				src={imgSrc}
 				alt={imgAlt}
+				onClick={() => window.open(file, '_blank')}
 			/>
 			<div className='flex flex-col p-3'>
 				<span className='text-lg font-medium leading-[23px] text-center'>

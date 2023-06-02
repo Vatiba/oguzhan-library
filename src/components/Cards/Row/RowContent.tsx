@@ -21,6 +21,7 @@ export type RowContentProps = {
    onRead?: () => void
    onPlay?: () => void
    onClickLike?: () => void
+   research_production_center?: string
 }
 
 function RowContent(props: RowContentProps) {
@@ -39,6 +40,7 @@ function RowContent(props: RowContentProps) {
       onPlay,
       onRead,
       onClickLike,
+      research_production_center
    } = props;
 
    const { t } = useTranslation('translation');
@@ -76,7 +78,7 @@ function RowContent(props: RowContentProps) {
                      {title}
                   </h3>
                   <div
-                     className='pb-3 flex flex-col'
+                     className='pb-2 flex flex-col'
                      onClick={() => onClick?.()}
                   >
                      {
@@ -92,6 +94,14 @@ function RowContent(props: RowContentProps) {
                         })
                      }
                   </div>
+                  {
+                     research_production_center &&
+                     <span
+                        className='text-lg font-bold pb-3'
+                     >
+                        {research_production_center}
+                     </span>
+                  }
                   {
                      text &&
                      <p

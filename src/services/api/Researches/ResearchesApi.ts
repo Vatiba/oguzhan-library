@@ -55,7 +55,7 @@ class ResearchesApi extends HttpClient {
 
 	public async getResearch(id: number, lang: string): Promise<Research> {
 		try {
-			return this.instance.patch(
+			return this.instance.get(
 				`/researches/${id}`,
 				{
 					headers: {
@@ -72,7 +72,7 @@ class ResearchesApi extends HttpClient {
 	public async researchDownloadCount(id: number): Promise<void> {
 		try {
 			return this.instance.post(
-				`/researches/${id}/download`,
+				`/researches/${id}/download/`,
 				{},
 				{
 					headers: {
@@ -88,7 +88,7 @@ class ResearchesApi extends HttpClient {
 	public async researchLikeCount(id: number): Promise<void> {
 		try {
 			return this.instance.post(
-				`/researches/${id}/like`,
+				`/researches/${id}/like/`,
 				{},
 				{
 					headers: {

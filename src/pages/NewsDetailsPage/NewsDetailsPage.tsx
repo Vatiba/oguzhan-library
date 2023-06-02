@@ -85,7 +85,7 @@ function NewsDetailsPage() {
 					<span className='flex mb-5'>
 						<NewspaperIcon className="h-6 w-6 text-textColor mr-1" aria-hidden="true" />
 						<h3 className='text-xl font-extrabold'>
-							{t('latestNews')}
+							{t('news')}
 						</h3>
 					</span>
 					<Carousel

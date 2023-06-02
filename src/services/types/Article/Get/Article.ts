@@ -12,7 +12,7 @@ type Article = {
    author: Author
    category: Category
    date_created: string
-   liked_count: number
+   like_count: number
 }
 
 export default Article;

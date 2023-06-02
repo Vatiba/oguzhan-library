@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo } from 'react';
 // components
 import Container from '@app/components/Container';
 import { Link, useSearch } from '@tanstack/react-location';
@@ -9,19 +9,24 @@ import Drawer from '@app/components/common/Drawer/Drawer';
 import BookDetailsAudio from '@app/components/Modal/BookDetailsAudio';
 // hooks
 import { useTranslation } from 'react-i18next';
-import { useGetBooks } from '@app/hooks/query/Books';
+import { useGetBook, useGetBooks } from '@app/hooks/query/Books';
+import { useQueryClient } from '@tanstack/react-query';
 // icons
 import { ListBulletIcon } from '@heroicons/react/20/solid';
 // helpers
-import { isNumber } from '@app/utils/helpers';
+import { downloadFile, isNumber } from '@app/utils/helpers';
 import { useBookDownloadCount, useBookLikeCount } from '@app/hooks/mutation/Books';
 // types
 import { Book } from '@app/services/types/Books';
 import BookDetails from '@app/components/Modal/BookDetails/BookDetails';
+import { BooksApi } from '@app/services/api/Books';
+
+const noticeViewCount = BooksApi.getInstance();
 
 function Search() {
 	const search = useSearch();
 	const { t, i18n } = useTranslation('translation');
+	const queryClient = useQueryClient();
 
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -53,14 +58,14 @@ function Search() {
 		mutate: like
 	} = useBookLikeCount();
 	const {
-		mutate: download
+		mutateAsync: download
 	} = useBookDownloadCount();
 
 	const pageCount = useMemo(() => {
 		if (!booksIsError && books) {
 			return Math.ceil(Number(books && books.count / 10));
 		}
-		return 12;
+		return 1;
 	}, [books, booksIsError]);
 
 	return (
@@ -72,7 +77,7 @@ function Search() {
 					date={audioBookDetails.year}
 					downloadCount={audioBookDetails.download_count}
 					imgSrc={audioBookDetails.thumbnail}
-					likeCount={audioBookDetails.liked_count}
+					likeCount={audioBookDetails.like_count}
 					src={audioBookDetails.interactive_file}
 					subTitles={audioBookDetails.author?.name ? [audioBookDetails.author.name] : []}
 					text={audioBookDetails.description}
@@ -80,9 +85,9 @@ function Search() {
 					viewedCount={audioBookDetails.view_count}
 					setIsOpen={setOpenAudioBookModal}
 					isOpen={openAudioBookModal}
-					onDownload={() => {
-						window.open(audioBookDetails.file, '_blank');
-						download(audioBookDetails.id)
+					onDownload={async () => {
+						await download(audioBookDetails.id);
+						downloadFile(audioBookDetails.file);
 					}}
 					onRead={() => {
 						window.open(audioBookDetails.file, '_blank');
@@ -100,9 +105,12 @@ function Search() {
 					date={bookDetails.year}
 					downloadCount={bookDetails.download_count}
 					imgSrc={bookDetails.thumbnail}
-					likeCount={bookDetails.liked_count}
+					likeCount={bookDetails.like_count}
 					onClickLike={() => {
 						like(bookDetails.id)
+					}}
+					onRead={() => {
+						window.open(bookDetails.interactive_file ? bookDetails.interactive_file : bookDetails.file, '_blank');
 					}}
 					subTitles={bookDetails.author ? [bookDetails.author.name] : []}
 					text={bookDetails.description}
@@ -159,7 +167,7 @@ function Search() {
 														date={item.year}
 														downloadCount={item.download_count}
 														imgSrc={item.thumbnail}
-														likeCount={item.liked_count}
+														likeCount={item.like_count}
 														viewedCount={item.view_count}
 														subTitles={item.author ? [item.author.name] : []}
 														text={item.description}
@@ -184,18 +192,20 @@ function Search() {
 														date={item.year}
 														downloadCount={item.download_count}
 														imgSrc={item.thumbnail}
-														likeCount={item.liked_count}
+														likeCount={item.like_count}
 														viewedCount={item.view_count}
 														subTitles={item.author ? [item.author.name] : []}
 														text={item.description}
 														title={item.name}
-														onClick={() => {
+														onClick={async () => {
+															await noticeViewCount.getBook(item.id, i18n.language);
+															queryClient.invalidateQueries(["books"]);
 															setBookDetails(item);
 															setOpenBookModal(true);
 														}}
-														onDownload={() => {
-															window.open(item.file, '_blank');
-															download(item.id)
+														onDownload={async () => {
+															await download(item.id)
+															downloadFile(item.file);
 														}}
 														onRead={() => {
 															window.open(item.interactive_file ? item.interactive_file : item.file, '_blank');
