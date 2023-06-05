@@ -94,10 +94,8 @@ export default function BookPageComponent(props: BookPageComponentProps) {
 					viewedCount={audioBookDetails.view_count}
 					setIsOpen={setOpenAudioBookModal}
 					isOpen={openAudioBookModal}
-					onDownload={async () => {
-						await download(audioBookDetails.id);
-						downloadFile(audioBookDetails.file);
-					}}
+					downloadHref={audioBookDetails.file}
+					onDownloadClick={async () => await download(audioBookDetails.id)}
 					onRead={() => {
 						window.open(audioBookDetails.file, '_blank');
 					}}
@@ -191,11 +189,16 @@ export default function BookPageComponent(props: BookPageComponentProps) {
 															} :
 															undefined
 													}
-													onDownload={
+													downloadHref={
+														search['type'] !== 'audioBook' || bookType ?
+															item.file
+															:
+															undefined
+													}
+													onDownloadClick={
 														search['type'] !== 'audioBook' || bookType ?
 															async () => {
 																await download(item.id)
-																downloadFile(item.file);
 															} :
 															undefined
 													}

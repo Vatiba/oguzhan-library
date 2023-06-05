@@ -24,12 +24,13 @@ function BookDetails(props: BookDetailsProps) {
 		src,
 		alt,
 		onClickLike,
-		onDownload,
 		onPlay,
 		onRead,
 		isOpen,
 		setIsOpen,
-		bookId
+		bookId,
+		onDownloadClick,
+		downloadHref
 	} = props;
 	const { t, i18n } = useTranslation('translation');
 
@@ -146,16 +147,20 @@ function BookDetails(props: BookDetailsProps) {
 													</div>
 												}
 												{
-													onDownload &&
+													downloadHref &&
 													<div className='pr-2'>
-														<Btn
-															txt={t('download') as string}
-															onClick={(e) => {
-																e.preventDefault();
-																onDownload();
-															}}
-															downLoad
-														/>
+														<a
+															className='bg-secondaryColor p-[10px] rounded-md flex items-center'
+															target='_blank'
+															href={downloadHref}
+															download
+															onClick={() => onDownloadClick?.()}
+														>
+															<ArrowDownIcon className="h-5 w-5 text-white" aria-hidden="true" />
+															<span className='text-base font-medium leading-[19px] text-white'>
+																{t('download') as string}
+															</span>
+														</a>
 													</div>
 												}
 												{

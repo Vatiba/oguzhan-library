@@ -200,7 +200,7 @@ function Header() {
 										options={
 											bookCategories.map(item => {
 												return {
-													href: `/search?category=${item.slug}`,
+													href: `/search?category=${item.id}`,
 													label: item.name,
 												}
 											})

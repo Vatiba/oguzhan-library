@@ -110,10 +110,8 @@ function Articles() {
 													subTitles={[`${item.author?.first_name || ''} ${item.author?.last_name || ''}`]}
 													text={item.content}
 													title={item.name}
-													onDownload={async () => {
-														await download(item.id);
-														downloadFile(item.file);
-													}}
+													downloadHref={item.file}
+													onDownloadClick={async () => await download(item.id)}
 													onRead={() => {
 														window.open(item.file, '_blank');
 													}}

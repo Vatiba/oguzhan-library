@@ -13,11 +13,12 @@ export type RowProps = {
 	viewedCount: number
 	downloadCount: number
 	onClick?: () => void
-	onDownload?: () => void
+	downloadHref?: string
 	onRead?: () => void
 	onPlay?: () => void
 	onClickLike?: () => void
 	research_production_center?: string
+	onDownloadClick?: () => void
 }
 
 function Row(props: RowProps) {
@@ -32,11 +33,12 @@ function Row(props: RowProps) {
 		title,
 		viewedCount,
 		onClick,
-		onDownload,
+		downloadHref,
 		onPlay,
 		onRead,
 		onClickLike,
-		research_production_center
+		research_production_center,
+		onDownloadClick
 	} = props;
 
 	return (
@@ -52,7 +54,8 @@ function Row(props: RowProps) {
 				viewedCount={viewedCount}
 				downloadCount={downloadCount}
 				onClick={onClick}
-				onDownload={onDownload}
+				downloadHref={downloadHref}
+				onDownloadClick={onDownloadClick}
 				onRead={onRead}
 				onPlay={onPlay}
 				onClickLike={onClickLike}

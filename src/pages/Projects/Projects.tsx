@@ -115,10 +115,8 @@ function Projects() {
                                        ]}
                                        text={item.content}
                                        title={item.name}
-                                       onDownload={async () => {
-                                          await download(item.id);
-                                          downloadFile(item.file);
-                                       }}
+                                       downloadHref={item.file}
+                                       onDownloadClick={async () => await download(item.id)}
                                        onRead={() => {
                                           window.open(item.file, '_blank');
                                        }}
