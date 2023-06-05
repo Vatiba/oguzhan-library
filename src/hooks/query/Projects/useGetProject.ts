@@ -5,7 +5,7 @@ const projectsApi = ProjectsApi.getInstance();
 
 const useGetProject = (id: number, lang: string) => {
    return useQuery(
-      ["project", id],
+      ["project", id, lang],
       () => projectsApi.getProject(id, lang),
    );
 };

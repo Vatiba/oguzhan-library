@@ -103,7 +103,7 @@ function Header() {
 								<HeadDropdown
 									title={t('books')}
 									wrapperCN='pr-3 mr-3 border-r-[1px] border-white border-solid'
-									dropdownCN='overflow-y-auto overflow-x-hidden max-h-56'
+									dropdownCN='overflow-y-auto overflow-x-hidden'
 									options={
 										bookCategories?.map(item => {
 											return {

@@ -5,7 +5,7 @@ const articleApi = ArticleApi.getInstance();
 
 const useGetArticleCategories = (lang: string) => {
 	return useQuery(
-		["articlesCategories"],
+		["articlesCategories", lang],
 		() => articleApi.getArticleCategories(lang),
 	);
 };

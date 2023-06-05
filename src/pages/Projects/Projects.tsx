@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 // components
 import Container from '@app/components/Container';
-import { Link, useSearch } from '@tanstack/react-location';
+import { Link, useNavigate, useSearch } from '@tanstack/react-location';
 import Row from '@app/components/Cards/Row/Row';
 import Pagination from '@app/components/common/Pagination';
 import Drawer from '@app/components/common/Drawer/Drawer';
@@ -13,16 +13,12 @@ import { useProjectDownloadCount, useProjectLikeCount } from '@app/hooks/mutatio
 // icons
 import { ListBulletIcon } from '@heroicons/react/20/solid';
 // helpers
-import { downloadFile, isNumber } from '@app/utils/helpers';
-import { ProjectsApi } from '@app/services/api/Projects';
-import { useQueryClient } from '@tanstack/react-query';
-
-const noticeViewCount = ProjectsApi.getInstance();
+import { isNumber } from '@app/utils/helpers';
 
 function Projects() {
+   const navigate = useNavigate();
    const search = useSearch();
    const { t, i18n } = useTranslation('translation');
-   const queryClient = useQueryClient();
 
    const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -130,8 +126,7 @@ function Projects() {
                                              item.department.name
                                        }
                                        onClick={async () => {
-                                          await noticeViewCount.getProject(item.id, i18n.language);
-                                          queryClient.invalidateQueries(["projects"]);
+                                          navigate({ to: `/projects/${item.id}` })
                                        }}
                                     />
                                  </div>

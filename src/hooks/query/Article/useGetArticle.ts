@@ -5,7 +5,7 @@ const articleApi = ArticleApi.getInstance();
 
 const useGetArticle = (id: number, lang: string) => {
    return useQuery(
-      ["article", id],
+      ["article", id, lang],
       () => articleApi.getArticle(id, lang),
    );
 };

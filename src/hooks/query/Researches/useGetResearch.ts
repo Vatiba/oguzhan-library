@@ -5,7 +5,7 @@ const researchesApi = ResearchesApi.getInstance();
 
 const useGetResearch = (id: number, lang: string) => {
    return useQuery(
-      ["research"],
+      ["research", id, lang],
       () => researchesApi.getResearch(id, lang),
    );
 };

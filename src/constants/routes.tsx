@@ -28,8 +28,11 @@ const Magazines = React.lazy(() => import("@app/pages/Magazines"));
 const NewsPage = React.lazy(() => import("@app/pages/NewsPage"));
 const NewsDetailsPage = React.lazy(() => import("@app/pages/NewsDetailsPage"));
 const Articles = React.lazy(() => import("@app/pages/Articles"));
+const ArticleDetails = React.lazy(() => import("@app/pages/ArticleDetails"));
 const Researches = React.lazy(() => import("@app/pages/Researches"));
+const ResearchDetails = React.lazy(() => import("@app/pages/ResearchDetails"));
 const Projects = React.lazy(() => import("@app/pages/Projects"));
+const ProjectDetails = React.lazy(() => import("@app/pages/ProjectDetails"));
 const Test = React.lazy(() => import("@app/pages/Test"));
 
 // api instances
@@ -118,7 +121,9 @@ const routes: Route[] = [
 						page: search['page'] as number || 1,
 						search: search['search'] as string || '',
 						type: search['type'] as string || '',
-						lang: i18n.language
+						lang: i18n.language,
+						genre: '',
+						subject: ''
 					}),
 				),
 			]);
@@ -358,132 +363,245 @@ const routes: Route[] = [
 	},
 	{
 		path: "/articles",
-		pendingMinMs: 500,
-		pendingMs: 0,
-		pendingElement: <Pending />,
-		loader: async () => {
-			Promise.all([
-				await queryClient.fetchQuery(
-					[
-						"articles",
-						'',
-						'',
-						'',
-						'',
-						'desc',
-						'id',
-						1,
-						'',
-						i18n.language
-					],
-					() => articlesApi.getArticles({
-						author: '',
-						category: '',
-						department: '',
-						faculty: '',
-						orderDirection: 'desc',
-						ordering: 'id',
-						page: 1,
-						search: '',
-						lang: i18n.language
-					}),
-				),
-			]);
+		children: [
+			{
+				path: "/",
+				pendingMinMs: 500,
+				pendingMs: 0,
+				pendingElement: <Pending />,
+				loader: async () => {
+					Promise.all([
+						await queryClient.fetchQuery(
+							[
+								"articles",
+								'',
+								'',
+								'',
+								'',
+								'desc',
+								'id',
+								1,
+								'',
+								i18n.language
+							],
+							() => articlesApi.getArticles({
+								author: '',
+								category: '',
+								department: '',
+								faculty: '',
+								orderDirection: 'desc',
+								ordering: 'id',
+								page: 1,
+								search: '',
+								lang: i18n.language
+							}),
+						),
+					]);
 
-			return {}
-		},
-		element: (
-			<CommonLayout>
-				<Articles />
-			</CommonLayout>
-		),
+					return {}
+				},
+				element: (
+					<CommonLayout>
+						<Articles />
+					</CommonLayout>
+				),
+			},
+			{
+				path: "/:id",
+				pendingMinMs: 500,
+				pendingMs: 0,
+				pendingElement: <Pending />,
+				loader: async ({ params }) => {
+					const id = parseInt(params['id']);
+					Promise.all([
+						await queryClient.fetchQuery(
+							[
+								"article",
+								id,
+								i18n.language
+							],
+							() => articlesApi.getArticle(id, i18n.language),
+						),
+					]);
+
+					return {}
+				},
+				element: (
+					<CommonLayout>
+						<ArticleDetails />
+					</CommonLayout>
+				),
+			}
+		]
 	},
 	{
 		path: "/researches",
-		pendingMinMs: 500,
-		pendingMs: 0,
-		pendingElement: <Pending />,
-		loader: async () => {
-			Promise.all([
-				await queryClient.fetchQuery(
-					[
-						"researches",
-						'',
-						'',
-						'',
-						'',
-						'desc',
-						'id',
-						1,
-						'',
-						i18n.language
-					],
-					() => researchApi.getResearches({
-						author: '',
-						category: '',
-						department: '',
-						faculty: '',
-						orderDirection: 'desc',
-						ordering: 'id',
-						page: 1,
-						search: '',
-						lang: i18n.language
-					}),
-				),
-			]);
+		children: [
+			{
+				path: "/",
+				pendingMinMs: 500,
+				pendingMs: 0,
+				pendingElement: <Pending />,
+				loader: async () => {
+					Promise.all([
+						await queryClient.fetchQuery(
+							[
+								"researches",
+								'',
+								'',
+								'',
+								'',
+								'desc',
+								'id',
+								1,
+								'',
+								i18n.language
+							],
+							() => researchApi.getResearches({
+								author: '',
+								category: '',
+								department: '',
+								faculty: '',
+								orderDirection: 'desc',
+								ordering: 'id',
+								page: 1,
+								search: '',
+								lang: i18n.language
+							}),
+						),
+					]);
 
-			return {}
-		},
-		element: (
-			<CommonLayout>
-				<Researches />
-			</CommonLayout>
-		),
+					return {}
+				},
+				element: (
+					<CommonLayout>
+						<Researches />
+					</CommonLayout>
+				),
+			},
+			{
+				path: "/:id",
+				pendingMinMs: 500,
+				pendingMs: 0,
+				pendingElement: <Pending />,
+				loader: async ({ params }) => {
+					const id = parseInt(params['id']);
+					Promise.all([
+						await queryClient.fetchQuery(
+							["research", id, i18n.language],
+							() => researchApi.getResearch(id, i18n.language),
+						),
+					]);
+
+					return {}
+				},
+				element: (
+					<CommonLayout>
+						<ResearchDetails />
+					</CommonLayout>
+				),
+			}
+		]
 	},
 	{
 		path: "/projects",
-		pendingMinMs: 500,
-		pendingMs: 0,
-		pendingElement: <Pending />,
-		loader: async () => {
-			Promise.all([
-				await queryClient.fetchQuery(
-					[
-						"projects",
-						'',
-						'',
-						'',
-						'',
-						'',
-						'desc',
-						'id',
-						1,
-						'',
-						i18n.language
-					],
-					() => projectsApi.getProjects({
-						author: '',
-						category: '',
-						department: '',
-						faculty: '',
-						orderDirection: 'desc',
-						ordering: 'id',
-						page: 1,
-						search: '',
-						lang: i18n.language,
-						manager: '',
-						research_and_production_center: ''
-					}),
-				),
-			]);
+		children: [
+			{
+				path: "/",
+				pendingMinMs: 500,
+				pendingMs: 0,
+				pendingElement: <Pending />,
+				loader: async () => {
+					Promise.all([
+						await queryClient.fetchQuery(
+							[
+								"projects",
+								'',
+								'',
+								'',
+								'',
+								'',
+								'desc',
+								'id',
+								1,
+								'',
+								i18n.language
+							],
+							() => projectsApi.getProjects({
+								author: '',
+								category: '',
+								department: '',
+								faculty: '',
+								orderDirection: 'desc',
+								ordering: 'id',
+								page: 1,
+								search: '',
+								lang: i18n.language,
+								manager: '',
+								research_and_production_center: ''
+							}),
+						),
+					]);
 
-			return {}
-		},
-		element: (
-			<CommonLayout>
-				<Projects />
-			</CommonLayout>
-		),
+					return {}
+				},
+				element: (
+					<CommonLayout>
+						<Projects />
+					</CommonLayout>
+				),
+			},
+			{
+				path: "/:id",
+				pendingMinMs: 500,
+				pendingMs: 0,
+				pendingElement: <Pending />,
+				loader: async ({ params }) => {
+					const id = parseInt(params['id']);
+					Promise.all([
+						await queryClient.fetchQuery(
+							[
+								"projects",
+								'',
+								'',
+								'',
+								'',
+								'',
+								'desc',
+								'id',
+								1,
+								'',
+								i18n.language
+							],
+							() => projectsApi.getProjects({
+								author: '',
+								category: '',
+								department: '',
+								faculty: '',
+								orderDirection: 'desc',
+								ordering: 'id',
+								page: 1,
+								search: '',
+								lang: i18n.language,
+								manager: '',
+								research_and_production_center: ''
+							}),
+						),
+						await queryClient.fetchQuery(
+							["project", id, i18n.language],
+							() => projectsApi.getProject(id, i18n.language),
+						),
+					]);
+
+					return {}
+				},
+				element: (
+					<CommonLayout>
+						<ProjectDetails />
+					</CommonLayout>
+				),
+			}
+		]
 	},
 	{
 		path: "/test",

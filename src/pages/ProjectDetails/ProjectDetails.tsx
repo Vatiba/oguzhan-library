@@ -6,11 +6,11 @@ import Carousel from '@app/components/Carousel';
 import NewsBanner from '@app/components/NewsBanner';
 // hooks
 import { useTranslation } from 'react-i18next';
-import { useGetNew, useGetNews } from '@app/hooks/query/News';
+import { useGetProject, useGetProjects } from '@app/hooks/query/Projects';
 // icons
 import { CalendarIcon, NewspaperIcon } from '@heroicons/react/20/solid';
 
-function NewsDetailsPage() {
+function ProjectDetails() {
 	const { params } = useMatch()
 	const { t, i18n } = useTranslation('translation');
 
@@ -19,16 +19,22 @@ function NewsDetailsPage() {
 	const {
 		data: newsDetails,
 		isError: newsDetailsIsError
-	} = useGetNew(i18n.language, id);
+	} = useGetProject(id, i18n.language);
 	const {
 		data: news,
 		isError: newsIsError,
-	} = useGetNews({
-		start_date: '',
-		end_date: '',
-		lang: i18n.language,
+	} = useGetProjects({
+		author: '',
+		category: '',
+		department: '',
+		faculty: '',
+		lang: '',
+		manager: '',
+		orderDirection: 'desc',
+		ordering: '',
 		page: 1,
-		search: ''
+		research_and_production_center: '',
+		search: '',
 	});
 
 	return (
@@ -41,9 +47,16 @@ function NewsDetailsPage() {
 					{t('mainPage')}
 				</Link>
 				/
-				<span className='ml-1'>
-					{t('news')}
-				</span>
+				<Link to='/articles' className='mr-1 ml-1'>
+					{t('designWorks')}
+				</Link>
+				/
+				{
+					newsDetails?.authors &&
+					<span className='ml-1'>
+						{newsDetails.authors}
+					</span>
+				}
 			</div>
 			{
 				!newsDetailsIsError && newsDetails &&
@@ -77,14 +90,13 @@ function NewsDetailsPage() {
 					</div>
 				</>
 			}
-
 			{
 				!newsIsError && news?.results &&
 				<div className='flex flex-col my-[40px]'>
 					<span className='flex mb-5'>
 						<NewspaperIcon className="h-6 w-6 text-textColor mr-1" aria-hidden="true" />
 						<h3 className='text-xl font-extrabold'>
-							{t('news')}
+							{t('designWorks')}
 						</h3>
 					</span>
 					<Carousel
@@ -98,7 +110,8 @@ function NewsDetailsPage() {
 								title: item.name,
 								id: item.id,
 								slug: item.slug,
-								href: `/news/${item.id}`
+								imgCN: 'object-contain',
+								href: `/projects/${item.id}`
 							})) || []
 						}
 					/>
@@ -108,4 +121,4 @@ function NewsDetailsPage() {
 	)
 }
 
-export default NewsDetailsPage;
+export default ProjectDetails;

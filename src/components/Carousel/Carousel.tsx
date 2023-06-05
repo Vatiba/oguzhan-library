@@ -21,6 +21,7 @@ type CarouselProps = {
 	}>
 	news?: Array<NewsProps & {
 		id: number
+		href: string
 	}>
 }
 
@@ -85,7 +86,7 @@ function Carousel(props: CarouselProps) {
 						news && news.map((news) => {
 							return (
 								<SwiperSlide key={news.id}>
-									<Link to={`/news/${news.id}`}>
+									<Link to={news.href}>
 										<News
 											{...news}
 										/>

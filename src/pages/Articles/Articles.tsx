@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 // components
 import Container from '@app/components/Container';
-import { Link, useSearch } from '@tanstack/react-location';
+import { Link, useNavigate, useSearch } from '@tanstack/react-location';
 import ArticleFilter from '@app/components/Filters/ArticleFilter';
 import Row from '@app/components/Cards/Row/Row';
 import Pagination from '@app/components/common/Pagination';
@@ -10,19 +10,15 @@ import Drawer from '@app/components/common/Drawer/Drawer';
 import { useTranslation } from 'react-i18next';
 import { useGetArticles } from '@app/hooks/query/Article';
 import { useArticleLikeCount, useArticleDownloadCount } from '@app/hooks/mutation/Article';
-import { useQueryClient } from '@tanstack/react-query';
 // icons
 import { ListBulletIcon } from '@heroicons/react/20/solid';
 // helpers
-import { downloadFile, isNumber } from '@app/utils/helpers';
-import { ArticleApi } from '@app/services/api/Article';
-
-const noticeViewCount = ArticleApi.getInstance();
+import { isNumber } from '@app/utils/helpers';
 
 function Articles() {
+	const navigate = useNavigate();
 	const search = useSearch();
 	const { t, i18n } = useTranslation('translation');
-	const queryClient = useQueryClient();
 
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -118,10 +114,9 @@ function Articles() {
 													onClickLike={() => {
 														like(item.id)
 													}}
-													onClick={async () => {
-														await noticeViewCount.getArticle(item.id, i18n.language);
-														queryClient.invalidateQueries(["articles"]);
-													}}
+													onClick={() =>
+														navigate({ to: `/articles/${item.id}` })
+													}
 												/>
 											</div>
 										)

@@ -34,7 +34,7 @@ function Home() {
 		page: 1,
 		search: ''
 	});
-	
+
 	return (
 		<Container className='pt-[120px] md:pt-[135px]'>
 			{
@@ -70,6 +70,7 @@ function Home() {
 								id: item.id
 							})) || []
 						}
+
 					/>
 				</div>
 			}
@@ -92,7 +93,9 @@ function Home() {
 								text: item.content,
 								title: item.name,
 								id: item.id,
-								slug: item.slug
+								slug: item.slug,
+								imgCN: 'object-cover',
+								href: `/news/${item.id}`
 							})) || []
 						}
 					/>

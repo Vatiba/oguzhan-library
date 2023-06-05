@@ -52,7 +52,7 @@ function NewsBanner(props: NewsBannerProps) {
 						imgs.map((item, index) => (
 							<SwiperSlide key={index}>
 								<img
-									className='w-full max-h-[400px] rounded-md'
+									className='w-full max-h-[400px] rounded-md object-contain'
 									src={item.src}
 									alt={item.alt}
 								/>

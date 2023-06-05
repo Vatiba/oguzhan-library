@@ -1,6 +1,7 @@
 import React from 'react'
 // icons
 import { CalendarIcon } from '@heroicons/react/20/solid'
+import classNames from 'classnames'
 
 export type NewsProps = {
 	imgSrc: string
@@ -9,6 +10,7 @@ export type NewsProps = {
 	text: string
 	date: string
 	slug: string
+	imgCN?: string
 }
 
 function News(props: NewsProps) {
@@ -18,6 +20,7 @@ function News(props: NewsProps) {
 		title,
 		text,
 		date,
+		imgCN,
 		slug,
 	} = props;
 
@@ -27,7 +30,7 @@ function News(props: NewsProps) {
 		>
 			<div className='h-[180px]'>
 				<img
-					className='h-full w-full rounded-t-md object-cover'
+					className={classNames('h-full w-full rounded-t-md', imgCN)}
 					src={imgSrc}
 					alt={imgAlt}
 				/>

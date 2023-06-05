@@ -116,6 +116,7 @@ function NewsPage() {
 									slug={item.slug}
 									text={item.content}
 									title={item.name}
+									imgCN='object-cover'
 								/>
 							</Link>
 						)

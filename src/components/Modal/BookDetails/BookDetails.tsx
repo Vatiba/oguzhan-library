@@ -89,11 +89,11 @@ function BookDetails(props: BookDetailsProps) {
 													</span>
 												</div>
 											}
-											{
-												book.description &&
-												<p className='text-sm font-light' dangerouslySetInnerHTML={{ __html: book.description }} />
-											}
 										</div>
+										{
+											book.description &&
+											<p className='sm:pl-[15px] text-sm font-light' dangerouslySetInnerHTML={{ __html: book.description }} />
+										}
 										<div className='flex justify-between w-full flex-wrap pt-2 sm:pl-[15px]'>
 											<div className='flex flex-col'>
 												{
