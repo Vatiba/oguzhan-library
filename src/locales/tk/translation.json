@@ -1,5 +1,6 @@
 {
 	"search": "Gözleg",
+	"year": "Ýyl",
 	"books": "Kitaplar",
 	"booksOfLeader": "Milli Liderimiziň kitaplary",
 	"3dbooks": "3D kitaplar",
@@ -37,5 +38,7 @@
 	"author": "Awtory",
 	"leader": "Ýolbaşçy",
 	"clear": "Arassala",
-	"researchCenters": "Ylmy amaly önümçilik merkezi"
+	"researchCenters": "Ylmy amaly önümçilik merkezi",
+	"genre": "Žanr",
+	"subject": "Ders"
 }

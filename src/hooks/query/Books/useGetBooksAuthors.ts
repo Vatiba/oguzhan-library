@@ -5,7 +5,7 @@ const booksApi = BooksApi.getInstance();
 
 const useGetBooksAuthors = (lang: string) => {
    return useQuery(
-      ["booksAuthors"],
+      ["booksAuthors", lang],
       () => booksApi.getBooksAuthors(lang),
    );
 };

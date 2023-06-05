@@ -49,7 +49,7 @@ function AutoComplete<T extends string | number>(props: AutoCompleteProps<T>) {
 					name: option.name
 				})
 			}
-		}else {
+		} else {
 			setSelected('')
 		}
 	}, [urlKey, search])
@@ -72,7 +72,12 @@ function AutoComplete<T extends string | number>(props: AutoCompleteProps<T>) {
 				<div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left border focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-secondaryColor sm:text-sm">
 					<Combobox.Input
 						className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
-						displayValue={(option) => (option as any)?.name}
+						displayValue={(option) =>
+							(option as any)?.name && (option as any)?.id !== '' ?
+								(option as any)?.name
+								:
+								undefined
+						}
 						onChange={(event) => setQuery(event.target.value)}
 						placeholder={placeholder}
 					/>

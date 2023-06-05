@@ -74,9 +74,10 @@ function Header() {
 						<span className='pl-4 font-bold text-base md:text-[20px] leading-[24px] text-white'>TITU e-library</span>
 					</Link>
 					<div className='max-w-[716px] hidden lg:block px-2'>
-						<h1 className='font-normal text-[16px] leading-[26px] xl:text-[22px] text-white text-center'>
-							Türkmenistanyň Prezidenti Serdar BERDIMUHAMEDOW: — Watan diňe halky bilen Watandyr! Döwlet diňe halky bilen döwletdir
-						</h1>
+						<h1 className="font-bold text-xl  text-white text-center">Türkmenistanyň Prezidenti Serdar BERDIMUHAMEDOW:</h1>
+						<h2 className='font-normal text-[16px] leading-[26px] xl:text-[22px] text-white text-center'>
+							— Watan diňe halky bilen Watandyr! Döwlet diňe halky bilen döwletdir
+						</h2>
 					</div>
 					<LangBtn />
 				</Container>
@@ -111,7 +112,6 @@ function Header() {
 											}
 										}) || []
 									}
-									isTwoColumn
 									isLoading={bookCategoriesIsLoading}
 								/>
 							}
@@ -122,6 +122,18 @@ function Header() {
 							>
 								{t('virtualLibrary')}
 							</a>
+							<Link
+								className='font-medium text-white pr-3 mr-3 border-r-[1px] border-white border-solid'
+								to="/search?type=audioBook"
+							>
+								{t('audioBooks')}
+							</Link>
+							<Link
+								className='font-medium text-white pr-3 mr-3 border-r-[1px] border-white border-solid'
+								to="/search?type=3dBook"
+							>
+								{t('3dbooks')}
+							</Link>
 							<HeadDropdown
 								title={t('newsPapersAndMagazines')}
 								wrapperCN='pr-3 mr-3 border-r-[1px] border-white border-solid'

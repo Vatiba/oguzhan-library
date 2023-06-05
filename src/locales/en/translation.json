@@ -1,5 +1,6 @@
 {
 	"search": "Search",
+	"year": "Year",
 	"books": "Books",
 	"booksOfLeader": "National leader books",
 	"3dbooks": "3D books",
@@ -37,5 +38,7 @@
 	"author": "Author",
 	"leader": "Leader",
 	"clear": "Clear",
-	"researchCenters": "Research and production center"
+	"researchCenters": "Research and production center",
+	"genre": "Genre",
+	"subject": "Subject"
 }
