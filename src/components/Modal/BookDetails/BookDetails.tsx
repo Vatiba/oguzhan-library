@@ -62,20 +62,21 @@ function BookDetails(props: BookDetailsProps) {
 									</div>
 								}
 								<div className='flex flex-col justify-center items-center sm:flex-row p-2'>
-									<div className='flex justify-center max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[150px] pl-3'>
-										{
-											book.thumbnail &&
-											<img
-												className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer'
-												src={book.thumbnail}
-												alt={alt}
-												onClick={() => onRead?.()}
-											/>
-										}
-									</div>
-									<div className='flex flex-col sm:pl-[15px] mr-auto'>
-										<div className='sm:pr-36 flex flex-col'>
-											<h3 className='text-xl font-medium'>
+									{
+										book.thumbnail &&
+										<img
+											className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px]'
+											src={book.thumbnail}
+											alt={alt}
+											onClick={() => onRead?.()}
+										/>
+									}
+									<div className='flex flex-col w-full'
+									>
+										<div className='sm:pr-36 flex flex-col sm:pl-[15px] mr-auto'>
+											<h3
+												className='text-xl font-medium line-clamp-2'
+											>
 												{book.name}
 											</h3>
 											{
@@ -93,18 +94,16 @@ function BookDetails(props: BookDetailsProps) {
 												<p className='text-sm font-light' dangerouslySetInnerHTML={{ __html: book.description }} />
 											}
 										</div>
-										<div className='flex justify-between w-full flex-wrap pt-2'>
+										<div className='flex justify-between w-full flex-wrap pt-2 sm:pl-[15px]'>
 											<div className='flex flex-col'>
 												{
-													book.year ?
-														<span className='flex items-center pt-0 sm:pt-4'>
-															<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
-															<span className='text-accentColor'>
-																{book.year}
-															</span>
+													book.year &&
+													<span className='flex items-center pt-0 sm:pt-4'>
+														<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
+														<span className='text-accentColor'>
+															{book.year}
 														</span>
-														:
-														null
+													</span>
 												}
 												<span className='static sm:absolute right-0 top-0 flex sm:p-3'>
 													{

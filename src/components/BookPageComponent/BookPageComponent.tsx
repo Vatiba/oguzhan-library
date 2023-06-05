@@ -99,8 +99,8 @@ export default function BookPageComponent(props: BookPageComponentProps) {
 					onRead={() => {
 						window.open(audioBookDetails.file, '_blank');
 					}}
-					onClickLike={() => {
-						like(audioBookDetails.id);
+					onClickLike={async () => {
+						await like(audioBookDetails.id);
 					}}
 					bookId={audioBookDetails.id}
 				/>
