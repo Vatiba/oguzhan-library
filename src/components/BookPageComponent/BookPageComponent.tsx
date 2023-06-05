@@ -58,7 +58,9 @@ export default function BookPageComponent(props: BookPageComponentProps) {
 		page: search['page'] as number || 1,
 		search: search['search'] as string || '',
 		type: bookType as typeof bookTypes[number] || search['type'],
-		lang: i18n.language
+		lang: i18n.language,
+		genre: search['genre'] as string || '',
+		subject: search['subject'] as string || '',
 	});
 
 	const {

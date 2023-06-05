@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 // components
 import AutoComplete from '@app/components/common/AutoComplete';
 // hooks
-import { useGetBookCategories, useGetBooksAuthors } from '@app/hooks/query/Books';
+import {
+	useGetBookCategories,
+	useGetBookGenres,
+	useGetBookSubjects,
+	useGetBooksAuthors
+} from '@app/hooks/query/Books';
 import { useNavigate, useSearch } from '@tanstack/react-location';
 import { useTranslation } from 'react-i18next';
 // types
@@ -33,9 +38,17 @@ function SearchFilter() {
 		data: bookCategories,
 		isError: bookCategoriesIsError
 	} = useGetBookCategories(i18n.language);
+	const {
+		data: bookGenres,
+		isError: bookGenresIsError
+	} = useGetBookGenres(i18n.language);
+	const {
+		data: bookSubjects,
+		isError: bookSubjectsIsError
+	} = useGetBookSubjects(i18n.language);
 
 	const debouncedChanger = useDebounceFunction((value: string | number, urlKey: string) => {
-		navigate({ 
+		navigate({
 			search(prev) {
 				return {
 					...prev,
@@ -139,34 +152,66 @@ function SearchFilter() {
 					/>
 				</div>
 			}
-			<div className='mt-2'>
-				<AutoComplete
-					options={
-						[
-							{
-								id: '',
-								name: '-----'
-							}
-						] || []
-					}
-					placeholder={t('genre') as string}
-					urlKey='genre'
-				/>
-			</div>
-			<div className='mt-2'>
-				<AutoComplete
-					options={
-						[
-							{
-								id: '',
-								name: '-----'
-							}
-						] || []
-					}
-					placeholder={t('subject') as string}
-					urlKey='subject'
-				/>
-			</div>
+			{
+				!bookGenresIsError && bookGenres &&
+				<div className='mt-2'>
+					<AutoComplete
+						options={
+							[
+								{
+									id: '',
+									name: '-----'
+								},
+								...bookGenres.map(item => ({
+									id: item.id,
+									name: item.name
+								}))
+							] || []
+						}
+						defaultValue={(() => {
+							const category = bookGenres.find(item => item.id == search['genre']);
+							if (category)
+								return {
+									id: category.id,
+									name: category.name
+								}
+							return
+						})()}
+						placeholder={t('genre') as string}
+						urlKey='genre'
+					/>
+				</div>
+			}
+			{
+				!bookSubjectsIsError && bookSubjects &&
+				<div className='mt-2'>
+					<AutoComplete
+						options={
+							[
+								{
+									id: '',
+									name: '-----'
+								},
+								...bookSubjects.map(item => ({
+									id: item.id,
+									name: item.name
+								}))
+							] || []
+						}
+						defaultValue={(() => {
+							const category = bookSubjects.find(item => item.id == search['subject']);
+							if (category)
+								return {
+									id: category.id,
+									name: category.name
+								}
+							return
+						})()}
+						placeholder={t('subject') as string}
+						urlKey='subject'
+					/>
+				</div>
+			}
 			<button
 				className='bg-secondaryColor rounded-md w-full text-white font-bold p-1 mt-4'
 				onClick={() => navigate({ to: '/search' })}

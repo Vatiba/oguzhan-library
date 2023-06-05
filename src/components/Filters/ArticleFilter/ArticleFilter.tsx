@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next';
 import { useGetUsers } from '@app/hooks/query/User';
 // types
 import useDebounceFunction from '@app/hooks/useDebounceFunction';
-import { FireIcon } from '@heroicons/react/24/outline';
 
 function ArticleFilter() {
 	const search = useSearch();
@@ -75,6 +74,10 @@ function ArticleFilter() {
 					<AutoComplete
 						options={
 							[
+								{
+									id: '',
+									name: '-----'
+								},
 								...authors.results.map(item => ({
 									id: item.id,
 									name: `${item.first_name} ${item.last_name}`
@@ -100,10 +103,16 @@ function ArticleFilter() {
 				<div className='mt-2'>
 					<AutoComplete
 						options={
-							articleCategories.map(item => ({
-								id: item.id,
-								name: item.name
-							})) || []
+							[
+								{
+									id: '',
+									name: '-----'
+								},
+								...articleCategories.map(item => ({
+									id: item.id,
+									name: item.name
+								}))
+							] || []
 						}
 						defaultValue={(() => {
 							const category = articleCategories.find(item => item.id == search['category']);
@@ -124,10 +133,16 @@ function ArticleFilter() {
 				<div className='mt-2'>
 					<AutoComplete
 						options={
-							faculties.map(item => ({
-								id: item.id,
-								name: item.name
-							})) || []
+							[
+								{
+									id: '',
+									name: '-----'
+								},
+								...faculties.map(item => ({
+									id: item.id,
+									name: item.name
+								}))
+							] || []
 						}
 						defaultValue={(() => {
 							const faculty = faculties.find(item => item.id == search['faculty']);
@@ -148,10 +163,16 @@ function ArticleFilter() {
 				<div className='mt-2'>
 					<AutoComplete
 						options={
-							departments.map(item => ({
-								id: item.id,
-								name: item.name
-							})) || []
+							[
+								{
+									id: '',
+									name: '-----'
+								},
+								...departments.map(item => ({
+									id: item.id,
+									name: item.name
+								}))
+							] || []
 						}
 						defaultValue={(() => {
 							const department = departments.find(item => item.id == search['department']);

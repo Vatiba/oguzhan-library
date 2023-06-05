@@ -27,7 +27,7 @@ class BooksApi extends HttpClient {
 		const bookType = type === 'book' ? 0 : type === 'audioBook' ? 1 : 2;
 		const orderBy = orderDirection === 'asc' ? ordering : ordering ? `-${ordering}` : '';
 		try {
-			return this.instance.get(`/books`, {
+			return this.instance.get(`/books/`, {
 				params: {
 					...others,
 					type: bookType,
@@ -45,7 +45,7 @@ class BooksApi extends HttpClient {
 
 	public async getBooksAuthors(lang: string): Promise<INS[]> {
 		try {
-			return this.instance.get(`/books/authors`, {
+			return this.instance.get(`/books/authors/`, {
 				headers: {
 					'Accept-Language': lang,
 					...HttpClient.headers,
@@ -59,7 +59,7 @@ class BooksApi extends HttpClient {
 	public async getBookCategories(lang: string): Promise<INS[]> {
 		try {
 			return this.instance.get(
-				`/books/categories`,
+				`/books/categories/`,
 				{
 					headers: {
 						'Accept-Language': lang,
@@ -75,7 +75,39 @@ class BooksApi extends HttpClient {
 	public async getBook(id: number, lang: string): Promise<Book> {
 		try {
 			return this.instance.get(
-				`/books/${id}`,
+				`/books/${id}/`,
+				{
+					headers: {
+						'Accept-Language': lang,
+						...HttpClient.headers,
+					},
+				}
+			);
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	public async getBookGenres(lang: string): Promise<INS[]> {
+		try {
+			return this.instance.get(
+				`/books/genres/`,
+				{
+					headers: {
+						'Accept-Language': lang,
+						...HttpClient.headers,
+					},
+				}
+			);
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	public async getBookSubjects(lang: string): Promise<INS[]> {
+		try {
+			return this.instance.get(
+				`/books/subjects/`,
 				{
 					headers: {
 						'Accept-Language': lang,

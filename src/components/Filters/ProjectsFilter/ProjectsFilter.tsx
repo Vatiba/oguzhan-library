@@ -78,10 +78,16 @@ function ProjectsFilter() {
 				<div className='mt-2'>
 					<AutoComplete
 						options={
-							authors.results.map(item => ({
-								id: item.id,
-								name: `${item.first_name} ${item.last_name}`
-							})) || []
+							[
+								{
+									id: '',
+									name: '-----'
+								},
+								...authors.results.map(item => ({
+									id: item.id,
+									name: `${item.first_name} ${item.last_name}`
+								}))
+							] || []
 						}
 						defaultValue={(() => {
 							const author = authors.results.find(item => item.id == search['authors']);
@@ -102,10 +108,16 @@ function ProjectsFilter() {
 				<div className='mt-2'>
 					<AutoComplete
 						options={
-							articleCategories.map(item => ({
-								id: item.id,
-								name: item.name
-							})) || []
+							[
+								{
+									id: '',
+									name: '-----'
+								},
+								...articleCategories.map(item => ({
+									id: item.id,
+									name: item.name
+								}))
+							] || []
 						}
 						defaultValue={(() => {
 							const category = articleCategories.find(item => item.id == search['category']);
@@ -126,10 +138,16 @@ function ProjectsFilter() {
 				<div className='mt-2'>
 					<AutoComplete
 						options={
-							researchCenters.map(item => ({
-								id: item.id,
-								name: item.name
-							})) || []
+							[
+								{
+									id: '',
+									name: '-----'
+								},
+								...researchCenters.map(item => ({
+									id: item.id,
+									name: item.name
+								}))
+							] || []
 						}
 						defaultValue={(() => {
 							const faculty = researchCenters.find(item => item.id == search['researchCenters']);
@@ -150,10 +168,16 @@ function ProjectsFilter() {
 				<div className='mt-2'>
 					<AutoComplete
 						options={
-							faculties.map(item => ({
-								id: item.id,
-								name: item.name
-							})) || []
+							[
+								{
+									id: '',
+									name: '-----'
+								},
+								...faculties.map(item => ({
+									id: item.id,
+									name: item.name
+								}))
+							] || []
 						}
 						defaultValue={(() => {
 							const faculty = faculties.find(item => item.id == search['faculty']);
@@ -174,10 +198,16 @@ function ProjectsFilter() {
 				<div className='mt-2'>
 					<AutoComplete
 						options={
-							departments.map(item => ({
-								id: item.id,
-								name: item.name
-							})) || []
+							[
+								{
+									id: '',
+									name: '-----'
+								},
+								...departments.map(item => ({
+									id: item.id,
+									name: item.name
+								}))
+							] || []
 						}
 						defaultValue={(() => {
 							const department = departments.find(item => item.id == search['department']);

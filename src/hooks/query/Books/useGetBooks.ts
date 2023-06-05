@@ -14,7 +14,9 @@ const useGetBooks = ({
 	page,
 	search,
 	type,
-	lang
+	lang,
+	genre,
+	subject,
 }: BooksGetDto) => {
 	return useQuery(
 		[
@@ -28,7 +30,9 @@ const useGetBooks = ({
 			page,
 			search,
 			type,
-			lang
+			lang,
+			genre,
+			subject,
 		],
 		() => booksApi.getBooks({
 			author,
@@ -40,7 +44,9 @@ const useGetBooks = ({
 			page,
 			search,
 			type,
-			lang
+			lang,
+			genre,
+			subject,
 		}),
 		{
 			staleTime: 1000 * 60

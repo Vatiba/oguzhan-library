@@ -12,6 +12,8 @@ type BooksGetDto = {
    search: string
    page: number
    lang: string
+   genre: string
+   subject: string
 }
 
 export default BooksGetDto;
