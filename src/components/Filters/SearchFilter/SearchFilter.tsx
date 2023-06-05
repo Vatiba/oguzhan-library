@@ -212,6 +212,32 @@ function SearchFilter() {
 					/>
 				</div>
 			}
+			<div className='mt-2'>
+				<AutoComplete
+					options={
+						[
+							{
+								id: '',
+								name: '-----'
+							},
+							{
+								id: 0,
+								name: 'EN'
+							},
+							{
+								id: 1,
+								name: 'RU'
+							},
+							{
+								id: 2,
+								name: 'TK'
+							},
+						] || []
+					}
+					placeholder={t('language') as string}
+					urlKey='language'
+				/>
+			</div>
 			<button
 				className='bg-secondaryColor rounded-md w-full text-white font-bold p-1 mt-4'
 				onClick={() => navigate({ to: '/search' })}

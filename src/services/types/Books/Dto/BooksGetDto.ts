@@ -14,6 +14,8 @@ type BooksGetDto = {
    lang: string
    genre: string
    subject: string
+   year: string | number
+   language: string
 }
 
 export default BooksGetDto;

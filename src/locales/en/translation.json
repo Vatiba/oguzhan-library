@@ -42,5 +42,6 @@
 	"genre": "Genre",
 	"subject": "Subject",
 	"studentYear": "Student year",
-	"majors": "Major"
+	"majors": "Major",
+	"language": "Language"
 }

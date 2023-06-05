@@ -9,19 +9,15 @@ import Drawer from '@app/components/common/Drawer/Drawer';
 // hooks
 import { useTranslation } from 'react-i18next';
 import { useGetBooks } from '@app/hooks/query/Books';
-import { useQueryClient } from '@tanstack/react-query';
 // icons
 import { ListBulletIcon } from '@heroicons/react/20/solid';
 // helpers
-import { downloadFile, isNumber } from '@app/utils/helpers';
+import { isNumber } from '@app/utils/helpers';
 import { useBookDownloadCount, useBookLikeCount } from '@app/hooks/mutation/Books';
 // types
 import { Book } from '@app/services/types/Books';
 import BookDetails from '@app/components/Modal/BookDetails/BookDetails';
-import { BooksApi } from '@app/services/api/Books';
 import bookTypes from '@app/constants/bookTypes';
-
-const noticeViewCount = BooksApi.getInstance();
 
 type BookPageComponentProps = {
 	bookType?: typeof bookTypes[number]
@@ -33,7 +29,6 @@ export default function BookPageComponent(props: BookPageComponentProps) {
 	} = props;
 	const search = useSearch();
 	const { t, i18n } = useTranslation('translation');
-	const queryClient = useQueryClient();
 
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -61,6 +56,8 @@ export default function BookPageComponent(props: BookPageComponentProps) {
 		lang: i18n.language,
 		genre: search['genre'] as string || '',
 		subject: search['subject'] as string || '',
+		year: search['year'] as string || '',
+		language: search['language'] as string || '',
 	});
 
 	const {

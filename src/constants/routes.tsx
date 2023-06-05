@@ -126,7 +126,9 @@ const routes: Route[] = [
 						type: search['type'] as string || '',
 						lang: i18n.language,
 						genre: '',
-						subject: ''
+						subject: '',
+						language: '',
+						year: ''
 					}),
 				),
 			]);
@@ -607,7 +609,7 @@ const routes: Route[] = [
 		]
 	},
 	{
-		path: "/tutorials", 
+		path: "/tutorials",
 		pendingMinMs: 500,
 		pendingMs: 0,
 		pendingElement: <Pending />,
