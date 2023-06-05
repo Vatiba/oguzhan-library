@@ -1,7 +1,7 @@
 import HttpClient from "@services/api/httpClient";
 import baseUrl from "@services/api/baseURL";
 import { Faculty } from "@app/services/types/Faculty";
-import { Department } from "@app/services/types/Common";
+import { Department, INS } from "@app/services/types/Common";
 
 
 class FacultyApi extends HttpClient {
@@ -59,6 +59,33 @@ class FacultyApi extends HttpClient {
 			throw error;
 		}
 	}
+
+	public async getMajors(lang: string): Promise<INS[]> {
+		try {
+			return this.instance.get(`/faculties/majors/`, {
+				headers: {
+					'Accept-Language': lang,
+					...HttpClient.headers,
+				},
+			});
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	public async getYears(lang: string): Promise<INS[]> {
+		try {
+			return this.instance.get(`/faculties/years/`, {
+				headers: {
+					'Accept-Language': lang,
+					...HttpClient.headers,
+				},
+			});
+		} catch (error) {
+			throw error;
+		}
+	}
+
 
 }
 

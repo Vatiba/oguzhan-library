@@ -7,15 +7,15 @@ import Btn from '@app/components/Buttons/Btn';
 import { useTranslation } from 'react-i18next';
 
 export type RowContentProps = {
-	imgSrc: string | null
+	imgSrc?: string | null
 	alt: string
 	title: string
 	subTitles: string[]
-	text: string | null
+	text?: string | null
 	date: string | number | null
-	likeCount: number
-	viewedCount: number
-	downloadCount: number
+	likeCount?: number
+	viewedCount?: number
+	downloadCount?: number
 	onClick?: () => void
 	downloadHref?: string
 	onRead?: () => void

@@ -3,15 +3,15 @@ import React from 'react';
 import RowContent from './RowContent';
 
 export type RowProps = {
-	imgSrc: string | null
+	imgSrc?: string | null
 	alt: string
 	title: string
 	subTitles: string[]
-	text: string | null
+	text?: string | null
 	date: string | number | null
-	likeCount: number
-	viewedCount: number
-	downloadCount: number
+	likeCount?: number
+	viewedCount?: number
+	downloadCount?: number
 	onClick?: () => void
 	downloadHref?: string
 	onRead?: () => void

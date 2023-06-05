@@ -53,7 +53,7 @@ function Home() {
 			{
 				!facultiesIsError && faculties &&
 				<div className='flex flex-col mt-[30px]'>
-					<Link className='flex mb-1' to='/search'>
+					<Link className='flex mb-1' to='/tutorials'>
 						<HomeModernIcon className="h-6 w-6 text-textColor mr-1" aria-hidden="true" />
 						<h3 className='text-xl font-extrabold underline'>
 							{t('faculties')}
@@ -67,7 +67,8 @@ function Home() {
 								imgSrc: item.image || '',
 								name: item.name,
 								slug: item.slug,
-								id: item.id
+								id: item.id,
+								href: `/tutorials/${item.id}`
 							})) || []
 						}
 

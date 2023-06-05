@@ -40,5 +40,7 @@
 	"clear": "Clear",
 	"researchCenters": "Research and production center",
 	"genre": "Genre",
-	"subject": "Subject"
+	"subject": "Subject",
+	"studentYear": "Student year",
+	"majors": "Major"
 }

@@ -182,8 +182,6 @@ export default function BookPageComponent(props: BookPageComponentProps) {
 													onClick={
 														search['type'] !== 'audioBook' || bookType ?
 															async () => {
-																await noticeViewCount.getBook(item.id, i18n.language);
-																queryClient.invalidateQueries(["books"]);
 																setBookDetails(item);
 																setOpenBookModal(true);
 															} :

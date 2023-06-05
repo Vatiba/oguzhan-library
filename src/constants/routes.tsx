@@ -16,6 +16,7 @@ import { PublicationsApi } from "@app/services/api/Publications";
 import { ArticleApi } from "@app/services/api/Article";
 import { ResearchesApi } from "@app/services/api/Researches";
 import { ProjectsApi } from "@app/services/api/Projects";
+import { TutorialsApi } from "@app/services/api/Tutorials";
 
 // pages
 const Home = React.lazy(() => import("@app/pages/Home"));
@@ -33,6 +34,7 @@ const Researches = React.lazy(() => import("@app/pages/Researches"));
 const ResearchDetails = React.lazy(() => import("@app/pages/ResearchDetails"));
 const Projects = React.lazy(() => import("@app/pages/Projects"));
 const ProjectDetails = React.lazy(() => import("@app/pages/ProjectDetails"));
+const Tutorials = React.lazy(() => import("@app/pages/Tutorials"));
 const Test = React.lazy(() => import("@app/pages/Test"));
 
 // api instances
@@ -45,6 +47,7 @@ const publicationsApi = PublicationsApi.getInstance();
 const articlesApi = ArticleApi.getInstance();
 const researchApi = ResearchesApi.getInstance();
 const projectsApi = ProjectsApi.getInstance();
+const tutorialsApi = TutorialsApi.getInstance();
 
 const routes: Route[] = [
 	{
@@ -602,6 +605,50 @@ const routes: Route[] = [
 				),
 			}
 		]
+	},
+	{
+		path: "/tutorials", 
+		pendingMinMs: 500,
+		pendingMs: 0,
+		pendingElement: <Pending />,
+		loader: async () => {
+			Promise.all([
+				await queryClient.fetchQuery(
+					[
+						"tutorials",
+						'',
+						'',
+						i18n.language,
+						'',
+						'',
+						'desc',
+						'',
+						1,
+						'',
+						''
+					],
+					() => tutorialsApi.getTutorials({
+						department: '',
+						faculty: '',
+						lang: i18n.language,
+						major_years__major: '',
+						major_years__year: '',
+						orderDirection: 'desc',
+						ordering: '',
+						page: 1,
+						search: '',
+						year: ''
+					}),
+				),
+			]);
+
+			return {}
+		},
+		element: (
+			<CommonLayout>
+				<Tutorials />
+			</CommonLayout>
+		),
 	},
 	{
 		path: "/test",

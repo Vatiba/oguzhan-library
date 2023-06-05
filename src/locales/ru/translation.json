@@ -40,5 +40,7 @@
 	"clear": "Очистить",
 	"researchCenters": "Научно-производственный центр",
 	"genre": "Жанр",
-	"subject": "Урок"
+	"subject": "Урок",
+	"studentYear": "Студент год",
+	"majors": "Професия"
 }

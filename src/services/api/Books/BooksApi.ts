@@ -24,7 +24,7 @@ class BooksApi extends HttpClient {
 		lang,
 		...others
 	}: BooksGetDto): Promise<Pagination<Book[]>> {
-		const bookType = type === 'book' ? 0 : type === 'audioBook' ? 1 : 2;
+		const bookType = type === 'book' ? 0 : type === 'audioBook' ? 1 : type === '3dBook' ? 2 : 0;
 		const orderBy = orderDirection === 'asc' ? ordering : ordering ? `-${ordering}` : '';
 		try {
 			return this.instance.get(`/books/`, {
