@@ -7,6 +7,9 @@ const useGetBookGenres = (lang: string) => {
 	return useQuery(
 		["bookGenres", lang],
 		() => booksApi.getBookGenres(lang),
+		{
+			staleTime: 1000 * 60
+		}
 	);
 };
 

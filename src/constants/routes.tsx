@@ -54,22 +54,25 @@ const routes: Route[] = [
 		pendingMinMs: 2000,
 		pendingMs: 0,
 		loader: async () => {
-
 			Promise.all([
-				await queryClient.fetchQuery(
+				await queryClient.ensureQueryData(
 					["bookCategories", i18n.language],
 					() => booksApi.getBookCategories(i18n.language),
 				),
-				await queryClient.fetchQuery(
+				await queryClient.ensureQueryData(
 					["externalLinks"],
 					() => mainApi.getExternalLinks(),
 				),
-				await queryClient.fetchQuery(
+				await queryClient.ensureQueryData(
 					["mainBanners"],
 					() => mainApi.getMainBanner(),
 				),
-				await queryClient.fetchQuery(
-					["news"],
+				await queryClient.ensureQueryData(
+					[
+						"news",
+						1,
+						i18n.language
+					],
 					() => newsApi.getNews({
 						start_date: '',
 						end_date: '',
@@ -78,8 +81,8 @@ const routes: Route[] = [
 						search: ''
 					}),
 				),
-				await queryClient.fetchQuery(
-					["faculties"],
+				await queryClient.ensureQueryData(
+					["faculties", i18n.language],
 					() => facultyApi.getFaculties(i18n.language),
 				),
 			]);
@@ -100,7 +103,7 @@ const routes: Route[] = [
 		pendingElement: <Pending />,
 		loader: async ({ search }) => {
 			Promise.all([
-				await queryClient.fetchQuery(
+				await queryClient.ensureQueryData(
 					[
 						"books",
 						search['author'] as string || '',
@@ -111,7 +114,12 @@ const routes: Route[] = [
 						'id',
 						search['page'] as number || 1,
 						search['search'] as string || '',
-						search['type'] as string || ''
+						search['type'] as string || '',
+						i18n.language,
+						search['genre'] as string || '',
+						search['subject'] as string || '',
+						search['year'] as string || '',
+						search['language'] as string || ''
 					],
 					() => booksApi.getBooks({
 						author: search['author'] as string || '',
@@ -129,6 +137,34 @@ const routes: Route[] = [
 						language: '',
 						year: ''
 					}),
+				),
+				await queryClient.ensureQueryData(
+					[
+						"booksAuthors",
+						i18n.language
+					],
+					() => booksApi.getBooksAuthors(i18n.language),
+				),
+				await queryClient.ensureQueryData(
+					[
+						"bookCategories",
+						i18n.language
+					],
+					() => booksApi.getBookCategories(i18n.language),
+				),
+				await queryClient.ensureQueryData(
+					[
+						"bookGenres",
+						i18n.language
+					],
+					() => booksApi.getBookGenres(i18n.language),
+				),
+				await queryClient.ensureQueryData(
+					[
+						"bookSubjects",
+						i18n.language
+					],
+					() => booksApi.getBookSubjects(i18n.language),
 				),
 			]);
 

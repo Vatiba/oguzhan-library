@@ -7,6 +7,9 @@ const useGetBooksAuthors = (lang: string) => {
    return useQuery(
       ["booksAuthors", lang],
       () => booksApi.getBooksAuthors(lang),
+		{
+			staleTime: 1000 * 60
+		}
    );
 };
 
