@@ -24,7 +24,7 @@ class PublicationsApi extends HttpClient {
    }: PublicationsGetDto): Promise<Pagination<Publication[]>> {
       const publicationType = type == 'newspaper' ? 0 : 1;
       try {
-         return this.instance.get(`/publications`, {
+         return this.instance.get(`/publications/`, {
             params: {
                type: publicationType,
                ...others
@@ -46,7 +46,7 @@ class PublicationsApi extends HttpClient {
    }: PublishersGetDto): Promise<Pagination<Publisher[]>> {
       const publisherType = type == 'newspaper' ? 0 : 1;
       try {
-         return this.instance.get(`/publications/publishers`, {
+         return this.instance.get(`/publications/publishers/`, {
             params: {
                ...others,
                type: publisherType,
@@ -64,7 +64,7 @@ class PublicationsApi extends HttpClient {
    public async getPublication(id: number, lang: string): Promise<Publication> {
       try {
          return this.instance.patch(
-            `/publications/${id}`,
+            `/publications/${id}/`,
             {
                headers: {
                   'Accept-Language': lang,
@@ -97,6 +97,22 @@ class PublicationsApi extends HttpClient {
       try {
          return this.instance.post(
             `/publications/${id}/like/`,
+            {},
+            {
+               headers: {
+                  ...HttpClient.headers,
+               },
+            }
+         );
+      } catch (error) {
+         throw error;
+      }
+   }
+
+   public async publicationViewCount(id: number): Promise<void> {
+      try {
+         return this.instance.post(
+            `/publications/${id}/view/`,
             {},
             {
                headers: {

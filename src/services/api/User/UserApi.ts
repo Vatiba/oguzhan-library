@@ -18,7 +18,7 @@ class UserApi extends HttpClient {
 
 	public async getUsers(page: number, lang: string): Promise<Pagination<Author[]>> {
 		try {
-			return this.instance.get(`/users`, {
+			return this.instance.get(`/users/`, {
 				params: {
 					page
 				},

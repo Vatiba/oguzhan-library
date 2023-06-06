@@ -22,7 +22,7 @@ class ConferenceApi extends HttpClient {
       ...others
    }: ConferenceGetDto): Promise<Pagination<Conference[]>> {
       try {
-         return this.instance.get(`/conferences`, {
+         return this.instance.get(`/conferences/`, {
             params: {
                ...others
             },

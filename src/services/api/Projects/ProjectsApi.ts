@@ -25,7 +25,7 @@ class ProjectsApi extends HttpClient {
 	}: ProjectsGetDto): Promise<Pagination<Project[]>> {
 		const orderBy = orderDirection === 'asc' ? ordering : `-${ordering}`
 		try {
-			return this.instance.get(`/projects`, {
+			return this.instance.get(`/projects/`, {
 				params: {
 					...others,
 					ordering: orderBy
@@ -42,7 +42,7 @@ class ProjectsApi extends HttpClient {
 
 	public async getProjectCategories(lang: string): Promise<Category[]> {
 		try {
-			return this.instance.get(`/projects/categories`, {
+			return this.instance.get(`/projects/categories/`, {
 				headers: {
 					'Accept-Language': lang,
 					...HttpClient.headers,
@@ -56,7 +56,7 @@ class ProjectsApi extends HttpClient {
 	public async getProject(id: number, lang: string): Promise<Project> {
 		try {
 			return this.instance.get(
-				`/projects/${id}`,
+				`/projects/${id}/`,
 				{
 					headers: {
 						'Accept-Language': lang,
@@ -89,6 +89,22 @@ class ProjectsApi extends HttpClient {
 		try {
 			return this.instance.post(
 				`/projects/${id}/like/`,
+				{},
+				{
+					headers: {
+						...HttpClient.headers,
+					},
+				}
+			);
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	public async projectsViewCount(id: number): Promise<void> {
+		try {
+			return this.instance.post(
+				`/projects/${id}/view/`,
 				{},
 				{
 					headers: {

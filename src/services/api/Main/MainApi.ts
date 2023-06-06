@@ -19,7 +19,7 @@ class MainApi extends HttpClient {
 
 	public async getMainBanner(): Promise<MainBanner[]> {
 		try {
-			return this.instance.get(`/main/banner_images`, {
+			return this.instance.get(`/main/banner_images/`, {
 				headers: {
 					...HttpClient.headers,
 				},
@@ -31,7 +31,7 @@ class MainApi extends HttpClient {
 
 	public async getExternalLinks(): Promise<ExternalLink[]> {
 		try {
-			return this.instance.get(`/main/external_links`, {
+			return this.instance.get(`/main/external_links/`, {
 				headers: {
 					...HttpClient.headers,
 				},

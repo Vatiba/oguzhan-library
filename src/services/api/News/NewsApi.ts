@@ -25,7 +25,7 @@ class NewsApi extends HttpClient {
 		lang
 	}: NewsGetDto): Promise<Pagination<New[]>> {
 		try {
-			return this.instance.get(`/news`, {
+			return this.instance.get(`/news/`, {
 				params: {
 					start_date,
 					end_date,
@@ -44,7 +44,7 @@ class NewsApi extends HttpClient {
 
 	public async getNew(id: number, lang: string): Promise<New> {
 		try {
-			return this.instance.get(`/news/${id}`, {
+			return this.instance.get(`/news/${id}/`, {
 				headers: {
 					'Accept-Language': lang,
 					...HttpClient.headers,

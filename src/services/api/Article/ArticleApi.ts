@@ -25,7 +25,7 @@ class ArticleApi extends HttpClient {
 	}: ArticleGetDto): Promise<Pagination<Article[]>> {
 		const orderBy = orderDirection === 'asc' ? ordering : `-${ordering}`
 		try {
-			return this.instance.get(`/articles`, {
+			return this.instance.get(`/articles/`, {
 				params: {
 					...others,
 					ordering: orderBy
@@ -42,7 +42,7 @@ class ArticleApi extends HttpClient {
 
 	public async getArticleCategories(lang: string): Promise<Category[]> {
 		try {
-			return this.instance.get(`/articles/categories`, {
+			return this.instance.get(`/articles/categories/`, {
 				headers: {
 					'Accept-Language': lang,
 					...HttpClient.headers,
@@ -56,7 +56,7 @@ class ArticleApi extends HttpClient {
 	public async getArticle(id: number, lang: string): Promise<Article> {
 		try {
 			return this.instance.get(
-				`/articles/${id}`,
+				`/articles/${id}/`,
 				{
 					headers: {
 						'Accept-Language': lang,
@@ -101,6 +101,21 @@ class ArticleApi extends HttpClient {
 		}
 	}
 
+	public async articleViewCount(id: number): Promise<void> {
+		try {
+			return this.instance.post(
+				`/articles/${id}/view/`,
+				{},
+				{
+					headers: {
+						...HttpClient.headers,
+					},
+				}
+			);
+		} catch (error) {
+			throw error;
+		}
+	}
 }
 
 export default ArticleApi;

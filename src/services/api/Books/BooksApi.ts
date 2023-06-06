@@ -152,6 +152,22 @@ class BooksApi extends HttpClient {
 		}
 	}
 
+	public async bookViewCount(id: number): Promise<void> {
+		try {
+			return this.instance.post(
+				`/books/${id}/view/`,
+				{},
+				{
+					headers: {
+						...HttpClient.headers,
+					},
+				}
+			);
+		} catch (error) {
+			throw error;
+		}
+	}
+
 }
 
 export default BooksApi;
