@@ -1,8 +1,6 @@
 import React from 'react'
 // icons
 import { CalendarIcon, HeartIcon, EyeIcon, ArrowDownIcon } from '@heroicons/react/20/solid'
-// components
-import Btn from '@app/components/Buttons/Btn'
 
 type MagazineProps = {
 	imgSrc: string
@@ -14,6 +12,7 @@ type MagazineProps = {
 	downloadCount: number
 	onDownloadClick: () => void
 	onClickLike: () => void
+	downloadHref: string
 }
 
 function Magazine(props: MagazineProps) {
@@ -26,7 +25,8 @@ function Magazine(props: MagazineProps) {
 		reviewCount,
 		downloadCount,
 		onDownloadClick,
-		onClickLike
+		onClickLike,
+		downloadHref,
 	} = props;
 
 	return (
@@ -55,16 +55,24 @@ function Magazine(props: MagazineProps) {
 							{likeCount}
 						</button>
 						<span className='flex text-sm font-normal leading-[16px] mr-2'>
-							<EyeIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
-							{reviewCount}
-						</span>
-						<span className='flex text-sm font-normal leading-[16px] mr-2'>
 							<ArrowDownIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 							{downloadCount}
 						</span>
 					</span>
 				</div>
-				<Btn downLoad onClick={() => onDownloadClick()} />
+
+				{
+					downloadHref &&
+					<a
+						className='bg-secondaryColor p-[10px] rounded-md flex items-center'
+						target='_blank'
+						href={downloadHref}
+						download
+						onClick={() => onDownloadClick?.()}
+					>
+						<ArrowDownIcon className="h-5 w-5 text-white" aria-hidden="true" />
+					</a>
+				}
 			</div>
 		</div>
 	)

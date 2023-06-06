@@ -9,7 +9,7 @@ import Drawer from '@app/components/common/Drawer/Drawer';
 // hooks
 import { useTranslation } from 'react-i18next';
 import { useGetArticles } from '@app/hooks/query/Article';
-import { useArticleLikeCount, useArticleDownloadCount } from '@app/hooks/mutation/Article';
+import { useArticleLikeCount, useArticleDownloadCount, useArticleViewCount } from '@app/hooks/mutation/Article';
 // icons
 import { ListBulletIcon } from '@heroicons/react/20/solid';
 // helpers
@@ -45,6 +45,9 @@ function Articles() {
 	const {
 		mutateAsync: download
 	} = useArticleDownloadCount();
+	const {
+		mutateAsync: viewCount
+	} = useArticleViewCount();
 
 	const pageCount = useMemo(() => {
 		if (!articlesIsError && articles) {
@@ -114,9 +117,10 @@ function Articles() {
 													onClickLike={() => {
 														like(item.id)
 													}}
-													onClick={() =>
+													onClick={async () => {
+														await viewCount(item.id)
 														navigate({ to: `/articles/${item.id}` })
-													}
+													}}
 												/>
 											</div>
 										)

@@ -9,7 +9,7 @@ import ProjectsFilter from '@app/components/Filters/ProjectsFilter';
 // hooks
 import { useTranslation } from 'react-i18next';
 import { useGetProjects } from '@app/hooks/query/Projects';
-import { useProjectDownloadCount, useProjectLikeCount } from '@app/hooks/mutation/Projects';
+import { useProjectDownloadCount, useProjectLikeCount, useProjectViewCount } from '@app/hooks/mutation/Projects';
 // icons
 import { ListBulletIcon } from '@heroicons/react/20/solid';
 // helpers
@@ -24,6 +24,7 @@ function Projects() {
 
    const page = isNumber(Number(search['page'])) ? Number(search['page']) : 1;
 
+   // queries
    const {
       data: articles,
       isError: articlesIsError
@@ -41,12 +42,16 @@ function Projects() {
       research_and_production_center: ''
    });
 
+   // mutations
    const {
       mutate: like
    } = useProjectLikeCount();
    const {
       mutateAsync: download
    } = useProjectDownloadCount();
+   const {
+      mutateAsync: viewCount
+   } = useProjectViewCount()
 
    const pageCount = useMemo(() => {
       if (!articlesIsError && articles) {
@@ -126,6 +131,7 @@ function Projects() {
                                              item.department.name
                                        }
                                        onClick={async () => {
+                                          await viewCount(item.id);
                                           navigate({ to: `/projects/${item.id}` })
                                        }}
                                     />

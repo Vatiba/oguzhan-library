@@ -7,7 +7,7 @@ import Pagination from '@app/components/common/Pagination';
 import { useTranslation } from 'react-i18next';
 import { useGetPublications } from '@app/hooks/query/Publications';
 // helpers
-import { downloadFile, isNumber } from '@app/utils/helpers';
+import { isNumber } from '@app/utils/helpers';
 import Magazine from '@app/components/Cards/Col/Magazine/Magazine';
 import { usePublicationDownloadCount, usePublicationLikeCount } from '@app/hooks/mutation/Publications';
 
@@ -102,7 +102,7 @@ function NewsPapers() {
 					{
 						newsPaper.results.map(item => {
 							return (
-								<div className='p-2 w-1/2 md:w-1/3 lg:w-1/4'>
+								<div className='p-2 w-1/2 md:w-1/3 lg:w-1/4' key={item.id}>
 									<Magazine
 										date={item.date_created}
 										imgAlt='News image'
@@ -113,8 +113,8 @@ function NewsPapers() {
 										title={item.publisher.name}
 										onDownloadClick={async () => {
 											await download(item.id)
-											downloadFile(item.file);
 										}}
+										downloadHref={item.file}
 										onClickLike={() => {
 											like(item.id)
 										}}

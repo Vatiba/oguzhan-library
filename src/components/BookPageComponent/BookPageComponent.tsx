@@ -13,7 +13,7 @@ import { useGetBooks } from '@app/hooks/query/Books';
 import { ListBulletIcon } from '@heroicons/react/20/solid';
 // helpers
 import { isNumber } from '@app/utils/helpers';
-import { useBookDownloadCount, useBookLikeCount } from '@app/hooks/mutation/Books';
+import { useBookDownloadCount, useBookLikeCount, useBookViewCount } from '@app/hooks/mutation/Books';
 // types
 import { Book } from '@app/services/types/Books';
 import BookDetails from '@app/components/Modal/BookDetails/BookDetails';
@@ -40,6 +40,7 @@ export default function BookPageComponent(props: BookPageComponentProps) {
 
 	const page = isNumber(Number(search['page'])) ? Number(search['page']) : 1;
 
+	// queries
 	const {
 		data: books,
 		isError: booksIsError
@@ -60,12 +61,16 @@ export default function BookPageComponent(props: BookPageComponentProps) {
 		language: search['language'] as string || '',
 	});
 
+	// mutations
 	const {
 		mutate: like
 	} = useBookLikeCount();
 	const {
 		mutateAsync: download
 	} = useBookDownloadCount();
+	const {
+		mutate: bookViewCount
+	} = useBookViewCount();
 
 	const pageCount = useMemo(() => {
 		if (!booksIsError && books) {
@@ -181,6 +186,7 @@ export default function BookPageComponent(props: BookPageComponentProps) {
 															async () => {
 																setBookDetails(item);
 																setOpenBookModal(true);
+																bookViewCount(item.id);
 															} :
 															undefined
 													}

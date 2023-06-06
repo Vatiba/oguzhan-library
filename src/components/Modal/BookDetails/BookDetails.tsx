@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // components
 import Modal from '@app/components/common/Modal';
 import { RowProps } from '@app/components/Cards/Row/Row';
@@ -9,7 +9,6 @@ import { ArrowDownIcon, CalendarIcon, EyeIcon, HeartIcon, PlayIcon } from '@hero
 import { useTranslation } from 'react-i18next';
 import { useGetBook } from '@app/hooks/query/Books';
 // styles
-import styles from './BookDetails.module.css';
 import Player from '@app/components/Player/Player';
 
 type BookDetailsProps = RowProps & {
@@ -34,6 +33,7 @@ function BookDetails(props: BookDetailsProps) {
 	} = props;
 	const { t, i18n } = useTranslation('translation');
 
+	// query
 	const {
 		data: book,
 		isLoading: bookIsLoading,

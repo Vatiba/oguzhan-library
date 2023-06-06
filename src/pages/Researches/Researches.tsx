@@ -14,6 +14,7 @@ import { useResearchesDownloadCount, useResearchesLikeCount } from '@app/hooks/m
 import { ListBulletIcon } from '@heroicons/react/20/solid';
 // helpers
 import { isNumber } from '@app/utils/helpers';
+import useResearchesViewCount from '@app/hooks/mutation/Researches/useResearchesViewCount';
 
 function Researches() {
 	const navigate = useNavigate();
@@ -24,6 +25,7 @@ function Researches() {
 
 	const page = isNumber(Number(search['page'])) ? Number(search['page']) : 1;
 
+	// queries
 	const {
 		data: articles,
 		isError: articlesIsError
@@ -39,12 +41,16 @@ function Researches() {
 		lang: i18n.language
 	});
 
+	// mutations
 	const {
 		mutate: like
 	} = useResearchesLikeCount();
 	const {
 		mutateAsync: download
 	} = useResearchesDownloadCount();
+	const {
+		mutateAsync: viewCount
+	} = useResearchesViewCount()
 
 	const pageCount = useMemo(() => {
 		if (!articlesIsError && articles) {
@@ -114,7 +120,10 @@ function Researches() {
 													onClickLike={() => {
 														like(item.id)
 													}}
-													onClick={() => navigate({ to: `/researches/${item.id}` })}
+													onClick={async () => {
+														await viewCount(item.id);
+														navigate({ to: `/researches/${item.id}` });
+													}}
 												/>
 											</div>
 										)

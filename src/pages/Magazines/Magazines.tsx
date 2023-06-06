@@ -104,7 +104,7 @@ function Magazines() {
                {
                   magazine.results.map(item => {
                      return (
-                        <div className='p-2 w-1/2 md:w-1/3 lg:w-1/4'>
+                        <div className='p-2 w-1/2 md:w-1/3 lg:w-1/4' key={item.id}>
                            <Magazine
                               date={item.date_created}
                               imgAlt='News image'
@@ -115,8 +115,8 @@ function Magazines() {
                               title={item.publisher.name}
                               onDownloadClick={async () => {
                                  await download(item.id)
-                                 downloadFile(item.file);
                               }}
+                              downloadHref={item.file}
                               onClickLike={() => {
                                  like(item.id)
                               }}
