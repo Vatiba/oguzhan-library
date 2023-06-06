@@ -43,5 +43,6 @@
 	"subject": "Subject",
 	"studentYear": "Student year",
 	"majors": "Major",
-	"language": "Language"
+	"language": "Language",
+	"tutorials": "Tutorials"
 }

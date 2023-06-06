@@ -35,7 +35,6 @@ const ResearchDetails = React.lazy(() => import("@app/pages/ResearchDetails"));
 const Projects = React.lazy(() => import("@app/pages/Projects"));
 const ProjectDetails = React.lazy(() => import("@app/pages/ProjectDetails"));
 const Tutorials = React.lazy(() => import("@app/pages/Tutorials"));
-const Test = React.lazy(() => import("@app/pages/Test"));
 
 // api instances
 const newsApi = NewsApi.getInstance();
@@ -650,12 +649,6 @@ const routes: Route[] = [
 			<CommonLayout>
 				<Tutorials />
 			</CommonLayout>
-		),
-	},
-	{
-		path: "/test",
-		element: (
-			<Test />
 		),
 	},
 ];

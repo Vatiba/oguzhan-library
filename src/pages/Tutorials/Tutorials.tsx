@@ -17,7 +17,6 @@ import { useGetTutorials } from '@app/hooks/query/Tutorials';
 
 
 function Tutorials() {
-	const navigate = useNavigate();
 	const search = useSearch();
 	const { t, i18n } = useTranslation('translation');
 
@@ -62,7 +61,7 @@ function Tutorials() {
 					</Link>
 					/
 					<span className='ml-1'>
-						{t('search')}
+						{t('tutorials')}
 					</span>
 				</div>
 				<div className="lg:hidden flex w-full justify-end mb-3">

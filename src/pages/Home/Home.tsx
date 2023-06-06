@@ -8,7 +8,6 @@ import { Link } from '@tanstack/react-location';
 import { HomeModernIcon, NewspaperIcon } from '@heroicons/react/20/solid'
 // hooks
 import { useTranslation } from 'react-i18next';
-// trash img
 import { useGetMainBanners } from '@app/hooks/query/Main';
 import { useGetFaculties } from '@app/hooks/query/Faculty';
 import { useGetNews } from '@app/hooks/query/News';
@@ -68,7 +67,7 @@ function Home() {
 								name: item.name,
 								slug: item.slug,
 								id: item.id,
-								href: `/tutorials/${item.id}`
+								href: `/tutorials?faculty=${item.id}`
 							})) || []
 						}
 

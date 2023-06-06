@@ -21,7 +21,7 @@ function AutoComplete<T extends string | number>(props: AutoCompleteProps<T>) {
 		options,
 		onChange,
 		defaultValue = '',
-		urlKey,
+		urlKey = '',
 		placeholder
 	} = props;
 
@@ -41,8 +41,8 @@ function AutoComplete<T extends string | number>(props: AutoCompleteProps<T>) {
 			)
 
 	useEffect(() => {
-		if (urlKey && search[urlKey]) {
-			const option = options.find(item => item.id == search[urlKey]);
+		if (urlKey && typeof search[urlKey] === 'number' ? (search[urlKey] as number) >= 0 : search[urlKey]) {
+			const option = options.find(item => item.id === search[urlKey]);
 			if (option) {
 				setSelected({
 					id: option.id,
@@ -52,7 +52,7 @@ function AutoComplete<T extends string | number>(props: AutoCompleteProps<T>) {
 		} else {
 			setSelected('')
 		}
-	}, [urlKey, search])
+	}, [urlKey, search]);
 
 	return (
 		<Combobox value={selected} onChange={(value) => {
