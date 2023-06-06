@@ -51,7 +51,7 @@ const tutorialsApi = TutorialsApi.getInstance();
 const routes: Route[] = [
 	{
 		path: "/",
-		pendingMinMs: 5000,
+		pendingMinMs: 2000,
 		pendingMs: 0,
 		loader: async () => {
 

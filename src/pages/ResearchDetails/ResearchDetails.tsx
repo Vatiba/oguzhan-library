@@ -44,7 +44,7 @@ function ResearchDetails() {
 				!newsDetailsIsError && newsDetails &&
 				<>
 					<div className='shadow-md rounded-md px-5 py-2 bg-white mb-5'>
-						<h1 className='font-bold text-xl'>
+						<h1 className='font-bold text-xl text-center'>
 							{newsDetails.name}
 						</h1>
 						<p className='mt-1 text-justify' dangerouslySetInnerHTML={{ __html: newsDetails.content }} />

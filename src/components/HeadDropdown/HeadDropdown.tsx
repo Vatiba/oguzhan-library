@@ -1,13 +1,11 @@
 // components
 import { Fragment } from 'react';
 import { Menu, Transition } from "@headlessui/react";
-import { Link } from '@tanstack/react-location'
+import { Link } from '@tanstack/react-location';
 // icons
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 // styles
 import classNames from 'classnames';
-// hooks
-import { useTranslation } from 'react-i18next';
 
 type HeadDropdownProps = {
 	title: string

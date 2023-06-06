@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 // components
 import Container from '@app/components/Container';
-import { Link, useNavigate, useSearch } from '@tanstack/react-location';
+import { Link, useSearch } from '@tanstack/react-location';
 import TutorialFilter from '@app/components/Filters/TutorialFilter/TutorialFilter';
 import Row from '@app/components/Cards/Row/Row';
 import Pagination from '@app/components/common/Pagination';
@@ -95,6 +95,9 @@ function Tutorials() {
 													subTitles={item?.author ? [item.author] : []}
 													title={item.name}
 													downloadHref={item.file}
+													onClick={() => {
+														window.open(item.file, '_blank')
+													}}
 												/>
 											</div>
 										)
