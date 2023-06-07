@@ -7,6 +7,9 @@ const useGetTutorial = (id: number, lang: string) => {
    return useQuery(
       ["tutorial", id, lang],
       () => tutorialsApi.getTutorial(id, lang),
+      {
+         staleTime: 1000 * 60,
+      }
    );
 };
 

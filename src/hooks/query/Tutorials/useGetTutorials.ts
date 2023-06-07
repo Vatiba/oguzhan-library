@@ -42,6 +42,9 @@ const useGetTutorials = ({
          search,
          year,
       }),
+      {
+         staleTime: 1000 * 60,
+      }
    );
 };
 

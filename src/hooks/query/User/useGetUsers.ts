@@ -7,6 +7,9 @@ const useGetUsers = (page: number, lang: string) => {
    return useQuery(
       ["user"],
       () => userApi.getUsers(page, lang),
+      {
+         staleTime: 1000 * 60,
+      }
    );
 };
 

@@ -7,6 +7,9 @@ const useGetResearch = (id: number, lang: string) => {
    return useQuery(
       ["research", id, lang],
       () => researchesApi.getResearch(id, lang),
+      {
+         staleTime: 1000 * 60,
+      }
    );
 };
 

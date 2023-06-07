@@ -21,6 +21,9 @@ const useGetPublicationsPublishers = ({
 			type,
 			lang
 		}),
+		{
+			staleTime: 1000 * 60,
+		}
 	);
 };
 

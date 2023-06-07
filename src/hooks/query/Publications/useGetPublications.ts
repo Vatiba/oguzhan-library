@@ -28,6 +28,9 @@ const useGetPublications = ({
 			type,
 			lang
 		}),
+		{
+         staleTime: 1000 * 60,
+		}
 	);
 };
 

@@ -7,6 +7,9 @@ const useGetProjectCategories = (lang: string) => {
 	return useQuery(
 		["projectsCategories", lang],
 		() => projectsApi.getProjectCategories(lang),
+		{
+			staleTime: 1000 * 60,
+		}
 	);
 };
 

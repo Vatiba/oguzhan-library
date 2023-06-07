@@ -7,6 +7,9 @@ const useGetProject = (id: number, lang: string) => {
    return useQuery(
       ["project", id, lang],
       () => projectsApi.getProject(id, lang),
+      {
+         staleTime: 1000 * 60,
+      }
    );
 };
 

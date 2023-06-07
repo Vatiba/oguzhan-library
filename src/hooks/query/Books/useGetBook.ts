@@ -7,6 +7,9 @@ const useGetBook = (id: number, lang: string) => {
    return useQuery(
       ["book", id],
       () => booksApi.getBook(id, lang),
+      {
+         staleTime: 1000 * 60,
+      }
    );
 };
 

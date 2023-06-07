@@ -7,6 +7,9 @@ const useGetPublication = (id: number, lang: string) => {
    return useQuery(
       ["publication", id],
       () => publicationsApi.getPublication(id, lang),
+      {
+         staleTime: 1000 * 60,
+      }
    );
 };
 

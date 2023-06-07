@@ -39,6 +39,9 @@ const useGetArticles = ({
 			search,
 			lang
 		}),
+		{
+         staleTime: 1000 * 60,
+		}
 	);
 };
 

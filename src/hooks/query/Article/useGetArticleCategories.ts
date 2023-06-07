@@ -7,6 +7,9 @@ const useGetArticleCategories = (lang: string) => {
 	return useQuery(
 		["articlesCategories", lang],
 		() => articleApi.getArticleCategories(lang),
+		{
+			staleTime: 1000 * 60,
+		}
 	);
 };
 

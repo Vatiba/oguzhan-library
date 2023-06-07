@@ -7,7 +7,7 @@ import Pagination from '@app/components/common/Pagination';
 import { useTranslation } from 'react-i18next';
 import { useGetPublications } from '@app/hooks/query/Publications';
 // helpers
-import { downloadFile, isNumber } from '@app/utils/helpers';
+import { isNumber } from '@app/utils/helpers';
 import Magazine from '@app/components/Cards/Col/Magazine/Magazine';
 import { usePublicationDownloadCount, usePublicationLikeCount } from '@app/hooks/mutation/Publications';
 
@@ -20,7 +20,6 @@ function Magazines() {
    const [endDate, setEndDate] = useState('');
 
    const page = isNumber(Number(search['page'])) ? Number(search['page']) : 1;
-
 
    const id = parseInt(params['id']);
    const {
@@ -35,7 +34,6 @@ function Magazines() {
       publisher: id,
       type: 'magazine'
    });
-
 
    const {
       mutateAsync: download

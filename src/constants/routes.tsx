@@ -91,9 +91,11 @@ const routes: Route[] = [
 		},
 		pendingElement: <Pending />,
 		element: (
-			<CommonLayout>
-				<Home />
-			</CommonLayout>
+			<Suspense fallback={<Pending />}>
+				<CommonLayout>
+					<Home />
+				</CommonLayout>
+			</Suspense>
 		),
 	},
 	{
@@ -171,9 +173,11 @@ const routes: Route[] = [
 			return {}
 		},
 		element: (
-			<CommonLayout>
-				<Search />
-			</CommonLayout>
+			<Suspense fallback={<Pending />}>
+				<CommonLayout>
+					<Search />
+				</CommonLayout>
+			</Suspense>
 		),
 	},
 	{
@@ -183,7 +187,7 @@ const routes: Route[] = [
 		pendingElement: <Pending />,
 		loader: async () => {
 			Promise.all([
-				await queryClient.fetchQuery(
+				await queryClient.ensureQueryData(
 					[
 						"conferences",
 						1,
@@ -202,9 +206,11 @@ const routes: Route[] = [
 			return {}
 		},
 		element: (
-			<CommonLayout>
-				<Conferences />
-			</CommonLayout>
+			<Suspense fallback={<Pending />}>
+				<CommonLayout>
+					<Conferences />
+				</CommonLayout>
+			</Suspense>
 		),
 	},
 	{
@@ -217,7 +223,7 @@ const routes: Route[] = [
 				pendingElement: <Pending />,
 				loader: async () => {
 					Promise.all([
-						await queryClient.fetchQuery(
+						await queryClient.ensureQueryData(
 							[
 								"publicationsPublishers",
 								1,
@@ -234,9 +240,11 @@ const routes: Route[] = [
 					return {}
 				},
 				element: (
-					<CommonLayout>
-						<NewsPapersPublishers />
-					</CommonLayout>
+					<Suspense fallback={<Pending />}>
+						<CommonLayout>
+							<NewsPapersPublishers />
+						</CommonLayout>
+					</Suspense>
 				),
 			},
 			{
@@ -247,7 +255,7 @@ const routes: Route[] = [
 				loader: async ({ params }) => {
 					const id = parseInt(params['id']);
 					Promise.all([
-						await queryClient.fetchQuery(
+						await queryClient.ensureQueryData(
 							[
 								"publications",
 								1,
@@ -287,7 +295,7 @@ const routes: Route[] = [
 				pendingElement: <Pending />,
 				loader: async () => {
 					Promise.all([
-						await queryClient.fetchQuery(
+						await queryClient.ensureQueryData(
 							[
 								"publicationsPublishers",
 								1,
@@ -304,9 +312,11 @@ const routes: Route[] = [
 					return {}
 				},
 				element: (
-					<CommonLayout>
-						<MagazinesPublishers />
-					</CommonLayout>
+					<Suspense fallback={<Pending />}>
+						<CommonLayout>
+							<MagazinesPublishers />
+						</CommonLayout>
+					</Suspense>
 				),
 			},
 			{
@@ -317,7 +327,7 @@ const routes: Route[] = [
 				loader: async ({ params }) => {
 					const id = parseInt(params['id']);
 					Promise.all([
-						await queryClient.fetchQuery(
+						await queryClient.ensureQueryData(
 							[
 								"publications",
 								1,
@@ -338,9 +348,11 @@ const routes: Route[] = [
 					return {}
 				},
 				element: (
-					<CommonLayout>
-						<Magazines />
-					</CommonLayout>
+					<Suspense fallback={<Pending />}>
+						<CommonLayout>
+							<Magazines />
+						</CommonLayout>
+					</Suspense>
 				),
 			},
 		]
@@ -355,8 +367,12 @@ const routes: Route[] = [
 				pendingElement: <Pending />,
 				loader: async () => {
 					Promise.all([
-						await queryClient.fetchQuery(
-							["news", i18n.language],
+						await queryClient.ensureQueryData(
+							[
+								"news",
+								1,
+								i18n.language
+							],
 							() => newsApi.getNews({
 								start_date: '',
 								end_date: '',
@@ -370,9 +386,11 @@ const routes: Route[] = [
 					return {};
 				},
 				element: (
-					<CommonLayout>
-						<NewsPage />
-					</CommonLayout>
+					<Suspense fallback={<Pending />}>
+						<CommonLayout>
+							<NewsPage />
+						</CommonLayout>
+					</Suspense>
 				),
 			},
 			{
@@ -383,8 +401,26 @@ const routes: Route[] = [
 				loader: async ({ params }) => {
 					const id = parseInt(params['id']);
 					Promise.all([
-						await queryClient.fetchQuery(
-							["news", id],
+						await queryClient.ensureQueryData(
+							[
+								"news",
+								1,
+								i18n.language
+							],
+							() => newsApi.getNews({
+								start_date: '',
+								end_date: '',
+								lang: i18n.language,
+								page: 1,
+								search: ''
+							}),
+						),
+						await queryClient.ensureQueryData(
+							[
+								"news",
+								id,
+								i18n.language
+							],
 							() => newsApi.getNew(id, i18n.language),
 						),
 					]);
@@ -411,7 +447,7 @@ const routes: Route[] = [
 				pendingElement: <Pending />,
 				loader: async () => {
 					Promise.all([
-						await queryClient.fetchQuery(
+						await queryClient.ensureQueryData(
 							[
 								"articles",
 								'',
@@ -441,9 +477,11 @@ const routes: Route[] = [
 					return {}
 				},
 				element: (
-					<CommonLayout>
-						<Articles />
-					</CommonLayout>
+					<Suspense fallback={<Pending />}>
+						<CommonLayout>
+							<Articles />
+						</CommonLayout>
+					</Suspense>
 				),
 			},
 			{
@@ -454,7 +492,7 @@ const routes: Route[] = [
 				loader: async ({ params }) => {
 					const id = parseInt(params['id']);
 					Promise.all([
-						await queryClient.fetchQuery(
+						await queryClient.ensureQueryData(
 							[
 								"article",
 								id,
@@ -467,9 +505,11 @@ const routes: Route[] = [
 					return {}
 				},
 				element: (
-					<CommonLayout>
-						<ArticleDetails />
-					</CommonLayout>
+					<Suspense fallback={<Pending />}>
+						<CommonLayout>
+							<ArticleDetails />
+						</CommonLayout>
+					</Suspense>
 				),
 			}
 		]
@@ -484,7 +524,7 @@ const routes: Route[] = [
 				pendingElement: <Pending />,
 				loader: async () => {
 					Promise.all([
-						await queryClient.fetchQuery(
+						await queryClient.ensureQueryData(
 							[
 								"researches",
 								'',
@@ -514,9 +554,11 @@ const routes: Route[] = [
 					return {}
 				},
 				element: (
-					<CommonLayout>
-						<Researches />
-					</CommonLayout>
+					<Suspense fallback={<Pending />}>
+						<CommonLayout>
+							<Researches />
+						</CommonLayout>
+					</Suspense>
 				),
 			},
 			{
@@ -527,8 +569,12 @@ const routes: Route[] = [
 				loader: async ({ params }) => {
 					const id = parseInt(params['id']);
 					Promise.all([
-						await queryClient.fetchQuery(
-							["research", id, i18n.language],
+						await queryClient.ensureQueryData(
+							[
+								"research",
+								id,
+								i18n.language
+							],
 							() => researchApi.getResearch(id, i18n.language),
 						),
 					]);
@@ -536,9 +582,11 @@ const routes: Route[] = [
 					return {}
 				},
 				element: (
-					<CommonLayout>
-						<ResearchDetails />
-					</CommonLayout>
+					<Suspense fallback={<Pending />}>
+						<CommonLayout>
+							<ResearchDetails />
+						</CommonLayout>
+					</Suspense>
 				),
 			}
 		]
@@ -553,7 +601,7 @@ const routes: Route[] = [
 				pendingElement: <Pending />,
 				loader: async () => {
 					Promise.all([
-						await queryClient.fetchQuery(
+						await queryClient.ensureQueryData(
 							[
 								"projects",
 								'',
@@ -565,7 +613,8 @@ const routes: Route[] = [
 								'id',
 								1,
 								'',
-								i18n.language
+								i18n.language,
+								''
 							],
 							() => projectsApi.getProjects({
 								author: '',
@@ -586,9 +635,11 @@ const routes: Route[] = [
 					return {}
 				},
 				element: (
-					<CommonLayout>
-						<Projects />
-					</CommonLayout>
+					<Suspense fallback={<Pending />}>
+						<CommonLayout>
+							<Projects />
+						</CommonLayout>
+					</Suspense>
 				),
 			},
 			{
@@ -599,7 +650,7 @@ const routes: Route[] = [
 				loader: async ({ params }) => {
 					const id = parseInt(params['id']);
 					Promise.all([
-						await queryClient.fetchQuery(
+						await queryClient.ensureQueryData(
 							[
 								"projects",
 								'',
@@ -611,7 +662,8 @@ const routes: Route[] = [
 								'id',
 								1,
 								'',
-								i18n.language
+								i18n.language,
+								''
 							],
 							() => projectsApi.getProjects({
 								author: '',
@@ -627,7 +679,7 @@ const routes: Route[] = [
 								research_and_production_center: ''
 							}),
 						),
-						await queryClient.fetchQuery(
+						await queryClient.ensureQueryData(
 							["project", id, i18n.language],
 							() => projectsApi.getProject(id, i18n.language),
 						),
@@ -636,9 +688,11 @@ const routes: Route[] = [
 					return {}
 				},
 				element: (
-					<CommonLayout>
-						<ProjectDetails />
-					</CommonLayout>
+					<Suspense fallback={<Pending />}>
+						<CommonLayout>
+							<ProjectDetails />
+						</CommonLayout>
+					</Suspense>
 				),
 			}
 		]
@@ -650,7 +704,7 @@ const routes: Route[] = [
 		pendingElement: <Pending />,
 		loader: async () => {
 			Promise.all([
-				await queryClient.fetchQuery(
+				await queryClient.ensureQueryData(
 					[
 						"tutorials",
 						'',
@@ -659,7 +713,7 @@ const routes: Route[] = [
 						'',
 						'',
 						'desc',
-						'',
+						'id',
 						1,
 						'',
 						''

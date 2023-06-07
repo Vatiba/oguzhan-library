@@ -7,6 +7,9 @@ const useGetResearchesCategories = (lang: string) => {
 	return useQuery(
 		["researchesCategories", lang],
 		() => researchesApi.getResearchesCategories(lang),
+		{
+			staleTime: 1000 * 60,
+		}
 	);
 };
 

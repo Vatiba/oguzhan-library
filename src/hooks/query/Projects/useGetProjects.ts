@@ -45,6 +45,9 @@ const useGetProjects = ({
 			lang,
 			research_and_production_center
 		}),
+		{
+			staleTime: 1000 * 60,
+		}
 	);
 };
 
