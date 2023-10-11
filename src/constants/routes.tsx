@@ -35,6 +35,7 @@ const ResearchDetails = React.lazy(() => import("@app/pages/ResearchDetails"));
 const Projects = React.lazy(() => import("@app/pages/Projects"));
 const ProjectDetails = React.lazy(() => import("@app/pages/ProjectDetails"));
 const Tutorials = React.lazy(() => import("@app/pages/Tutorials"));
+const Test = React.lazy(() => import("@app/pages/test"));
 
 // api instances
 const newsApi = NewsApi.getInstance();
@@ -49,6 +50,16 @@ const projectsApi = ProjectsApi.getInstance();
 const tutorialsApi = TutorialsApi.getInstance();
 
 const routes: Route[] = [
+	{
+		path: "/test",
+		element: (
+			<Suspense fallback={<Pending />}>
+				<CommonLayout>
+					<Test />
+				</CommonLayout>
+			</Suspense>
+		),
+	},
 	{
 		path: "/",
 		pendingMinMs: 2000,
