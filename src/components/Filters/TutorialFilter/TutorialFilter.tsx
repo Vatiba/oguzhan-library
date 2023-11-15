@@ -12,7 +12,7 @@ import { useNavigate, useSearch } from '@tanstack/react-location';
 import { useTranslation } from 'react-i18next';
 // types
 import useDebounceFunction from '@app/hooks/useDebounceFunction';
-import { useGetFaculties, useGetFacultyDepartment, useGetMajors, useGetYears } from '@app/hooks/query/Faculty';
+import { useGetFaculties, useGetFacultyDepartment, useGetMajors, useGetSubjects, useGetYears } from '@app/hooks/query/Faculty';
 
 function TutorialFilter() {
 	const search = useSearch();
@@ -47,12 +47,16 @@ function TutorialFilter() {
 		data: studentYears,
 		isError: studentYearsIsError
 	} = useGetYears(i18n.language);
+	const {
+		data: subjects,
+		isError: subjectsIsError
+	} = useGetSubjects(i18n.language);
 
 	const debouncedChanger = useDebounceFunction((value: string | number, urlKey: string) => {
 		navigate({
 			search(prev) {
 				return {
-					...prev,
+					studentYearsIsError,	...prev,
 					[urlKey]: value
 				}
 			},
@@ -207,6 +211,36 @@ function TutorialFilter() {
 						})()}
 						placeholder={t('department') as string}
 						urlKey='department'
+					/>
+				</div>
+			}
+			{
+				!subjectsIsError && subjects &&
+				<div className='mt-2'>
+					<AutoComplete
+						options={
+							[
+								{
+									id: '',
+									name: '-----'
+								},
+								...subjects.map(item => ({
+									id: item.id,
+									name: item.name
+								}))
+							] || []
+						}
+						defaultValue={(() => {
+							const category = subjects.find(item => item.id == search['subject']);
+							if (category)
+								return {
+									id: category.id,
+									name: category.name
+								}
+							return
+						})()}
+						placeholder={t('subject') as string}
+						urlKey='subject'
 					/>
 				</div>
 			}

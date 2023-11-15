@@ -115,13 +115,13 @@ function Header() {
 									isLoading={bookCategoriesIsLoading}
 								/>
 							}
-							<a
+							{/* <a
 								className='font-medium text-white pr-3 mr-3 border-r-[1px] border-white border-solid'
 								href="http://172.16.0.71/360/"
 								target="_blank"
 							>
 								{t('virtualLibrary')}
-							</a>
+							</a> */}
 							<Link
 								className='font-medium text-white pr-3 mr-3 border-r-[1px] border-white border-solid'
 								to="/search?type=audioBook"

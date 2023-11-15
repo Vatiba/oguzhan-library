@@ -37,7 +37,8 @@ function Tutorials() {
 		lang: i18n.language,
 		major_years__year: search['studentYear'] as string || '',
 		major_years__major: search['major'] as string || '',
-		year: search['year'] as string || ''
+		year: search['year'] as string || '',
+		subject: search['subject'] as string || '',
 	});
 
 	const pageCount = useMemo(() => {

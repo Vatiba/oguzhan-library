@@ -15,6 +15,7 @@ const useGetTutorials = ({
    page,
    search,
    year,
+   subject
 }: TutorialGetDto) => {
    return useQuery(
       [
@@ -29,6 +30,7 @@ const useGetTutorials = ({
          page,
          search,
          year,
+         subject
       ],
       () => tutorialsApi.getTutorials({
          department,
@@ -41,6 +43,7 @@ const useGetTutorials = ({
          page,
          search,
          year,
+         subject
       }),
       {
          staleTime: 1000 * 60,
