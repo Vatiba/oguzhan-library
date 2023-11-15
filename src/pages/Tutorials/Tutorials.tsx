@@ -99,6 +99,7 @@ function Tutorials() {
 													onClick={() => {
 														window.open(item.file, '_blank')
 													}}
+													subject={item.subject}
 												/>
 											</div>
 										)

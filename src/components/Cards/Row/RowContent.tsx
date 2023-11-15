@@ -5,6 +5,7 @@ import { CalendarIcon, HeartIcon, EyeIcon, ArrowDownIcon, PlayIcon } from '@hero
 import Btn from '@app/components/Buttons/Btn';
 // hooks
 import { useTranslation } from 'react-i18next';
+import { INS } from '@app/services/types/Common';
 
 export type RowContentProps = {
 	imgSrc?: string | null
@@ -23,6 +24,7 @@ export type RowContentProps = {
 	onClickLike?: () => void
 	research_production_center?: string
 	onDownloadClick?: () => void
+	subject?: INS
 }
 
 function RowContent(props: RowContentProps) {
@@ -42,7 +44,8 @@ function RowContent(props: RowContentProps) {
 		onRead,
 		onClickLike,
 		research_production_center,
-		onDownloadClick
+		onDownloadClick,
+		subject
 	} = props;
 
 	const { t } = useTranslation('translation');
@@ -80,7 +83,7 @@ function RowContent(props: RowContentProps) {
 							{title}
 						</h3>
 						<div
-							className='pb-2 flex flex-col'
+							className='pb-1 flex flex-col'
 							onClick={() => onClick?.()}
 						>
 							{
@@ -96,6 +99,32 @@ function RowContent(props: RowContentProps) {
 								})
 							}
 						</div>
+						{/* {
+						subject ?
+							<div
+								className='flex flex-col'
+								onClick={() => onClick?.()}
+							>
+								<span
+									className='text-base font-normal pt-1'
+								>
+									{t('subject')}: {subject.name}
+								</span>
+							</div>
+							:
+							null
+						} */}
+						{
+								date ?
+									<span className='flex items-center'>
+										<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
+										<span className='text-accentColor'>
+											{date}
+										</span>
+									</span>
+									:
+									null
+							}
 						{
 							research_production_center &&
 							<span
@@ -113,11 +142,11 @@ function RowContent(props: RowContentProps) {
 							/>
 						}
 					</div>
-					<div className='flex justify-between w-full flex-wrap pt-2 sm:pl-[15px]'>
-						<div className='flex flex-col'>
-							{
+					<div className='flex justify-between w-full flex-wrap sm:pl-[15px]'>
+						<div className='flex flex-col '>
+							{/* {
 								date ?
-									<span className='flex items-center pt-0 sm:pt-4'>
+									<span className='flex items-center pt-0 sm:pt-2'>
 										<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
 										<span className='text-accentColor'>
 											{date}
@@ -125,7 +154,23 @@ function RowContent(props: RowContentProps) {
 									</span>
 									:
 									null
-							}
+							} */}
+
+						{
+						subject ?
+							<div
+								className='flex flex-col'
+								onClick={() => onClick?.()}
+							>
+								<span
+									className='text-base font-normal pt-3'
+								>
+									{t('subject')}: {subject.name}
+								</span>
+							</div>
+							:
+							null
+						}
 							<span className='static sm:absolute right-0 top-0 flex sm:p-3'>
 								{
 									likeCount !== undefined &&

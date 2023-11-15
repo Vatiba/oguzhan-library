@@ -1,6 +1,7 @@
 import React from 'react';
 // components
 import RowContent from './RowContent';
+import { INS } from '@app/services/types/Common';
 
 export type RowProps = {
 	imgSrc?: string | null
@@ -19,6 +20,7 @@ export type RowProps = {
 	onClickLike?: () => void
 	research_production_center?: string
 	onDownloadClick?: () => void
+	subject?: INS
 }
 
 function Row(props: RowProps) {
@@ -38,7 +40,8 @@ function Row(props: RowProps) {
 		onRead,
 		onClickLike,
 		research_production_center,
-		onDownloadClick
+		onDownloadClick,
+		subject,
 	} = props;
 
 	return (
@@ -60,6 +63,7 @@ function Row(props: RowProps) {
 				onPlay={onPlay}
 				onClickLike={onClickLike}
 				research_production_center={research_production_center}
+				subject={subject}
 			/>
 		</div>
 	)
