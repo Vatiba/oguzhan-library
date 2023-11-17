@@ -739,7 +739,8 @@ const routes: Route[] = [
 						ordering: '',
 						page: 1,
 						search: '',
-						year: ''
+						year: '',
+						subject: '',
 					}),
 				),
 			]);

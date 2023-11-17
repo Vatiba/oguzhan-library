@@ -1,5 +1,5 @@
 import { Languages } from "@app/types";
-import { OrderDirection } from "../../Common";
+import { INS, OrderDirection } from "../../Common";
 
 type TutorialGetDto = {
   subject: string;

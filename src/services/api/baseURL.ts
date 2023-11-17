@@ -1,6 +1,6 @@
 const baseUrl = import.meta.env.MODE === 'development' ?
-	"http://10.1.5.69/api"
+	"http://elibrary.oguzhan.edu.tm/api"
 	:
-	"http://10.1.5.69/api";
+	"http://elibrary.oguzhan.edu.tm/api";
 
 export default baseUrl;
