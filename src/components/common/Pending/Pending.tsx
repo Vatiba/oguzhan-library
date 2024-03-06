@@ -1,13 +1,13 @@
 import React from 'react';
 // animated Logo
-import AnimatedLogo from '@app/assets/img/animate_logo.gif';
+import Logo from '@app/assets/img/logo.png';
 
 function Pending() {
    return (
       <div
          className='w-full h-screen flex justify-center items-center bg-[#FCFCFC]'
       >
-         <img src={AnimatedLogo} alt="Loading state" />
+         <img src={Logo} alt="Loading state" />
       </div>
    )
 }

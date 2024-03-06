@@ -16,6 +16,11 @@ import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { OptionType } from '../Accordion';
 import Accordion from '../Accordion';
+import { useGetArticleCategories } from '@app/hooks/query/Article';
+import { useGetProjectCategories } from '@app/hooks/query/Projects';
+import { useGetResearchesCategories } from '@app/hooks/query/Researches';
+import { useGetNews } from '@app/hooks/query/News';
+import { useGetPublicationsPublishers } from '@app/hooks/query/Publications';
 
 const newsPaperOptions: OptionType = [
 	{
@@ -29,18 +34,18 @@ const newsPaperOptions: OptionType = [
 ]
 
 const scienceWorldOptions: OptionType = [
-	{
-		href: '/articles',
-		label: 'scienceArticles'
-	},
-	{
-		href: '/researches',
-		label: 'scienceWorks'
-	},
-	{
-		href: '/projects',
-		label: 'designWorks'
-	},
+	// {
+	// 	href: '/articles',
+	// 	label: 'scienceArticles'
+	// },
+	// {
+	// 	href: '/researches',
+	// 	label: 'scienceWorks'
+	// },
+	// {
+	// 	href: '/projects',
+	// 	label: 'designWorks'
+	// },
 	{
 		href: '/conferences',
 		label: 'conferences'
@@ -64,14 +69,37 @@ function Header() {
 		data: externalLinks,
 		isError: externalLinksIsError
 	} = useGetExternalLinks();
+	const {
+		data: articleCategories,
+	} = useGetArticleCategories(i18n.language);
+	const {
+		data: projectCategories
+	} = useGetProjectCategories(i18n.language);
+	const {
+		data: researchCategories
+	} = useGetResearchesCategories(i18n.language);
+	const {
+		data: newspapersPublishers
+	} = useGetPublicationsPublishers({
+		lang: i18n.language,
+		page: 1,
+		type: 'newspaper'
+	});
+	const {
+		data: magazinePublishers
+	} = useGetPublicationsPublishers({
+		lang: i18n.language,
+		page: 1,
+		type: 'magazine'
+	});
 
 	return (
 		<header className='bg-primaryColor fixed w-full z-20'>
 			<div className='border-b-[1px]'>
 				<Container className='flex items-center justify-between py-[5px]'>
 					<Link className='flex items-center' to='/'>
-						<img className='h-[50px] w-[50px] md:h-[65px] md:w-[65px]' src={Logo} alt="TITU logo" />
-						<span className='pl-4 font-bold text-base md:text-[20px] leading-[24px] text-white'>TITU e-library</span>
+						<img className='h-[50px] w-[50px] md:h-[65px] md:w-[65px]' src={Logo} alt="IHBA logo" />
+						<span className='pl-4 font-bold text-base md:text-[20px] leading-[24px] text-white'>E-KiTAPHANA</span>
 					</Link>
 					<div className='max-w-[716px] hidden lg:block px-2'>
 						<h1 className="font-bold text-xl  text-white text-center">Türkmenistanyň Prezidenti Serdar BERDIMUHAMEDOW:</h1>
@@ -128,23 +156,76 @@ function Header() {
 							>
 								{t('audioBooks')}
 							</Link>
-							<Link
+							{/* <Link
 								className='font-medium text-white pr-3 mr-3 border-r-[1px] border-white border-solid'
 								to="/search?type=3dBook"
 							>
 								{t('3dbooks')}
-							</Link>
+							</Link> */}
 							<HeadDropdown
 								title={t('newsPapersAndMagazines')}
 								wrapperCN='pr-3 mr-3 border-r-[1px] border-white border-solid'
-								options={newsPaperOptions.map(item => ({
-									href: item.href,
-									label: t(item.label)
-								}))}
+								options={[
+									{
+										href: '#',
+										label: t('eNewspapers'),
+										children: newspapersPublishers?.results.map(item => {
+											return {
+												href: `/newsPapers/${item.id}`,
+												label: item.name
+											}
+										})
+									},
+									{
+										href: '#',
+										label: t('eMagazines'),
+										children: magazinePublishers?.results.map(item => {
+											return {
+												href: `/magazines/${item.id}`,
+												label: item.name
+											}
+										})
+									},
+
+									// ...newsPaperOptions.map(item => ({
+									// 	href: item.href,
+									// 	label: t(item.label)
+									// }))
+								]}
 							/>
 							<HeadDropdown
 								title={t('scienceWorld')}
 								options={externalLinks ? [
+									{
+										href: '#',
+										label: t('scienceArticles'),
+										children: articleCategories?.map(item => {
+											return {
+												href: `/articles?category=${item.id}`,
+												label: item.name
+											}
+										})
+									},
+									{
+										href: '#',
+										label: t('scienceWorks'),
+										children: researchCategories?.map(item => {
+											return {
+												href: `/researches?category=${item.id}`,
+												label: item.name
+											}
+										})
+									},
+									{
+										href: '#',
+										label: t('designWorks'),
+										children: projectCategories?.map(item => {
+											return {
+												href: `/projects?category=${item.id}`,
+												label: item.name
+											}
+										})
+									},
 									...scienceWorldOptions.map(item => {
 										return {
 											href: item.href,
@@ -207,13 +288,13 @@ function Header() {
 										}
 									/>
 								}
-								<a
+								{/* <a
 									className='font-medium text-white px-4 py-2'
 									href="http://172.16.0.71/360/"
 									target="_blank"
 								>
 									{t('virtualLibrary')}
-								</a>
+								</a> */}
 								<Accordion
 									title={t('newsPapersAndMagazines')}
 									options={newsPaperOptions}
