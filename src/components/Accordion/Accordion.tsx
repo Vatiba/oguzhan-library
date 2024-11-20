@@ -25,11 +25,16 @@ function Accordion(props: AccordionProps) {
       <Disclosure>
          {({ open }) => (
             <>
-               <Disclosure.Button className="flex w-full justify-between rounded-lg px-4 py-2 text-left text-sm font-medium hover:bg-primaryColor focus:outline-none focus-visible:ring focus-visible:bg-opacity-80 bg-opacity-60 focus-visible:ring-opacity-75">
-                  <span className='text-white text-base'>{title}</span>
+               <Disclosure.Button className="group flex w-full justify-between rounded-lg px-4 py-2 text-left text-sm font-medium hover:bg-primary-dark hover:text-white focus:outline-none focus-visible:ring focus-visible:bg-opacity-80 bg-opacity-60 focus-visible:ring-opacity-75">
+                  <span className='group-hover:text-white text-base text-textColors-dark'>{title}</span>
                   <ChevronUpIcon
-                     className={`${open ? 'rotate-180 transform' : ''
-                        } h-5 w-5 text-white`}
+                     className={classNames(
+                        'h-5 w-5',
+                        {
+                           'text-textColors-dark': open,
+                           'rotate-180 transform': open
+                        }
+                     )}
                   />
                </Disclosure.Button>
                <Disclosure.Panel className="px-4 pt-1 pb-2 text-sm text-gray-500">
@@ -39,11 +44,16 @@ function Accordion(props: AccordionProps) {
                            <Disclosure key={index}>
                               {({ open }) => (
                                  <>
-                                    <Disclosure.Button className="flex w-full justify-between rounded-lg px-4 py-2 text-left text-sm font-medium hover:bg-primaryColor focus:outline-none focus-visible:ring focus-visible:bg-opacity-80 bg-opacity-60 focus-visible:ring-opacity-75">
-                                       <span className='text-white text-base'>{t(item.label)}</span>
+                                    <Disclosure.Button className="group flex w-full justify-between rounded-lg px-4 py-2 text-left text-sm font-medium hover:bg-primary-dark hover:text-white focus:outline-none focus-visible:ring focus-visible:bg-opacity-80 bg-opacity-60 focus-visible:ring-opacity-75">
+                                       <span className='group-hover:text-white text-base text-textColors-dark'>{t(item.label)}</span>
                                        <ChevronUpIcon
-                                          className={`${open ? 'rotate-180 transform' : ''
-                                             } h-5 w-5 text-white`}
+                                          className={classNames(
+                                             'h-5 w-5',
+                                             {
+                                                'text-textColors-dark': open,
+                                                'rotate-180 transform': open
+                                             }
+                                          )}
                                        />
                                     </Disclosure.Button>
                                     <Disclosure.Panel className="px-4 pt-1 pb-2 text-sm text-gray-500">
@@ -53,10 +63,7 @@ function Accordion(props: AccordionProps) {
                                                 return (
                                                    <a
                                                       href={item.href}
-                                                      className={classNames(
-                                                         'text-white',
-                                                         'block mx-[10px] py-2 text-base font-medium rounded-md'
-                                                      )}
+                                                      className={'text-textColors-dark hover:bg-primary-dark hover:text-white block mx-2 px-4 py-2 text-base font-medium rounded-md'}
                                                       key={index}
                                                    >
                                                       {t(item.label)}
@@ -73,10 +80,7 @@ function Accordion(props: AccordionProps) {
                            <Link
                               to={item.href}
                               key={index}
-                              className={classNames(
-                                 'text-white',
-                                 'block mx-[10px] py-2 text-base font-medium rounded-md'
-                              )}
+                              className='text-textColors-dark hover:bg-primary-dark hover:text-white block mx-2 px-4 py-2 text-base font-medium rounded-md'
                            >
                               {t(item.label)}
                            </Link>

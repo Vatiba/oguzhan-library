@@ -8,7 +8,7 @@ import { Link } from '@tanstack/react-location';
 function Footer() {
 	return (
 		<footer>
-			<div className='bg-primaryColor'>
+			<div className='bg-textColors-light'>
 				<Container
 					className='flex justify-between flex-wrap py-[14px]'
 				>
@@ -24,11 +24,6 @@ function Footer() {
 							Mail: oguzhan@etut.edu.tm
 						</a>
 					</div>
-				</Container>
-			</div>
-			<div className='bg-accentColor'>
-				<Container className='py-2'>
-					<span className='font-medium text-[20px] leading-[23px] text-white'>©Copyright. All right reserved. TITU.</span>
 				</Container>
 			</div>
 		</footer>

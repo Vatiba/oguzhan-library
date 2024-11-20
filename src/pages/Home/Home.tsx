@@ -35,7 +35,7 @@ function Home() {
 	});
 
 	return (
-		<Container className='pt-[120px] md:pt-[135px]'>
+		<Container className='pt-[192px] md:pt-[207px]'>
 			{
 				!mainBannersIsError && mainBanners &&
 				<div className='mt-4'>
