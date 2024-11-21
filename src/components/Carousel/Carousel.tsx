@@ -10,7 +10,8 @@ import { useState } from 'react';
 import Faculty, { FacultyProps } from '../Cards/Col/Faculty/Faculty';
 import News, { NewsProps } from '../Cards/Col/News/News';
 // icons
-import { ArrowRightIcon, ArrowLeftIcon } from '@heroicons/react/20/solid'
+// import { ArrowRightIcon, ArrowLeftIcon } from '@heroicons/react/20/solid';
+import ArrowIcon from '@app/assets/icons/arrow.svg';
 import { Link } from '@tanstack/react-location';
 
 
@@ -100,15 +101,15 @@ function Carousel(props: CarouselProps) {
 			<div className='absolute flex justify-between z-10 w-full -mt-40'>
 				<button
 					ref={(node) => setPrevEl(node)}
-					className='bg-mainBgColor shadow-md rounded-full p-2 -ml-6 cursor-pointer'
+					className='bg-white border border-primary-dark rounded-full p-2 -ml-6 cursor-pointer'
 				>
-					<ArrowLeftIcon className="h-6 w-6 text-textColor" aria-hidden="true" />
+					<img src={ArrowIcon} className="h-6 w-6 text-textColor" aria-hidden="true" />
 				</button>
 				<button
 					ref={(node) => setNextEl(node)}
-					className='bg-mainBgColor shadow-md rounded-full p-2 -mr-6 cursor-pointer'
+					className='bg-white border border-primary-dark rounded-full p-2 -mr-6 cursor-pointer'
 				>
-					<ArrowRightIcon className="h-6 w-6 text-textColor" aria-hidden="true" />
+					<img src={ArrowIcon} className="h-6 w-6 text-textColor rotate-180" aria-hidden="true" />
 				</button>
 			</div>
 		</div>

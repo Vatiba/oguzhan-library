@@ -18,14 +18,14 @@ function Faculty(props: FacultyProps) {
 
 	return (
 		<div
-			className='rounded-md shadow-md h-[290px] min-w-[250px] max-w-[350px] bg-mainBgColor flex flex-col'
+			className='rounded-md border border-grey-dark h-[290px] min-w-[250px] max-w-[350px] bg-white flex flex-col'
 		>
 			<img
 				className='h-[190px] rounded-t-md object-cover'
 				src={imgSrc}
 				alt={imgAlt}
 			/>
-			<span className='text-lg p-4 font-medium leading-[23px]'>
+			<span className='text-lg text-textColors-dark p-4 font-medium leading-[23px]'>
 				{name}
 			</span>
 		</div>

@@ -5,7 +5,9 @@ import MainBanner from '@app/components/MainBanner';
 import Carousel from '@app/components/Carousel';
 import { Link } from '@tanstack/react-location';
 // icons
-import { HomeModernIcon, NewspaperIcon } from '@heroicons/react/20/solid'
+// import { HomeModernIcon, NewspaperIcon } from '@heroicons/react/20/solid';
+import FacultyIcon from '@app/assets/icons/school-outline.svg';
+import NewspaperIcon from '@app/assets/icons/newspaper.svg';
 // hooks
 import { useTranslation } from 'react-i18next';
 import { useGetMainBanners } from '@app/hooks/query/Main';
@@ -53,8 +55,8 @@ function Home() {
 				!facultiesIsError && faculties &&
 				<div className='flex flex-col mt-[30px]'>
 					<Link className='flex mb-1' to='/tutorials'>
-						<HomeModernIcon className="h-6 w-6 text-textColor mr-1" aria-hidden="true" />
-						<h3 className='text-xl font-extrabold underline'>
+						<img src={FacultyIcon} className="h-6 w-6 text-textColor mr-3" aria-hidden="true" />
+						<h3 className='text-xl font-extrabold text-primary-dark'>
 							{t('faculties')}
 						</h3>
 					</Link>
@@ -78,8 +80,8 @@ function Home() {
 				!newsIsError && news?.results &&
 				<div className='flex flex-col my-[40px]'>
 					<Link className='flex mb-1' to="/news">
-						<NewspaperIcon className="h-6 w-6 text-textColor mr-1" aria-hidden="true" />
-						<h3 className='text-xl font-extrabold underline'>
+						<img src={NewspaperIcon} className="h-6 w-6 text-textColor mr-3" aria-hidden="true" />
+						<h3 className='text-xl font-extrabold text-primary-dark'>
 							{t('news')}
 						</h3>
 					</Link>
