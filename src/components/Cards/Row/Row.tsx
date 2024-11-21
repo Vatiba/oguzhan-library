@@ -45,7 +45,7 @@ function Row(props: RowProps) {
 	} = props;
 
 	return (
-		<div className='relative bg-white shadow-md rounded-md'>
+		<div className='relative bg-white border-b border-grey-dark pb-7 mb-7'>
 			<RowContent
 				imgSrc={imgSrc}
 				alt={alt}

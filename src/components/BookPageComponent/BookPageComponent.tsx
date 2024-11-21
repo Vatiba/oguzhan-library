@@ -135,15 +135,15 @@ export default function BookPageComponent(props: BookPageComponentProps) {
 			<Drawer open={drawerOpen} setOpen={setDrawerOpen}>
 				<SearchFilter />
 			</Drawer>
-			<Container className='pt-[120px] md:pt-[135px]'>
+			<Container className='pt-[192px] md:pt-[207px]'>
 				{/* ==== Breadcrumb ==== */}
-				<div className='my-6 font-bold text-xl'>
+				<div className='my-6 text-lg text-textColors-normal'>
 					<Link to='/' className='mr-1'>
 						{t('mainPage')}
 					</Link>
 					/
 					<span className='ml-1'>
-						{t('search')}
+						{t('search')} {books?.count ? `(${books?.count})` : null}
 					</span>
 				</div>
 				<div className="lg:hidden flex w-full justify-end mb-3">
@@ -151,18 +151,18 @@ export default function BookPageComponent(props: BookPageComponentProps) {
 						className='bg-mainBgColor rounded-md p-3'
 						onClick={() => setDrawerOpen(true)}
 					>
-						<ListBulletIcon className="h-6 w-6 text-secondaryColor" aria-hidden="true" />
+						<ListBulletIcon className="h-6 w-6 text-primary-dark" aria-hidden="true" />
 					</button>
 				</div>
 				{/* ==== Content ==== */}
 				<div className='flex'>
 					<div className='lg:block hidden 2xl:w-1/4 lg:w-2/7 pb-10'>
-						<div className='rounded-md shadow-md bg-white py-7 px-7'>
+						<div className='rounded-md border border-grey-dark bg-white py-7 px-7'>
 							<SearchFilter />
 						</div>
 					</div>
-					<div className='2xl:w-3/4 lg:w-5/7 w-full px-2 my-3'>
-						<div className='flex flex-col'>
+					<div className='2xl:w-3/4 lg:w-5/7 w-full pl-2'>
+						<div className='flex flex-col bg-white p-5 border border-grey-dark rounded-md'>
 							{
 								!booksIsError && books ?
 									books.results.map(item => {

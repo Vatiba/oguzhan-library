@@ -19,7 +19,7 @@ function Btn(props: BtnProps) {
 	return (
 		<button
 			{...others}
-			className='bg-secondaryColor p-[10px] rounded-md flex items-center'
+			className='bg-primary-dark p-[10px] rounded-md flex items-center'
 		>
 			{
 				downLoad &&

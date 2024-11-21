@@ -44,5 +44,8 @@
 	"studentYear": "Student year",
 	"majors": "Major",
 	"language": "Language",
-	"tutorials": "Tutorials"
+	"tutorials": "Tutorials",
+	"name": "Name",
+	"category": "Category",
+	"description": "Description"
 }

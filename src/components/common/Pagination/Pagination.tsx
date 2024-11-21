@@ -34,11 +34,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 			}}
 			forcePage={props.page - 1}
 			containerClassName='flex h-12'
-			activeClassName='py-2 px-4 bg-secondaryColor rounded-md text-white font-bold text-lg'
-			pageClassName='border py-2 px-4 rounded-md font-bold text-lg hover:bg-secondaryColor hover:text-white'
-			breakClassName='border py-2 px-4 rounded-md font-bold text-lg hover:bg-secondaryColor hover:text-white'
-			nextClassName='border py-2 px-4 rounded-md font-bold text-lg hover:bg-secondaryColor hover:text-white'
-			previousClassName='border py-2 px-4 rounded-md font-bold text-lg hover:bg-secondaryColor hover:text-white'
+			activeClassName='py-2 px-4 bg-primary-dark rounded-md text-white font-bold text-lg'
+			pageClassName='border py-2 px-4 rounded-md font-bold text-lg hover:bg-primary-dark hover:text-white'
+			breakClassName='border py-2 px-4 rounded-md font-bold text-lg hover:bg-primary-dark hover:text-white'
+			nextClassName='border py-2 px-4 rounded-md font-bold text-lg hover:bg-primary-dark hover:text-white'
+			previousClassName='border py-2 px-4 rounded-md font-bold text-lg hover:bg-primary-dark hover:text-white'
 			previousLabel={'<'}
 			nextLabel={'>'}
 		/>

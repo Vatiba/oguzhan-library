@@ -4,7 +4,7 @@ import Modal from '@app/components/common/Modal';
 import { RowProps } from '@app/components/Cards/Row/Row';
 import Btn from '@app/components/Buttons/Btn/Btn';
 // icons
-import { ArrowDownIcon, CalendarIcon, EyeIcon, HeartIcon, PlayIcon } from '@heroicons/react/20/solid';
+import { ArrowDownIcon, CalendarIcon, PlayIcon } from '@heroicons/react/24/outline';
 // hooks
 import { useTranslation } from 'react-i18next';
 import { useGetBook } from '@app/hooks/query/Books';
@@ -45,7 +45,7 @@ function BookDetails(props: BookDetailsProps) {
 			isOpen={isOpen}
 			onClose={() => setIsOpen(false)}
 		>
-			<div className='w-full'>
+			<div className='w-full px-5 py-8'>
 				{
 					!bookIsError ?
 						!bookIsLoading ?
@@ -56,23 +56,91 @@ function BookDetails(props: BookDetailsProps) {
 										className='absolute w-full h-full hidden md:flex rounded-md justify-center items-center bg-accentColor cursor-pointer transition-opacity opacity-0 hover:opacity-50'
 										onClick={() => onPlay()}
 									>
-										<div className='bg-secondaryColor p-3 rounded-full'>
+										<div className='bg-primary-dark p-3 rounded-full'>
 											<PlayIcon className='h-6 w-6 text-white' aria-hidden="true" />
 										</div>
 									</div>
 								}
-								<div className='flex flex-col justify-center items-center sm:flex-row p-2'>
+								<div className='flex sm:flex-row flex-wrap sm:flex-nowrap mb-4'>
 									{
 										book.thumbnail &&
 										<img
-											className='rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px]'
+											className='object-contain w-full rounded-md sm:rounded-r-none sm:rounded-l-md cursor-pointer max-h-64 sm:h-auto sm:max-w-[130px] sm:min-w-[120px]'
 											src={book.thumbnail}
 											alt={alt}
 											onClick={() => onRead?.()}
 										/>
 									}
-									<div className='flex flex-col w-full'
-									>
+									<div className='sm:ml-4 flex flex-col w-full'>
+										<div className='flex items-center mb-1'>
+											<span className='text-primary-dark font-semibold text-lg'>
+												{t('name')}:
+											</span>
+											<span className='text-textColors-dark ml-2'>
+												{book.name}
+											</span>
+										</div>
+										{
+											book.author ?
+												<div className='flex items-center mb-1'>
+													<span className='text-primary-dark font-semibold text-lg'>
+														{t('author')}:
+													</span>
+													<span className='text-textColors-dark ml-2'>
+														{book.author.name}
+													</span>
+												</div>
+												: null
+										}
+										<div className='flex items-center mb-1'>
+											<span className='text-primary-dark font-semibold text-lg'>
+												{t('year')}:
+											</span>
+											<span className='text-textColors-dark ml-2'>
+												{book.year}
+											</span>
+										</div>
+										<div className='flex items-center mb-1'>
+											<span className='text-primary-dark font-semibold text-lg'>
+												{t('category')}:
+											</span>
+											<span className='text-textColors-dark ml-2'>
+												{book.category.name}
+											</span>
+										</div>
+										<div className='flex'>
+											{
+												onRead &&
+												<div className='pr-2'>
+													<Btn
+														txt={t('read') as string}
+														onClick={(e) => {
+															e.preventDefault();
+															onRead();
+														}}
+													/>
+												</div>
+											}
+											{
+												downloadHref &&
+												<div className='pr-2'>
+													<a
+														className='bg-primary-dark p-[10px] rounded-md flex items-center'
+														target='_blank'
+														href={downloadHref}
+														download
+														onClick={() => onDownloadClick?.()}
+													>
+														<ArrowDownIcon className="h-5 w-5 text-white" aria-hidden="true" />
+														<span className='text-base font-medium leading-[19px] text-white'>
+															{t('download') as string}
+														</span>
+													</a>
+												</div>
+											}
+										</div>
+									</div>
+									{/* <div className='flex flex-col w-full'>
 										<div className='sm:pr-36 flex flex-col sm:pl-[15px] mr-auto'>
 											<h3
 												className='text-xl font-medium line-clamp-2'
@@ -105,32 +173,6 @@ function BookDetails(props: BookDetailsProps) {
 														</span>
 													</span>
 												}
-												<span className='static sm:absolute right-0 top-0 flex sm:p-3'>
-													{
-														book.like_count !== undefined &&
-														<button
-															className='flex text-sm font-normal leading-[16px] mr-2'
-															onClick={() => onClickLike?.()}
-														>
-															<HeartIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
-															{book.like_count}
-														</button>
-													}
-													{
-														book.view_count !== undefined &&
-														<span className='flex text-sm font-normal leading-[16px] mr-2'>
-															<EyeIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
-															{book.view_count}
-														</span>
-													}
-													{
-														book.download_count !== undefined &&
-														<span className='flex text-sm font-normal leading-[16px] mr-2'>
-															<ArrowDownIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
-															{book.download_count}
-														</span>
-													}
-												</span>
 											</div>
 											<div className='flex items-center sm:pt-0 pt-2'>
 												{
@@ -149,7 +191,7 @@ function BookDetails(props: BookDetailsProps) {
 													downloadHref &&
 													<div className='pr-2'>
 														<a
-															className='bg-secondaryColor p-[10px] rounded-md flex items-center'
+															className='bg-primary-dark p-[10px] rounded-md flex items-center'
 															target='_blank'
 															href={downloadHref}
 															download
@@ -175,13 +217,20 @@ function BookDetails(props: BookDetailsProps) {
 												}
 											</div>
 										</div>
-									</div>
+									</div> */}
+								</div>
+								<div className='text-lg font-bold text-primary-dark mb-3'>
+									{t('description')}
 								</div>
 								{
 									src &&
 									<div className='w-full flex justify-center mt-2 md:px-5 pb-2'>
 										<Player src={src} />
 									</div>
+								}
+								{
+									book.description &&
+									<div className='text-sm font-light' dangerouslySetInnerHTML={{ __html: book.description }} />
 								}
 							</>
 							:

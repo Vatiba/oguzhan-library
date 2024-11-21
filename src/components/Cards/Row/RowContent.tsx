@@ -1,6 +1,7 @@
 import React from 'react';
 // icons
-import { CalendarIcon, HeartIcon, EyeIcon, ArrowDownIcon, PlayIcon } from '@heroicons/react/20/solid';
+import { HeartIcon, EyeIcon, ArrowDownIcon, PlayIcon } from '@heroicons/react/24/outline';
+import CalendarIcon from '@app/assets/icons/calendar.svg';
 // components
 import Btn from '@app/components/Buttons/Btn';
 // hooks
@@ -58,12 +59,12 @@ function RowContent(props: RowContentProps) {
 					className='absolute w-full h-full hidden md:flex rounded-md justify-center items-center bg-accentColor cursor-pointer transition-opacity opacity-0 hover:opacity-50'
 					onClick={() => onPlay()}
 				>
-					<div className='bg-secondaryColor p-3 rounded-full'>
+					<div className='bg-primary-dark p-3 rounded-full'>
 						<PlayIcon className='h-6 w-6 text-white' aria-hidden="true" />
 					</div>
 				</div>
 			}
-			<div className='flex flex-col justify-center items-center sm:flex-row p-2'>
+			<div className='flex flex-col justify-center items-center sm:flex-row'>
 				{
 					imgSrc &&
 					<img
@@ -77,7 +78,7 @@ function RowContent(props: RowContentProps) {
 				>
 					<div className='sm:pr-36 flex flex-col sm:pl-[15px] mr-auto'>
 						<h3
-							className='text-xl font-medium line-clamp-2'
+							className='text-xl text-primary-dark font-medium line-clamp-2'
 							onClick={() => onClick?.()}
 						>
 							{title}
@@ -115,17 +116,6 @@ function RowContent(props: RowContentProps) {
 							null
 						} */}
 						{
-								date ?
-									<span className='flex items-center'>
-										<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
-										<span className='text-accentColor'>
-											{date}
-										</span>
-									</span>
-									:
-									null
-							}
-						{
 							research_production_center &&
 							<span
 								className='text-lg font-bold pb-3'
@@ -135,11 +125,22 @@ function RowContent(props: RowContentProps) {
 						}
 						{
 							text &&
-							<p
+							<div
 								className='text-sm font-light line-clamp-3'
 								dangerouslySetInnerHTML={{ __html: text }}
 								onClick={() => onClick?.()}
 							/>
+						}
+						{
+							date ?
+								<div className='my-2 flex items-center'>
+									<img src={CalendarIcon} className="h-4 w-4 text-textColor mr-2" aria-hidden="true" />
+									<span className='text-accentColor'>
+										{date}
+									</span>
+								</div>
+								:
+								null
 						}
 					</div>
 					<div className='flex justify-between w-full flex-wrap sm:pl-[15px]'>
@@ -156,43 +157,43 @@ function RowContent(props: RowContentProps) {
 									null
 							} */}
 
-						{
-						subject ?
-							<div
-								className='flex flex-col'
-								onClick={() => onClick?.()}
-							>
-								<span
-									className='text-base font-normal pt-3'
-								>
-									{t('subject')}: {subject.name}
-								</span>
-							</div>
-							:
-							null
-						}
+							{
+								subject ?
+									<div
+										className='flex flex-col'
+										onClick={() => onClick?.()}
+									>
+										<span
+											className='text-base font-normal pt-3'
+										>
+											{t('subject')}: {subject.name}
+										</span>
+									</div>
+									:
+									null
+							}
 							<span className='static sm:absolute right-0 top-0 flex sm:p-3'>
 								{
 									likeCount !== undefined &&
 									<button
-										className='flex text-sm font-normal leading-[16px] mr-2'
+										className='flex text-sm font-normal leading-[16px] mr-4'
 										onClick={() => onClickLike?.()}
 									>
-										<HeartIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
+										<HeartIcon className="h-4 w-4 text-textColors-normal mr-1" aria-hidden="true" />
 										{likeCount}
 									</button>
 								}
 								{
 									viewedCount !== undefined &&
-									<span className='flex text-sm font-normal leading-[16px] mr-2'>
-										<EyeIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
+									<span className='flex text-sm font-normal leading-[16px] mr-4'>
+										<EyeIcon className="h-4 w-4 text-textColors-normal mr-1" aria-hidden="true" />
 										{viewedCount}
 									</span>
 								}
 								{
 									downloadCount !== undefined &&
-									<span className='flex text-sm font-normal leading-[16px] mr-2'>
-										<ArrowDownIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
+									<span className='flex text-sm font-normal leading-[16px] mr-4'>
+										<ArrowDownIcon className="h-4 w-4 text-textColors-normal mr-1" aria-hidden="true" />
 										{downloadCount}
 									</span>
 								}
@@ -215,13 +216,12 @@ function RowContent(props: RowContentProps) {
 								downloadHref &&
 								<div className='pr-2'>
 									<a
-										className='bg-secondaryColor p-[10px] rounded-md flex items-center'
+										className='bg-primary-dark p-[10px] rounded-md flex items-center'
 										target='_blank'
 										href={downloadHref}
 										download
 										onClick={() => onDownloadClick?.()}
 									>
-										<ArrowDownIcon className="h-5 w-5 text-white" aria-hidden="true" />
 										<span className='text-base font-medium leading-[19px] text-white'>
 											{t('download') as string}
 										</span>

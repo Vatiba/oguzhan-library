@@ -105,7 +105,7 @@ function AutoComplete<T extends string | number>(props: AutoCompleteProps<T>) {
 								<Combobox.Option
 									key={person.id}
 									className={({ active }) =>
-										`relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-secondaryColor text-white' : 'text-gray-900'
+										`relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-primary-dark text-white' : 'text-gray-900'
 										}`
 									}
 									value={person}

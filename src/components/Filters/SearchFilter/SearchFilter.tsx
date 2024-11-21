@@ -69,7 +69,7 @@ function SearchFilter() {
 
 	return (
 		<div className='flex flex-col'>
-			<input
+			{/* <input
 				id="search"
 				name="search"
 				type="text"
@@ -78,7 +78,10 @@ function SearchFilter() {
 				value={searchValueInput}
 				onChange={({ currentTarget: { value } }) => handleSearchChange(value)}
 				placeholder={t('search') as string}
-			/>
+			/> */}
+			<span className='text-xs text-textColors-normal'>
+				{t('year')}
+			</span>
 			<input
 				id="year"
 				name="year"
@@ -92,6 +95,9 @@ function SearchFilter() {
 			{
 				!authorsIsError && authors &&
 				<div className='mt-2'>
+					<span className='text-xs text-textColors-normal'>
+						{t('author')}
+					</span>
 					<AutoComplete
 						options={
 							[
@@ -125,6 +131,9 @@ function SearchFilter() {
 			{
 				!bookCategoriesIsError && bookCategories &&
 				<div className='mt-2'>
+					<span className='text-xs text-textColors-normal'>
+						{t('categories')}
+					</span>
 					<AutoComplete
 						options={
 							[
@@ -155,6 +164,9 @@ function SearchFilter() {
 			{
 				!bookGenresIsError && bookGenres &&
 				<div className='mt-2'>
+					<span className='text-xs text-textColors-normal'>
+						{t('genre')}
+					</span>
 					<AutoComplete
 						options={
 							[
@@ -185,6 +197,9 @@ function SearchFilter() {
 			{
 				!bookSubjectsIsError && bookSubjects &&
 				<div className='mt-2'>
+					<span className='text-xs text-textColors-normal'>
+						{t('subject')}
+					</span>
 					<AutoComplete
 						options={
 							[
@@ -213,6 +228,9 @@ function SearchFilter() {
 				</div>
 			}
 			<div className='mt-2'>
+				<span className='text-xs text-textColors-normal'>
+					{t('language')}
+				</span>
 				<AutoComplete
 					options={
 						[
@@ -239,7 +257,7 @@ function SearchFilter() {
 				/>
 			</div>
 			<button
-				className='bg-secondaryColor rounded-md w-full text-white font-bold p-1 mt-4'
+				className='bg-primary-dark rounded-md w-full text-white font-bold p-1 mt-4'
 				onClick={() => navigate({ to: '/search' })}
 			>
 				{t('clear')}

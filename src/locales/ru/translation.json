@@ -44,5 +44,8 @@
 	"studentYear": "Студент год",
 	"majors": "Професия",
 	"language": "Язык",
-	"tutorials": "Руководство"
+	"tutorials": "Руководство",
+	"name": "Имя",
+	"category": "Категория",
+	"description": "Описание"
 }
