@@ -53,18 +53,18 @@ function RowContent(props: RowContentProps) {
 
 	return (
 		<>
-			{
-				onPlay &&
-				<div
-					className='absolute w-full h-full hidden md:flex rounded-md justify-center items-center bg-accentColor cursor-pointer transition-opacity opacity-0 hover:opacity-50'
-					onClick={() => onPlay()}
-				>
-					<div className='bg-primary-dark p-3 rounded-full'>
-						<PlayIcon className='h-6 w-6 text-white' aria-hidden="true" />
-					</div>
-				</div>
-			}
 			<div className='flex flex-col justify-center items-center sm:flex-row'>
+				{
+					onPlay &&
+					<div
+						className='absolute w-full h-full hidden md:flex rounded-md justify-center items-center bg-accentColor cursor-pointer transition-opacity opacity-0 hover:opacity-50'
+						onClick={() => onPlay()}
+					>
+						<div className='bg-primary-dark p-3 rounded-full'>
+							<PlayIcon className='h-6 w-6 text-white' aria-hidden="true" />
+						</div>
+					</div>
+				}
 				{
 					imgSrc &&
 					<img

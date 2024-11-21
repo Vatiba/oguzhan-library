@@ -219,15 +219,15 @@ function BookDetails(props: BookDetailsProps) {
 										</div>
 									</div> */}
 								</div>
-								<div className='text-lg font-bold text-primary-dark mb-3'>
-									{t('description')}
-								</div>
 								{
 									src &&
-									<div className='w-full flex justify-center mt-2 md:px-5 pb-2'>
+									<div className='w-full flex justify-center mt-4 pb-4'>
 										<Player src={src} />
 									</div>
 								}
+								<div className='text-lg font-bold text-primary-dark mb-3'>
+									{t('description')}
+								</div>
 								{
 									book.description &&
 									<div className='text-sm font-light' dangerouslySetInnerHTML={{ __html: book.description }} />

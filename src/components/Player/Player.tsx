@@ -60,7 +60,7 @@ function Player(props: PlayerProps) {
 	return (
 		<>
 			<button
-				className='rounded-full p-3 bg-secondaryColor text-white mr-1'
+				className='rounded-lg p-3 bg-primary-dark text-white mr-1'
 				onClick={() => {
 					if (isPlaying) {
 						audioRef.current?.pause();
@@ -76,15 +76,15 @@ function Player(props: PlayerProps) {
 						<PlayIcon className='h-6 w-6' />
 				}
 			</button>
-			<div className='flex flex-col items-center ml-2 w-full'>
+			<div className='flex flex-col items-end ml-2 w-full'>
 				<span className='text-base font-medium pb-1'>
 					{secondsToHours(currentMusic.currentTime)} / {secondsToHours(currentMusic.duration)}
 				</span>
 				<Slider
-					trackStyle={{ background: '#FF7700' }}
+					trackStyle={{ background: '#5D87FF' }}
 					handleStyle={{
-						border: '2px solid #FF7700',
-						background: '#FF7700',
+						border: '6px solid #5D87FF',
+						background: '#5D87FF',
 						boxShadow: 'none',
 						opacity: 1,
 					}}
