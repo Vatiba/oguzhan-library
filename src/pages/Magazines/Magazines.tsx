@@ -51,7 +51,7 @@ function Magazines() {
    }, [magazine, magazineIsError]);
 
    return (
-      <Container className='pt-[120px] md:pt-[135px]'>
+      <Container className='pt-[192px] md:pt-[207px]'>
          {/* ==== Breadcrumb ==== */}
          <div className='my-6 font-bold text-xl'>
             <Link to='/' className='mr-1'>
@@ -88,7 +88,7 @@ function Magazines() {
                />
             </div>
             <button
-               className='rounded-md p-3 bg-secondaryColor text-white'
+               className='rounded-md p-3 bg-primary-dark text-white'
                onClick={() => magazineRefetch()}
             >
                {t('search')}
@@ -98,14 +98,14 @@ function Magazines() {
          {/* ==== Content ==== */}
          {
             !magazineIsError && magazine &&
-            <div className='flex flex-wrap -mx-1'>
+            <div className='flex flex-wrap -mx-2 mt-4'>
                {
                   magazine.results.map(item => {
                      return (
-                        <div className='p-2 w-1/2 md:w-1/3 lg:w-1/4' key={item.id}>
+                        <div className='p-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4' key={item.id}>
                            <Magazine
                               date={item.date_created}
-                              imgAlt='News image'
+                              imgAlt='Magazine image'
                               imgSrc={item.thumbnail}
                               downloadCount={item.download_count}
                               likeCount={item.like_count}
