@@ -90,7 +90,7 @@ function NewsPage() {
 					/>
 				</div>
 				<button
-					className='rounded-md p-3 bg-secondaryColor text-white'
+					className='rounded-md p-3 bg-primary-dark text-white'
 					onClick={() => newsRefetch()}
 				>
 					{t('search')}
