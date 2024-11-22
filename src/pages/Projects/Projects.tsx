@@ -66,9 +66,9 @@ function Projects() {
          <Drawer open={drawerOpen} setOpen={setDrawerOpen}>
             <ProjectsFilter />
          </Drawer>
-         <Container className='pt-[120px] md:pt-[135px]'>
+         <Container className='pt-[192px] md:pt-[207px]'>
             {/* ==== Breadcrumb ==== */}
-            <div className='my-6 font-bold text-xl'>
+            <div className='my-6 text-lg text-textColors-normal'>
                <Link to='/' className='mr-1'>
                   {t('mainPage')}
                </Link>
@@ -82,18 +82,18 @@ function Projects() {
                   className='bg-mainBgColor rounded-md p-3'
                   onClick={() => setDrawerOpen(true)}
                >
-                  <ListBulletIcon className="h-6 w-6 text-secondaryColor" aria-hidden="true" />
+                  <ListBulletIcon className="h-6 w-6 text-primary-dark" aria-hidden="true" />
                </button>
             </div>
             {/* ==== Content ==== */}
             <div className='flex'>
                <div className='lg:block hidden 2xl:w-1/4 lg:w-2/7 pb-10'>
-                  <div className='rounded-md shadow-md bg-white py-7 px-7'>
+                  <div className='rounded-md border border-grey-dark bg-white py-7 px-7'>
                      <ProjectsFilter />
                   </div>
                </div>
-               <div className='2xl:w-3/4 lg:w-5/7 w-full px-2 my-3'>
-                  <div className='flex flex-col'>
+               <div className='2xl:w-3/4 lg:w-5/7 w-full px-2'>
+                  <div className='flex flex-col bg-white p-5 border border-grey-dark rounded-md'>
                      {
                         !articlesIsError && articles ?
                            articles.results.map(item => {

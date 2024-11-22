@@ -87,7 +87,7 @@ function SearchFilter() {
 				name="year"
 				type="number"
 				autoComplete="year"
-				className="mt-3 block w-full rounded-md border-0 py-1.5 focus:outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6"
+				className="mt-3 block w-full rounded-md border-0 py-1.5 focus:outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-dark sm:text-sm sm:leading-6"
 				value={yearValueInput}
 				onChange={({ currentTarget: { valueAsNumber } }) => handleYearChange(valueAsNumber)}
 				placeholder={t('year') as string}

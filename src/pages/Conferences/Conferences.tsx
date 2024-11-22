@@ -41,10 +41,10 @@ function Conferences() {
 
 	return (
 		<Container
-			className='pt-[120px] md:pt-[135px]'
+			className='pt-[192px] md:pt-[207px]'
 		>
 			{/* ==== Breadcrumb ==== */}
-			<div className='my-6 font-bold text-xl'>
+			<div className='my-6 text-lg text-textColors-normal'>
 				<Link to='/' className='mr-1'>
 					{t('mainPage')}
 				</Link>
@@ -57,7 +57,7 @@ function Conferences() {
 			{/* ==== Filters ==== */}
 			<div className='flex flex-wrap gap-2 items-end'>
 				<div className='flex flex-col'>
-					<span className='font-medium'>
+					<span className='text-lg text-textColors-normal'>
 						{t("startDate")}
 					</span>
 					<input
@@ -68,7 +68,7 @@ function Conferences() {
 					/>
 				</div>
 				<div className='flex flex-col'>
-					<span className='font-medium'>
+					<span className='text-lg text-textColors-normal'>
 						{t("endDate")}
 					</span>
 					<input
@@ -79,7 +79,7 @@ function Conferences() {
 					/>
 				</div>
 				<div className='flex flex-col'>
-					<span className='font-medium'>
+					<span className='text-lg text-textColors-normal'>
 						{t("conferenceName")}
 					</span>
 					<input
@@ -90,7 +90,7 @@ function Conferences() {
 					/>
 				</div>
 				<button
-					className='rounded-md p-3 bg-secondaryColor text-white'
+					className='rounded-md p-3 bg-primary-dark text-white'
 					onClick={() => conferenceRefetch()}
 				>
 					{t('search')}

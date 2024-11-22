@@ -76,7 +76,7 @@ function RowContent(props: RowContentProps) {
 				}
 				<div className='flex flex-col w-full'
 				>
-					<div className='sm:pr-36 flex flex-col sm:pl-[15px] mr-auto'>
+					<div className='sm:pr-40 flex flex-col sm:pl-[15px] mr-auto'>
 						<h3
 							className='text-xl text-primary-dark font-medium line-clamp-2'
 							onClick={() => onClick?.()}

@@ -66,7 +66,7 @@ function Magazines() {
          {/* ==== Filters ==== */}
          <div className='flex flex-wrap gap-2 items-end'>
             <div className='flex flex-col'>
-               <span className='font-medium'>
+               <span className='text-lg text-textColors-normal'>
                   {t("startDate")}
                </span>
                <input
@@ -77,7 +77,7 @@ function Magazines() {
                />
             </div>
             <div className='flex flex-col'>
-               <span className='font-medium'>
+               <span className='text-lg text-textColors-normal'>
                   {t("endDate")}
                </span>
                <input

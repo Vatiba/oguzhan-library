@@ -63,7 +63,7 @@ function ArticleFilter() {
 				name="search"
 				type="text"
 				autoComplete="search"
-				className="block w-full rounded-md border-0 py-1.5 focus:outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6"
+				className="block w-full rounded-md border-0 py-1.5 focus:outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-dark sm:text-sm sm:leading-6"
 				value={searchValueInput}
 				onChange={({ currentTarget: { value } }) => handleSearchChange(value)}
 				placeholder={t('search') as string}
@@ -71,6 +71,9 @@ function ArticleFilter() {
 			{
 				!authorsIsError && authors?.results &&
 				<div className='mt-2'>
+					<span className='text-xs text-textColors-normal'>
+						{t('authors')}
+					</span>
 					<AutoComplete
 						options={
 							[
@@ -101,6 +104,9 @@ function ArticleFilter() {
 			{
 				!articleCategoriesIsError && articleCategories &&
 				<div className='mt-2'>
+					<span className='text-xs text-textColors-normal'>
+						{t('categories')}
+					</span>
 					<AutoComplete
 						options={
 							[
@@ -131,6 +137,9 @@ function ArticleFilter() {
 			{
 				!facultiesIsError && faculties &&
 				<div className='mt-2'>
+					<span className='text-xs text-textColors-normal'>
+						{t('faculties')}
+					</span>
 					<AutoComplete
 						options={
 							[
@@ -161,6 +170,9 @@ function ArticleFilter() {
 			{
 				!departmentsIsError && departments &&
 				<div className='mt-2'>
+					<span className='text-xs text-textColors-normal'>
+						{t('department')}
+					</span>
 					<AutoComplete
 						options={
 							[
@@ -189,7 +201,7 @@ function ArticleFilter() {
 				</div>
 			}
 			<button
-				className='bg-secondaryColor rounded-md w-full text-white font-bold p-1 mt-4'
+				className='bg-primary-dark rounded-md w-full text-white font-bold p-1 mt-4'
 				onClick={() => navigate({ to: '/articles' })}
 			>
 				{t('clear')}
