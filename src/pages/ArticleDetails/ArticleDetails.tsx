@@ -6,7 +6,7 @@ import { Link, useMatch } from '@tanstack/react-location';
 import { useTranslation } from 'react-i18next';
 import { useGetArticle } from '@app/hooks/query/Article';
 // icons
-import { CalendarIcon } from '@heroicons/react/20/solid';
+import CalendarIcon from '@app/assets/icons/calendar.svg';
 
 function ArticleDetails() {
    const { params } = useMatch()
@@ -20,11 +20,9 @@ function ArticleDetails() {
    } = useGetArticle(id, i18n.language);
 
    return (
-      <Container
-         className='pt-[120px] md:pt-[135px]'
-      >
+      <Container className='pt-[192px] md:pt-[207px]'>
          {/* ==== Breadcrumb ==== */}
-         <div className='my-6 font-bold text-xl'>
+         <div className='my-6 text-xl text-textColors-normal'>
             <Link to='/' className='mr-1'>
                {t('mainPage')}
             </Link>
@@ -43,13 +41,13 @@ function ArticleDetails() {
          {
             !newsDetailsIsError && newsDetails &&
             <>
-               <div className='shadow-md rounded-md px-5 py-2 bg-white mb-5'>
+               <div className='rounded-md p-5 bg-white border border-grey-dark mb-10'>
                   <h1 className='font-bold text-xl mb-2 text-center'>
                      {newsDetails.name}
                   </h1>
                   <p className='mt-1 text-justify' dangerouslySetInnerHTML={{ __html: newsDetails.content }} />
                   <span className='flex items-center pt-4'>
-                     <CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
+                     <img src={CalendarIcon} className="h-4 w-4 text-textColor mr-2" aria-hidden="true" />
                      <span className='text-accentColor'>
                         {newsDetails.date_created}
                      </span>

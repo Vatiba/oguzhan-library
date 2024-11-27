@@ -8,7 +8,8 @@ import NewsBanner from '@app/components/NewsBanner';
 import { useTranslation } from 'react-i18next';
 import { useGetProject, useGetProjects } from '@app/hooks/query/Projects';
 // icons
-import { CalendarIcon, NewspaperIcon } from '@heroicons/react/20/solid';
+import CalendarIcon from '@app/assets/icons/calendar.svg';
+import NewspaperIcon from '@app/assets/icons/newspaper.svg';
 
 function ProjectDetails() {
 	const { params } = useMatch()
@@ -39,10 +40,10 @@ function ProjectDetails() {
 
 	return (
 		<Container
-			className='pt-[120px] md:pt-[135px]'
+			className='pt-[192px] md:pt-[207px]'
 		>
 			{/* ==== Breadcrumb ==== */}
-			<div className='my-6 font-bold text-xl'>
+			<div className='my-6 text-lg text-textColors-normal'>
 				<Link to='/' className='mr-1'>
 					{t('mainPage')}
 				</Link>
@@ -60,7 +61,7 @@ function ProjectDetails() {
 			</div>
 			{
 				!newsDetailsIsError && newsDetails &&
-				<>
+				<div className='rounded-md p-5 bg-white border border-grey-dark'>
 					{
 						newsDetails.images &&
 						<div className='my-1'>
@@ -76,29 +77,27 @@ function ProjectDetails() {
 							/>
 						</div>
 					}
-					<div className='shadow-md rounded-md px-5 py-2 bg-white'>
-						<h1 className='font-bold text-xl'>
-							{newsDetails.name}
-						</h1>
-						<p className='mt-1 text-justify' dangerouslySetInnerHTML={{ __html: newsDetails.content }} />
-						<span className='flex items-center pt-4'>
-							<CalendarIcon className="h-4 w-4 text-textColor mr-1" aria-hidden="true" />
-							<span className='text-accentColor'>
-								{newsDetails.date_created}
-							</span>
+					<h1 className='font-bold text-xl mt-10'>
+						{newsDetails.name}
+					</h1>
+					<p className='mt-1 text-justify' dangerouslySetInnerHTML={{ __html: newsDetails.content }} />
+					<span className='flex items-center pt-4'>
+						<img src={CalendarIcon} className="h-4 w-4 text-textColor mr-2" aria-hidden="true" />
+						<span className='text-accentColor'>
+							{newsDetails.date_created}
 						</span>
-					</div>
-				</>
+					</span>
+				</div>
 			}
 			{
 				!newsIsError && news?.results &&
 				<div className='flex flex-col my-[40px]'>
-					<span className='flex mb-5'>
-						<NewspaperIcon className="h-6 w-6 text-textColor mr-1" aria-hidden="true" />
-						<h3 className='text-xl font-extrabold'>
-							{t('designWorks')}
+					<Link className='flex mb-1' to="/news">
+						<img src={NewspaperIcon} className="h-6 w-6 text-textColor mr-3" aria-hidden="true" />
+						<h3 className='text-xl font-extrabold text-primary-dark'>
+							{t('news')}
 						</h3>
-					</span>
+					</Link>
 					<Carousel
 						type='news'
 						news={

@@ -57,7 +57,7 @@ function RowContent(props: RowContentProps) {
 				{
 					onPlay &&
 					<div
-						className='absolute w-full h-full hidden md:flex rounded-md justify-center items-center bg-accentColor cursor-pointer transition-opacity opacity-0 hover:opacity-50'
+						className='absolute w-full h-full hidden md:flex rounded-md justify-center items-center bg-grey-light cursor-pointer transition-opacity opacity-0 hover:opacity-50'
 						onClick={() => onPlay()}
 					>
 						<div className='bg-primary-dark p-3 rounded-full'>

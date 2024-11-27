@@ -22,6 +22,7 @@ function LangBtn() {
 			id="lang"
 			onChange={({ currentTarget: { value } }) => handleChange(value)}
 			className='text-xl p-3 bg-transparent text-textColors-light'
+			value={storage.getItem('language')}
 		>
 			<option value="tk">TM</option>
 			<option value="en">EN</option>

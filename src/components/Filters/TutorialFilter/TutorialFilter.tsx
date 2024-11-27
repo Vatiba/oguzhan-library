@@ -56,7 +56,7 @@ function TutorialFilter() {
 		navigate({
 			search(prev) {
 				return {
-					studentYearsIsError,	...prev,
+					studentYearsIsError, ...prev,
 					[urlKey]: value
 				}
 			},
@@ -79,7 +79,7 @@ function TutorialFilter() {
 				name="search"
 				type="text"
 				autoComplete="search"
-				className="block w-full rounded-md border-0 py-1.5 focus:outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6"
+				className="block w-full rounded-md border-0 py-1.5 focus:outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-dark sm:text-sm sm:leading-6"
 				value={searchValueInput}
 				onChange={({ currentTarget: { value } }) => handleSearchChange(value)}
 				placeholder={t('search') as string}
@@ -89,7 +89,7 @@ function TutorialFilter() {
 				name="year"
 				type="number"
 				autoComplete="year"
-				className="mt-3 block w-full rounded-md border-0 py-1.5 focus:outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondaryColor sm:text-sm sm:leading-6"
+				className="mt-3 block w-full rounded-md border-0 py-1.5 focus:outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-dark sm:text-sm sm:leading-6"
 				value={yearValueInput}
 				onChange={({ currentTarget: { valueAsNumber } }) => handleYearChange(valueAsNumber)}
 				placeholder={t('year') as string}
@@ -245,7 +245,7 @@ function TutorialFilter() {
 				</div>
 			}
 			<button
-				className='bg-secondaryColor rounded-md w-full text-white font-bold p-1 mt-4'
+				className='bg-primary-dark rounded-md w-full text-white font-bold p-1 mt-4'
 				onClick={() => navigate({ to: '/tutorials' })}
 			>
 				{t('clear')}

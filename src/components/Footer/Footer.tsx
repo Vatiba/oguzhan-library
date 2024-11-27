@@ -8,7 +8,7 @@ import { Link } from '@tanstack/react-location';
 function Footer() {
 	return (
 		<footer>
-			<div className='bg-textColors-light'>
+			<div className='bg-primary-dark'>
 				<Container
 					className='flex justify-between flex-wrap py-[14px]'
 				>
